@@ -1,1 +1,2 @@
-export * from './lazyComponent'
+export * from './lazyComponent';
+export * from './setDocumentTitle';
