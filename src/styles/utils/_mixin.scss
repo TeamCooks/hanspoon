@@ -1,0 +1,85 @@
+@use 'sass:math';
+
+// 텍스트 ellipsis ----------------------------------------------------------- /
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// 텍스트 ellipsis multiline ----------------------------------------------------------- /
+@mixin ellipsisMulti($line, $lineheight: 1.5) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  line-height: $lineheight * 1em;
+  max-height: $lineheight * $line * 1em;
+}
+
+// 반응형 iframe ----------------------------------------------------------- /
+@mixin responsiveIframe($widthRatio, $heightRatio) {
+  position: relative;
+  width: 100%;
+  height: 0 !important;
+  padding-top: math.div($heightRatio, $widthRatio) * 100%;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// 미디어 쿼리 중단점 (Breakpoints) --------------------------------------------------------------- /
+$break: 768px;
+
+@mixin mobile {
+  @media (max-width: $break - 1) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: $break) {
+    @content;
+  }
+}
+
+@mixin gradient($style) {
+  background: linear-gradient($style);
+}
+
+@mixin rangeThumb {
+  width: 18px;
+  height: 18px;
+  margin: -8px 0 0;
+  border-radius: 50%;
+  background: #5d5fef;
+  cursor: pointer;
+  border: 0 !important;
+}
+
+@mixin rangeTrack {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: #b2b2b2;
+}
+
+
+// flexbox 믹스인
+@mixin flexbox(
+  $direction: row,
+  $justify-content: flex-start,
+  $align-items: stretch,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-wrap: $flex-wrap;
+}
