@@ -1,3 +1,15 @@
-export default function Home () {
-  return <div className="error">Home 컴포넌트입니다. 여기에는 랜덤 레시피와 핫 레시피 목록이 들어와야 합니다.</div>
+import { Helmet } from 'react-helmet-async';
+import { setDocumentTitle } from '../../utils';
+import { Header, RandomRecipe, HotRecipes, Footer } from '../../components/index';
+
+export default function Home() {
+  return (
+    <>
+      <Helmet>
+        <title>{setDocumentTitle('홈')}</title>
+      </Helmet>
+      <RandomRecipe />
+      <HotRecipes />
+    </>
+  );
 }
