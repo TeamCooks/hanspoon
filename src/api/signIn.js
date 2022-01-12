@@ -7,7 +7,6 @@ export const signIn = async ({ email, password }) => {
     initializeApp(firebaseConfig);
     const auth = getAuth();
     const { user } = await signInWithEmailAndPassword(auth, email, password)    ;
-    console.log(user);
     return user;
   } catch (error) {
     const errorCode = error.code;
