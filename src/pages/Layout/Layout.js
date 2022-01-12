@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { Wrapper } from './Wrapper';
 export default function Layout() {
   return (
-    <div className="error">
+    <>
       Layout 컴포넌트입니다. 여기에는 헤더와 푸터, 네비게이션 바가 들어와야 합니다.
       <ul className="NavLinkList">
         <li>
@@ -26,7 +27,9 @@ export default function Layout() {
           </Link>
         </li>
       </ul>
-      <Outlet />
-    </div>
+      <Wrapper className="main">
+        <Outlet />
+      </Wrapper>
+    </>
   );
 }
