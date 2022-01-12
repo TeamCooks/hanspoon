@@ -15,7 +15,7 @@ export const SignIn = () => {
       console.log(values);
       try {
         const user = await signIn(values);
-        console.log(user);
+        console.log(user.uid);
         setAuthError(false);
         // 여기에 auth 정보를 context에 update하기
       } catch (e) {
