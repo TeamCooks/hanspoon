@@ -12,7 +12,7 @@ body {
 .error {
   border: 4px solid $primary_green;
   min-height: 300px;
-  color: red;
+  color: blue;
 }
 
 .NavLinkList {
@@ -21,6 +21,6 @@ body {
   @include flexbox();
 
   .NavLink {
-    margin: 50px;
+    margin: 15px;
   }
 }
