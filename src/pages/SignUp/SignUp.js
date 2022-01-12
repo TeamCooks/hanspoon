@@ -15,10 +15,8 @@ export const SignUp = () => {
     },
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
-      console.log(values);
       try {
         const user = await signUp(values);
-        console.log(user);
         setAuthError(false);
         // 여기에 auth 정보를 context에 update하기
       } catch (e) {
