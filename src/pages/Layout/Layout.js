@@ -37,7 +37,7 @@ export default function Layout() {
           </Link>
         </li>
         <li>
-          <Link className="NavLink" to="signup">
+          <Link className="NavLink" to="detail">
            상세모달
           </Link>
         </li>
