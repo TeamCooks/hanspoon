@@ -26,7 +26,6 @@ export const signUp = async ({ username, email, password }) => {
       email,
       createdAt: Timestamp.fromDate(new Date()),
     });
-    console.log(user);
     return user;
   } catch (error) {
     const errorCode = error.code;
