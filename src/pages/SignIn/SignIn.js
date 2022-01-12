@@ -23,8 +23,8 @@ export const SignIn = () => {
   });
   return (
     <form onSubmit={formik.handleSubmit}>
-      <FormikField fieldname={'password'} formik={formik} />
       <FormikField fieldname={'email'} formik={formik} />
+      <FormikField fieldname={'password'} formik={formik} />
       <button type="submit">Submit</button>
     </form>
   );
