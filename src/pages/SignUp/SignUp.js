@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { signUpSchema } from '../../services';
 
 export const SignUp = () => {
   const formik = useFormik({
@@ -10,18 +10,7 @@ export const SignUp = () => {
       passwordConfirm:'',
       email: '',
     },
-    validationSchema: Yup.object({
-      username: Yup.string()
-        .min(3, 'Must be 3 characters or more')
-        .required('Required'),
-      password: Yup.string()
-        .min(8, 'Must be 8 characters or more')
-        .required('Required'),
-      passwordConfirm: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Required'),
-      email: Yup.string().email('Invalid email address').required('Required'),
-    }),
+    validationSchema: signUpSchema,
     onSubmit: values => {
       console.log(values);
     },

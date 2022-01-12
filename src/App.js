@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import { lazyComponent } from './utils/lazyComponent';
 import './styles/index.scss';
 import './styles/global.scss';
+import { SignIn } from './pages/SignIn/SignIn';
+import { SignUp } from './pages/SignUp/SignUp';
 
 const Home = lazyComponent('Home');
 const Layout = lazyComponent('Layout');
@@ -19,6 +21,8 @@ function App() {
         { path: 'my-recipes', element: <Authorized /> },
         { path: 'page-not-found', element: <PageNotFound /> },
         { path: '*', element: <Navigate to="page-not-found" replace /> },
+        { path: 'signin', element: <SignIn /> },
+        { path: 'signup', element: <SignUp /> },
       ],
     },
   ]);
