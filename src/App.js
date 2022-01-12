@@ -5,6 +5,7 @@ import './styles/index.scss';
 import './styles/global.scss';
 import { SignIn } from './pages/SignIn/SignIn';
 import { SignUp } from './pages/SignUp/SignUp';
+import { Detail } from './pages/Detail/Detail';
 
 const Home = lazyComponent('Home');
 const Layout = lazyComponent('Layout');
@@ -21,6 +22,7 @@ function App() {
         { path: 'my-recipes', element: <Authorized /> },
         { path: 'page-not-found', element: <PageNotFound /> },
         { path: '*', element: <Navigate to="page-not-found" replace /> },
+        { path: 'detail', element: <Detail /> },
         { path: 'signin', element: <SignIn /> },
         { path: 'signup', element: <SignUp /> },
       ],
