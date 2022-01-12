@@ -3,12 +3,12 @@ import { FiSearch } from 'react-icons/fi';
 
 export function SearchForm() {
   return (
-    <form className={styles.searchForm}>
+    <form className={styles.form}>
       <label className="a11yHidden" for="searchRecipe">
         Search recipes
       </label>
-      <input id="searchRecipe" type="search" className={styles.searchInput} autoComplete="off" />
-      <button className={styles.searchButton} aria-label="search">
+      <input id="searchRecipe" type="search" className={styles.input} autoComplete="off" />
+      <button className={styles.button} aria-label="search">
         <FiSearch />
       </button>
     </form>

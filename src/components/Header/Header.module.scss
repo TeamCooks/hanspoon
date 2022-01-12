@@ -9,6 +9,6 @@
 }
 
 .wrapper {
-  @include flexbox();
+  @include flexbox($align-items: center);
   gap: 20px;
 }
