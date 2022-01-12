@@ -1,10 +1,10 @@
-import './Header.scss'
+import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
-    <header className='header'>
-      <div className='wrapper'>
+    <header className={styles.header}>
+      <div className={styles.wrapper}>
         <Link to="/">Han Spoon</Link>
         <div>검색컴포넌트</div>
       </div>
