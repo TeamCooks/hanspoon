@@ -12,10 +12,8 @@ export const SignIn = () => {
     },
     validationSchema: signInSchema,
     onSubmit: async (values) => {
-      console.log(values);
       try {
         const user = await signIn(values);
-        console.log(user.uid);
         setAuthError(false);
         // 여기에 auth 정보를 context에 update하기
       } catch (e) {
