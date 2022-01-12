@@ -26,6 +26,21 @@ export default function Layout() {
             404페이지
           </Link>
         </li>
+        <li>
+          <Link className="NavLink" to="signin">
+            로그인
+          </Link>
+        </li>
+        <li>
+          <Link className="NavLink" to="signup">
+           회원가입
+          </Link>
+        </li>
+        <li>
+          <Link className="NavLink" to="signup">
+           상세모달
+          </Link>
+        </li>
       </ul>
       <Wrapper className="main">
         <Outlet />

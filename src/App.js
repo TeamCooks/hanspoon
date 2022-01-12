@@ -5,7 +5,7 @@ import './styles/index.scss';
 import './styles/global.scss';
 import { SignIn } from './pages/SignIn/SignIn';
 import { SignUp } from './pages/SignUp/SignUp';
-import { Detail } from './pages/Detail/Detail';
+import { Detail } from './components/Detail/Detail';
 
 const Home = lazyComponent('Home');
 const Layout = lazyComponent('Layout');
