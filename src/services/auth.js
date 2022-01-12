@@ -42,3 +42,12 @@ export function FormikField({ fieldname, formik }) {
     </>
   );
 };
+
+const AUTH_ERROR_MSG = {
+  login: 'Login failed. Please try again.',
+  signup: 'Signup failed. Please try again.'
+}
+
+export function AuthError ({type}) {
+  return <div className="auth-error">{AUTH_ERROR_MSG[type]}</div>
+}

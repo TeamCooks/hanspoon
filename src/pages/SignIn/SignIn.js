@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { signIn } from '../../api/requestAuth';
-import { signInSchema, FormikField } from '../../services';
+import { signInSchema, FormikField, AuthError } from '../../services';
 
 export const SignIn = () => {
   const [hasAuthError, setAuthError] = useState(false);
@@ -25,7 +25,7 @@ export const SignIn = () => {
   });
   return (
     <>
-    {hasAuthError ? <div className="authError">Login Failed. Please Try Again.</div> : null}
+    {hasAuthError ? <AuthError type="login" /> : null}
     <form onSubmit={formik.handleSubmit}>
       <FormikField fieldname={'email'} formik={formik} />
       <FormikField fieldname={'password'} formik={formik} />

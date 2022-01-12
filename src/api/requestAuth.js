@@ -23,7 +23,6 @@ export const signUp = async ({ email, password }) => {
     return user;
   } catch (error) {
     const errorCode = error.code;
-    const errorMessage = error.message;
-    console.error(errorCode, errorMessage);
+    throw new Error(errorCode);
   }
 };
