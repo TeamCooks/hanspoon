@@ -57,7 +57,6 @@ export default function Search() {
           </li>
         ))}
       </ul>
-      )
     </div>
   );
 }
