@@ -1,0 +1,69 @@
+.container {
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(36, 36, 36, 0.8);
+  backdrop-filter: blur(2px);
+}
+
+.backgroundImage {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.content {
+  padding: 4rem;
+  color: #121212;
+  height: 100%;
+  overflow: auto;
+}
+
+.content:focus {
+  outline: 3px solid rgba(249, 0, 0, 0.6);
+}
+
+.content * {
+  margin: 0;
+}
+
+.foot {}
+
+.closeButton {
+  cursor: pointer;
+  position: absolute;
+  z-index: 200;
+  top: 20px;
+  right: 20px;
+  border: 0;
+  padding: 10px;
+  background: transparent;
+  color: #fefefe;
+}
+
+.closeButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #009cc1;
+}
+
+.closeButton svg {
+  pointer-events: none;
+  fill: currentColor;
+}
+
+.dim {
+  // position: absolute;
+  // z-index: 100;
+  // top: 0;
+  // left: 0;
+  // width: 100vw;
+  // height: 100vh;
+  // background: rgba(36, 36, 36, 0.8);
+  // backdrop-filter: blur(2px);
+}
