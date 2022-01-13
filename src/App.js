@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import { lazyComponent } from './utils/lazyComponent';
 import './styles/index.scss';
 import './styles/global.scss';
-import { SignIn } from './pages/SignIn/SignIn';
-import { SignUp } from './pages/SignUp/SignUp';
+import { SignIn } from './components/SignIn/SignIn';
+import { SignUp } from './components/SignUp/SignUp';
 import { Detail } from './components/Detail/Detail';
 
 const Home = lazyComponent('Home');
