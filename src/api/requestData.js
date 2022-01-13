@@ -31,6 +31,7 @@ export const searchRecipes = async (keyword, number = 10, offset = 0) => {
         number,
         offset,
       },
+    
     });
     return data;
   } catch (e) {

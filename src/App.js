@@ -3,14 +3,15 @@ import { Suspense } from 'react';
 import { lazyComponent } from './utils/lazyComponent';
 import './styles/index.scss';
 import './styles/global.scss';
-import { SignIn } from './pages/SignIn/SignIn';
-import { SignUp } from './pages/SignUp/SignUp';
+import { SignIn } from './components/SignIn/SignIn';
+import { SignUp } from './components/SignUp/SignUp';
 import { Detail } from './components/Detail/Detail';
 
 const Home = lazyComponent('Home');
 const Layout = lazyComponent('Layout');
 const Authorized = lazyComponent('Authorized');
 const PageNotFound = lazyComponent('PageNotFound');
+const Search = lazyComponent('Search');
 
 function App() {
   const routeElement = useRoutes([
@@ -25,6 +26,7 @@ function App() {
         { path: 'detail', element: <Detail /> },
         { path: 'signin', element: <SignIn /> },
         { path: 'signup', element: <SignUp /> },
+        { path: 'search/:keyword', element: <Search /> },
       ],
     },
   ]);
