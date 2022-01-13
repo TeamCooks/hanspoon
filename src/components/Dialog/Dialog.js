@@ -1,32 +1,11 @@
 import { useRef, useEffect, useCallback } from 'react';
-import {
-  // number,
-  string,
-  bool,
-  func,
-  // array,
-  // object,
-  // symbol,
-  elementType,
-  // element,
-  node,
-  // instanceOf,
-  oneOf,
-  oneOfType,
-  // arrayOf
-  // objectOf
-  // shape,
-  // exact,
-  any,
-} from 'prop-types';
+import { string, bool, func, node, oneOf, oneOfType, any } from 'prop-types';
 import { createPortal } from 'react-dom';
 import { getTabbableElements } from '../../utils';
-import classNames from 'classnames';
 import styles from './Dialog.module.scss';
-const bodyNode = document.body;
 
-export function Dialog({ isVisible, onClose, children, nodeId = 'dialog' , ...restProps }) {
-  // 참조 객체 생성
+export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', img, ...restProps }) {
+  const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
 
@@ -74,15 +53,25 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog' , ...re
     // 이벤트 구독
     document.addEventListener(eventType, eventListener);
 
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY.current}px`;
+    
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
       document.removeEventListener(eventType, eventListener);
+
+      // unmount 시 원래 스크롤 위치로 보내기
+      scrollY.current = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
     };
   }, [handleClose]);
 
   return createPortal(
-      <section
+    <>
+      <div
         ref={dialogRef}
         className={styles.container}
         role="dialog"
@@ -91,11 +80,11 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog' , ...re
         aria-label="React Portal﹕모달 다이얼로그"
         {...restProps}
       >
-        {children}
+        <div className={styles.content}>{children}</div>
         <Dialog.CloseButton onClose={handleClose} />
-        <Dialog.Dim onClose={handleClose} />
-      </section>
-  ,
+      </div>
+      {img ? <Dialog.Image img={img} /> : null}
+    </>,
     document.getElementById(nodeId),
   );
 }
@@ -104,6 +93,8 @@ Dialog.propTypes = {
   isVisible: bool,
   onClose: func.isRequired,
   children: node.isRequired,
+  nodeId: string,
+  img: string,
   restProps: any,
 };
 
@@ -115,40 +106,6 @@ Dialog.Dim = function DialogDim({ onClose }) {
 
 Dialog.Dim.propTypes = {
   onClose: oneOfType([func, oneOf([null, undefined])]),
-};
-
-/* -------------------------------------------------------------------------- */
-
-Dialog.Head = function DialogHead({ as: Comp = 'header', className = '', ...restProps }) {
-  return <Comp className={classNames(styles.head, className)} {...restProps} />;
-};
-Dialog.Head.propTypes = {
-  as: oneOfType([string, elementType]),
-  className: string,
-  restProps: any,
-};
-
-/* -------------------------------------------------------------------------- */
-
-Dialog.Foot = function DialogFoot({ as: Comp = 'footer', className = '', ...restProps }) {
-  return <Comp className={classNames(styles.foot, className)} {...restProps} />;
-};
-Dialog.Foot.propTypes = {
-  as: oneOfType([string, elementType]),
-  className: string,
-  restProps: any,
-};
-
-/* -------------------------------------------------------------------------- */
-
-Dialog.Content = function DialogContent({ as: Comp = 'div', className = '', ...restProps }) {
-  return <Comp className={classNames(styles.content, className)} {...restProps} />;
-};
-
-Dialog.Content.propTypes = {
-  as: oneOfType([string, elementType]),
-  className: string,
-  restProps: any,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -171,4 +128,14 @@ Dialog.CloseButton = function DialogCloseButton({ onClose }) {
 
 Dialog.CloseButton.propTypes = {
   onClose: func,
+};
+
+/* -------------------------------------------------------------------------- */
+
+Dialog.Image = function DialogImage({ img: src }) {
+  return <img className={styles.backgroundImage} src={src} alt="" />;
+};
+
+Dialog.Image.propTypes = {
+  img: string,
 };
