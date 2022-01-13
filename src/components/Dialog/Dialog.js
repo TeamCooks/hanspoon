@@ -133,7 +133,7 @@ Dialog.CloseButton.propTypes = {
 /* -------------------------------------------------------------------------- */
 
 Dialog.Image = function DialogImage({ img: src }) {
-  return <img className={styles.backgroundImage} src={src} alt="" />;
+  return <img className={styles.backgroundImage} src={src} role="none" alt="" />;
 };
 
 Dialog.Image.propTypes = {
