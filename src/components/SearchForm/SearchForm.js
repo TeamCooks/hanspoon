@@ -1,12 +1,17 @@
 import styles from './SearchForm.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function SearchForm() {
   const [keyword, setKeyword] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setKeyword('');
+  }, [location]);
 
   const handleChange = (e) => {
     setKeyword(e.target.value);
