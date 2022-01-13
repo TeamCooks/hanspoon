@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { searchRecipes } from '../../api/requestData';
+import { Card } from '../../components';
 
 export default function Search() {
   const { keyword } = useParams();
@@ -45,8 +46,14 @@ export default function Search() {
       <ul>
         {currentSearchResults.map(({ id, image, title }) => (
           <li key={id}>
-            <h2>{title}</h2>
-            <img alt={title} src={`https://spoonacular.com/recipeImages/${image}`} />
+            <Card
+              type="square"
+              background="white"
+              summary={false}
+              headingPosition="bottomCenter"
+              imgSrc={`https://spoonacular.com/recipeImages/${image}`}
+              foodName={title}
+            />
           </li>
         ))}
       </ul>
