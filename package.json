@@ -22,8 +22,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -61,8 +61,10 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.2",
+    "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "react-app-rewired": "^2.1.11"
   }
 }
