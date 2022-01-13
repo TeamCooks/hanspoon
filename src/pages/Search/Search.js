@@ -4,25 +4,53 @@ import { searchRecipes } from '../../api/requestData';
 
 export default function Search() {
   const { keyword } = useParams();
-  const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
+  const [fetchedData, setFetchedData] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentSearchResults, setCurrentSearchResults] = useState([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  // const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => {
+      if (!fetchedData[currentPage]) {
+        const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, 10, [currentPage - 1] * 10);
+        if (totalResults !== fetchedTotalResults) setTotalResults(fetchedTotalResults);
+        setFetchedData({ ...fetchedData, [currentPage]: results });
+        setCurrentSearchResults(results);
+      } else {
+        setCurrentSearchResults(fetchedData[currentPage]);
+      }
+    })();
+    setIsLoading(false);
+  }, [currentPage, keyword]);
 
   return (
     <div>
       <p>{totalResults}개의 검색결과가 있습니다.</p>
-      {hasError ? (
-        <div>에러다</div>
-      ) : (
-        <ul>
-          {data.map(({ id, image, title }) => (
-            <li key={id}>
-              <h2>{title}</h2>
-              <img alt={title} src={`https://spoonacular.com/recipeImages/${image}`} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <p>현재 페이지 {currentPage}</p>
+      {isLoading ? <div>로딩중입니다.</div> : null}
+      <button onClick={() => setCurrentPage(1)}>처음결과보기</button>
+      <button onClick={() => setCurrentPage(currentPage - 1)}>이전결과보기</button>
+      <ul>
+        {[-2, -1, 0, 1, 2].map((num) => (
+          <li key={num}>
+            <button onClick={() => setCurrentPage(num + currentPage)}>{currentPage + num}</button>
+          </li>
+        ))}
+      </ul>
+      <button onClick={() => setCurrentPage(currentPage + 1)}>다음결과보기</button>
+      <button onClick={() => setCurrentPage(Math.ceil(totalResults / 10))}>끝결과보기</button>
+      <ul>
+        {currentSearchResults.map(({ id, image, title }) => (
+          <li key={id}>
+            <h2>{title}</h2>
+            <img alt={title} src={`https://spoonacular.com/recipeImages/${image}`} />
+          </li>
+        ))}
+      </ul>
+      )
     </div>
   );
 }
@@ -49,7 +77,7 @@ const useSearch = (keyword, shouldFetch) => {
     };
 
     // if (shouldFetch()) {
-      fetchData();
+    fetchData();
     // }
   }, [keyword]);
 
