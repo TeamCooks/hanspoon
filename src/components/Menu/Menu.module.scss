@@ -1,0 +1,49 @@
+@use './../../styles/utils/' as *;
+
+.nav {
+  position: relative;
+}
+
+.button {
+  background: none;
+  border: none;
+  padding: 0;
+
+  &.circle {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}
+
+.list {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: $menu_bg;
+  color: white;
+  padding: 5px 0;
+  white-space: nowrap;
+}
+
+.list::before {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: -9px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 10px 5px;
+  border-color: transparent transparent $menu_bg transparent;
+}
+
+.item {
+  padding: 15px 25px;
+  text-align: center;
+}
+
+.item:hover {
+  background-color: lighten($menu_bg, 20%);
+}
