@@ -5,7 +5,7 @@ import { Card } from '../../components';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
 
-const RESULTS_PER_PAGE = 10;
+const RESULTS_PER_PAGE = 12;
 
 export default function Search() {
   const { keyword } = useParams();
