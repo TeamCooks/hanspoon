@@ -1,49 +1,48 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { searchRecipes } from '../../api/requestData';
+import { searchRecipes } from '@api/requestData';
 import { Card } from '../../components';
+import classNames from 'classnames';
+import styles from './Search.module.scss';
+
+const RESULTS_PER_PAGE = 12;
 
 export default function Search() {
   const { keyword } = useParams();
-  const [fetchedData, setFetchedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [fetchedData, setFetchedData] = useState({});
   const [currentSearchResults, setCurrentSearchResults] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   // const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
 
+  const handleClick = (num) => {
+    setCurrentPage(num);
+  };
   useEffect(() => {
-    setIsLoading(true);
+    setCurrentPage(1);
+    (async () => {
+      const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, RESULTS_PER_PAGE);
+      setTotalResults(fetchedTotalResults);
+      setFetchedData({ 1: results });
+      setCurrentSearchResults(results);
+    })();
+  }, [keyword]);
+  
+  useEffect(() => {
     (async () => {
       if (!fetchedData[currentPage]) {
-        const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, 10, [currentPage - 1] * 10);
-        if (totalResults !== fetchedTotalResults) setTotalResults(fetchedTotalResults);
+        const { results } = await searchRecipes(keyword, RESULTS_PER_PAGE, [currentPage - 1] * RESULTS_PER_PAGE);
         setFetchedData({ ...fetchedData, [currentPage]: results });
         setCurrentSearchResults(results);
       } else {
         setCurrentSearchResults(fetchedData[currentPage]);
       }
     })();
-    setIsLoading(false);
-  }, [currentPage, keyword]);
+  }, [currentPage]);
 
   return (
-    <div>
-      <p>{totalResults}개의 검색결과가 있습니다.</p>
-      <p>현재 페이지 {currentPage}</p>
-      {isLoading ? <div>로딩중입니다.</div> : null}
-      <button onClick={() => setCurrentPage(1)}>처음결과보기</button>
-      <button onClick={() => setCurrentPage(currentPage - 1)}>이전결과보기</button>
-      <ul>
-        {[-2, -1, 0, 1, 2].map((num) => (
-          <li key={num}>
-            <button onClick={() => setCurrentPage(num + currentPage)}>{currentPage + num}</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => setCurrentPage(currentPage + 1)}>다음결과보기</button>
-      <button onClick={() => setCurrentPage(Math.ceil(totalResults / 10))}>끝결과보기</button>
-      <ul>
+    <div className={classNames(styles.container)}>
+      <ul className={styles.searchResultsList}>
         {currentSearchResults.map(({ id, image, title }) => (
           <li key={id}>
             <Card
@@ -57,9 +56,78 @@ export default function Search() {
           </li>
         ))}
       </ul>
+      <Search.PageControl
+        className={classNames(styles.bottom, styles.control)}
+        onClick={handleClick}
+        currentPage={currentPage}
+        totalResults={totalResults}
+      />
     </div>
   );
 }
+
+Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handleClick }) => {
+  const lastPageNum = Math.ceil(totalResults / limit);
+  const pageStartNum = Math.floor((currentPage - 1) / limit) * limit + 1;
+  const pageEndNum = pageStartNum + limit - 1 < lastPageNum ? pageStartNum + limit - 1 : lastPageNum;
+  return (
+    <ul className={className}>
+      {Array.from({ length: pageEndNum - pageStartNum + 1 }, (_, i) => {
+        return (
+          <li key={i} className={classNames({ [styles.current]: currentPage === pageStartNum + i })}>
+            <button
+              type="button"
+              className={styles.pageButton}
+              aria-pressed={currentPage === pageStartNum + i}
+              aria-label={`Go to page ${pageStartNum + i}.`}
+              onClick={() => {
+                handleClick(pageStartNum + i);
+              }}
+            >
+              {pageStartNum + i}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResults }) => {
+  return (
+    <div className={classNames(className, styles.control)}>
+      <button
+        type="button"
+        className={styles.pageButton}
+        aria-label={`Go to previous results page.`}
+        onClick={() => {
+          if (currentPage === 1) return;
+          handleClick(currentPage - 1);
+        }}
+      >
+        PREV
+      </button>
+      <Search.PageList
+        className={styles.pageList}
+        currentPage={currentPage}
+        totalResults={totalResults}
+        limit={RESULTS_PER_PAGE}
+        onClick={handleClick}
+      />
+      <button
+        type="button"
+        className={styles.pageButton}
+        aria-label={`Go to next results page.`}
+        onClick={() => {
+          if (currentPage > Math.floor(totalResults / RESULTS_PER_PAGE)) return;
+          handleClick(currentPage + 1);
+        }}
+      >
+        NEXT
+      </button>
+    </div>
+  );
+};
 
 const useSearch = (keyword, shouldFetch) => {
   const [data, setData] = useState([]);

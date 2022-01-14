@@ -1,0 +1,32 @@
+@use '@styles/' as *;
+
+.container {
+  background-color: $gray--100;
+  padding: rem(16px);
+  .searchResultsList {
+    @include flexbox(row, space-between, flex-start, wrap);
+  }
+}
+
+.control {
+  @include flexbox(row, center);
+  gap: rem(20px);
+  .pageButton {
+    border: none;
+    background: transparent;
+    font-weight: 500;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.pageList {
+  @include flexbox();
+  
+  
+
+  .current {
+    color: $primary-orange;
+  }
+}
