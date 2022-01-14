@@ -41,7 +41,7 @@ export default function Layout() {
         </li>
         <li>
           <Link className="NavLink" to="detail">
-           상세모달
+            상세모달
           </Link>
         </li>
       </ul>
