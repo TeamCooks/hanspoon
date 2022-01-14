@@ -144,12 +144,11 @@ textarea {
 
 main.main {
   @include desktop {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 rem(10px);
+    max-width: 1800px;
+    padding: rem(60px);
   }
   @include mobile {
-    padding: 0 rem(10px);
+    padding: rem(10px);
     min-width: 320px;
   }
 }
