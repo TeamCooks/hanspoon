@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { searchRecipes } from '../../api/requestData';
+import { searchRecipes } from '@api/requestData';
 import { Card } from '../../components';
 
 export default function Search() {
@@ -20,10 +20,11 @@ export default function Search() {
       setCurrentSearchResults(results);
     })();
   }, [keyword]);
-
+  
   useEffect(() => {
     (async () => {
       if (!fetchedData[currentPage]) {
+        if (currentPage === 1) return;
         const { results } = await searchRecipes(keyword, 10, [currentPage - 1] * 10);
         setFetchedData({ ...fetchedData, [currentPage]: results });
         setCurrentSearchResults(results);
