@@ -5,33 +5,38 @@ import { Card } from '../../components';
 
 export default function Search() {
   const { keyword } = useParams();
-  const [fetchedData, setFetchedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [fetchedData, setFetchedData] = useState({});
   const [currentSearchResults, setCurrentSearchResults] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   // const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
 
   useEffect(() => {
-    setIsLoading(true);
+    setCurrentPage(1);
+    (async () => {
+      const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, 10);
+      setTotalResults(fetchedTotalResults);
+      setFetchedData({ '1': results });
+      setCurrentSearchResults(results);
+    })();
+  }, [keyword]);
+
+  useEffect(() => {
     (async () => {
       if (!fetchedData[currentPage]) {
-        const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, 10, [currentPage - 1] * 10);
-        if (totalResults !== fetchedTotalResults) setTotalResults(fetchedTotalResults);
+        const { results } = await searchRecipes(keyword, 10, [currentPage - 1] * 10);
         setFetchedData({ ...fetchedData, [currentPage]: results });
         setCurrentSearchResults(results);
       } else {
         setCurrentSearchResults(fetchedData[currentPage]);
       }
     })();
-    setIsLoading(false);
-  }, [currentPage, keyword]);
+  }, [currentPage]);
 
   return (
     <div>
       <p>{totalResults}개의 검색결과가 있습니다.</p>
       <p>현재 페이지 {currentPage}</p>
-      {isLoading ? <div>로딩중입니다.</div> : null}
       <button onClick={() => setCurrentPage(1)}>처음결과보기</button>
       <button onClick={() => setCurrentPage(currentPage - 1)}>이전결과보기</button>
       <ul>
