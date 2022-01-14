@@ -18,13 +18,18 @@
 }
 
 .list {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: $menu_bg;
-  color: white;
-  padding: 5px 0;
-  white-space: nowrap;
+  &.active {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: $menu_bg;
+    color: white;
+    padding: 5px 0;
+    white-space: nowrap;
+  }
+
+  display: none;
 }
 
 .list::before {
