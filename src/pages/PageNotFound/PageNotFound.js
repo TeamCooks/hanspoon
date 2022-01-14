@@ -1,3 +1,10 @@
+import { Link } from 'react-router-dom';
+import styles from './PageNotFound.module.scss';
+
 export default function PageNotFound () {
-  return <div className="error">PageNotFound 컴포넌트입니다. 여기에는 404 페이지가 들어와야 합니다.</div>
+  return <div className={styles.pageNotFound}>
+    <h2 className={styles.heading}>Oops! Page Not Found!</h2>
+    <Link to='/'>Go to main page?</Link>
+
+  </div>
 }

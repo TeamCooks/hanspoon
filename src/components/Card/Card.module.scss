@@ -1,0 +1,66 @@
+@use '@styles/' as *;
+
+// type
+.wide {
+  width: 100%;
+  height: 50vw;
+}
+
+.square {
+  width: 312px;
+  height: 230px;
+}
+
+// background
+.cardWrap {
+  padding: rem(16px);
+  position: relative;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.white {
+  background: white;
+}
+
+.none {
+  background: none;
+}
+
+.title {
+  font-size: rem(18px);
+  font-weight: bold;
+  padding: 16px 0;
+}
+
+// summary
+.true {
+  display: block;
+  @include mobile {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.false {
+  display: none;
+}
+
+// headingPosition
+.bottom {
+  font-size: rem(20px);
+  &Left {
+    left: 0;
+  }
+  &Center {
+    text-align: center;
+  }
+}
+
+.topLeft {
+  font-size: rem(24px);
+  color: orange;
+}
