@@ -1,0 +1,19 @@
+@use '@styles/' as *;
+
+.section {
+  margin-bottom: rem(80px) !important;
+  flex-grow: 1;
+
+  @include desktop {
+    max-width: 30%;
+    min-width: rem(512px);
+    padding: rem(20px);
+  }
+}
+
+.contentHeader {
+  font-size: rem(32px);
+  color: #ec7b30;
+  font-weight: bold;
+  padding: rem(16px) 0;
+}

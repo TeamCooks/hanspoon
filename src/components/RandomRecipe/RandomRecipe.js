@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../Card/Card';
+import { SkeletonCard } from '../Card/SkeletonCard';
+
 import { Button } from '../Button/Button';
 import { getRandomRecipe } from '@api/requestData';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import styles from './RandomRecipe.module.scss';
 
 export function RandomRecipe() {
+  const [id, setId] = useState('');
   const [title, setTitle] = useState('');
-  const [summaryText, setSummaryText] = useState('');
+  const [summary, setSummary] = useState('');
   const [image, setImage] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -16,9 +21,10 @@ export function RandomRecipe() {
       setLoading(true);
 
       const { recipes } = await getRandomRecipe();
-      const { title, summary, image } = recipes[0];
+      const { id, title, summary, image } = recipes[0];
+      setId(id);
       setTitle(title);
-      setSummaryText(summary);
+      setSummary(summary);
       setImage(image);
     } catch (e) {
       setError(e);
@@ -32,18 +38,13 @@ export function RandomRecipe() {
 
   if (loading) {
     return (
-      <section>
-        <h2 className="content-header">RandomRecipe</h2>
-        <button>REROLL</button>
-        <Card
-          type="wide"
-          background="white"
-          summary={true}
-          headingPosition="bottomLeft"
-          imgSrc="http://placehold.it/312x230"
-          foodName="loading.."
-          summaryText="loading.."
-        />
+      <section className={styles.section}>
+        <h2 className={styles.contentHeader}>RandomRecipe</h2>
+        <button>
+          <GiPerspectiveDiceSixFacesRandom />
+          REROLL
+        </button>
+        <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />
       </section>
     );
   }
@@ -52,23 +53,26 @@ export function RandomRecipe() {
   }
 
   return (
-    <section>
-      <h2 className="content-header">RandomRecipe</h2>
+    <section className={styles.section}>
+      <h2 className={styles.contentHeader}>RandomRecipe</h2>
       <button
+        className="randomButton"
         onClick={() => {
           getData();
         }}
       >
+        <GiPerspectiveDiceSixFacesRandom />
         REROLL
       </button>
       <Card
+        id={id}
         type="wide"
         background="white"
-        summary={true}
+        hasSummary={true}
         headingPosition="bottomLeft"
         imgSrc={image}
-        foodName={title}
-        summaryText={summaryText}
+        title={title}
+        summary={summary}
       />
     </section>
   );
