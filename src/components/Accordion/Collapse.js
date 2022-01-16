@@ -1,10 +1,12 @@
 import React from 'react';
+import CollapseHeading from './CollapseHeading';
+import CollapseContent from './CollapseContent';
 
 const Collapse = (props) => {
   return (
     <div>
-      <h3>{props.heading}</h3>
-      <p>{props.content}</p>
+      <CollapseHeading heading={props.heading} />
+      <CollapseContent content={props.content} />
     </div>
   );
 };
