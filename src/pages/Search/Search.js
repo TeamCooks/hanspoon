@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card } from '../../components';
 import { useSearch } from '../../Hooks';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
 
-const RESULTS_PER_PAGE = 12;
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage, RESULTS_PER_PAGE);
+  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage);
 
   const handleClick = (num) => {
     setCurrentPage(num);
@@ -47,10 +48,25 @@ export default function Search() {
 
 Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handleClick }) => {
   const lastPageNum = Math.ceil(totalResults / limit);
-  const pageStartNum = Math.floor((currentPage - 1) / limit) * limit + 1;
-  const pageEndNum = pageStartNum + limit - 1 < lastPageNum ? pageStartNum + limit - 1 : lastPageNum;
+  const pageStartNum = Math.max(currentPage - 2, 1);
+  const pageEndNum = Math.min(currentPage + 2, lastPageNum);
   return (
-    <ul className={className}>
+    <ul className={classNames(className, styles.pageNumberList)}>
+      {currentPage > 3 ? (
+        <li>
+          <button
+            type="button"
+            className={styles.pageButton}
+            aria-pressed={false}
+            aria-label={`Go to previous pages.`}
+            onClick={() => {
+              handleClick(currentPage - 3);
+            }}
+          >
+            <IoEllipsisHorizontalSharp />
+          </button>
+        </li>
+      ) : null}
       {Array.from({ length: pageEndNum - pageStartNum + 1 }, (_, i) => {
         return (
           <li key={i} className={classNames({ [styles.current]: currentPage === pageStartNum + i })}>
@@ -68,6 +84,21 @@ Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handl
           </li>
         );
       })}
+      {currentPage < lastPageNum - 2 ? (
+        <li>
+          <button
+            type="button"
+            className={styles.pageButton}
+            aria-pressed={false}
+            aria-label={`Go to next pages.`}
+            onClick={() => {
+              handleClick(currentPage + 3);
+            }}
+          >
+            <IoEllipsisHorizontalSharp />{' '}
+          </button>
+        </li>
+      ) : null}
     </ul>
   );
 };
@@ -84,13 +115,13 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
           handleClick(currentPage - 1);
         }}
       >
-        PREV
+        <IoIosArrowBack />
       </button>
       <Search.PageList
         className={styles.pageList}
         currentPage={currentPage}
         totalResults={totalResults}
-        limit={RESULTS_PER_PAGE}
+        limit={5}
         onClick={handleClick}
       />
       <button
@@ -98,11 +129,11 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
         className={styles.pageButton}
         aria-label={`Go to next results page.`}
         onClick={() => {
-          if (currentPage > Math.floor(totalResults / RESULTS_PER_PAGE)) return;
+          if (currentPage > Math.floor(totalResults / 5)) return;
           handleClick(currentPage + 1);
         }}
       >
-        NEXT
+        <IoIosArrowForward />
       </button>
     </div>
   );
