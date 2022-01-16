@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { searchRecipes } from '@api/requestData';
 import { Card } from '../../components';
@@ -6,44 +6,23 @@ import classNames from 'classnames';
 import styles from './Search.module.scss';
 
 const RESULTS_PER_PAGE = 12;
-
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [fetchedData, setFetchedData] = useState({});
-  const [currentSearchResults, setCurrentSearchResults] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
-  // const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
+  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage);
 
   const handleClick = (num) => {
     setCurrentPage(num);
   };
+
   useEffect(() => {
     setCurrentPage(1);
-    (async () => {
-      const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, RESULTS_PER_PAGE);
-      setTotalResults(fetchedTotalResults);
-      setFetchedData({ 1: results });
-      setCurrentSearchResults(results);
-    })();
   }, [keyword]);
   
-  useEffect(() => {
-    (async () => {
-      if (!fetchedData[currentPage]) {
-        const { results } = await searchRecipes(keyword, RESULTS_PER_PAGE, [currentPage - 1] * RESULTS_PER_PAGE);
-        setFetchedData({ ...fetchedData, [currentPage]: results });
-        setCurrentSearchResults(results);
-      } else {
-        setCurrentSearchResults(fetchedData[currentPage]);
-      }
-    })();
-  }, [currentPage]);
-
   return (
     <div className={classNames(styles.container)}>
       <ul className={styles.searchResultsList}>
-        {currentSearchResults.map(({ id, image, title }) => (
+        {results.map(({ id, image, title }) => (
           <li key={id}>
             <Card
               type="square"
@@ -129,34 +108,46 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
   );
 };
 
-const useSearch = (keyword, shouldFetch) => {
-  const [data, setData] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
+const useSearch = (keyword, currentPage) => {
+  const [results, setResults] = useState([]);
+  const storedResults = useRef({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [totalResults, setTotalResults] = useState(0);
+
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const { results: fetchedResults, totalResults: fetchedTotalResults } = await searchRecipes(
+        keyword,
+        RESULTS_PER_PAGE,
+        currentPage * RESULTS_PER_PAGE,
+      );
+      storedResults.current[currentPage] = fetchedResults;
+      setResults(fetchedResults);
+      setTotalResults(fetchedTotalResults);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const { results, totalResults } = await searchRecipes(keyword);
-        setData((previousData) => previousData.concat(results));
-        setTotalResults(totalResults);
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    // if (shouldFetch()) {
-    fetchData();
-    // }
+    storedResults.current = {};
   }, [keyword]);
 
+  useEffect(() => {
+    if (!storedResults.current[currentPage]) {
+      fetchData();
+    } else {
+      setResults(storedResults.current[currentPage]);
+    }
+  }, [currentPage]);
+
   return {
-    data,
+    results,
     isLoading,
     hasError: error !== null,
     error,
