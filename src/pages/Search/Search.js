@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { searchRecipes } from '@api/requestData';
 import { Card } from '../../components';
+import { useSearch } from '../../Hooks';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
 
@@ -9,7 +9,7 @@ const RESULTS_PER_PAGE = 12;
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage);
+  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage, RESULTS_PER_PAGE);
 
   const handleClick = (num) => {
     setCurrentPage(num);
@@ -18,7 +18,7 @@ export default function Search() {
   useEffect(() => {
     setCurrentPage(1);
   }, [keyword]);
-  
+
   return (
     <div className={classNames(styles.container)}>
       <ul className={styles.searchResultsList}>
@@ -106,51 +106,4 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
       </button>
     </div>
   );
-};
-
-const useSearch = (keyword, currentPage) => {
-  const [results, setResults] = useState([]);
-  const storedResults = useRef({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [totalResults, setTotalResults] = useState(0);
-
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const { results: fetchedResults, totalResults: fetchedTotalResults } = await searchRecipes(
-        keyword,
-        RESULTS_PER_PAGE,
-        currentPage * RESULTS_PER_PAGE,
-      );
-      storedResults.current[currentPage] = fetchedResults;
-      setResults(fetchedResults);
-      setTotalResults(fetchedTotalResults);
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    storedResults.current = {};
-  }, [keyword]);
-
-  useEffect(() => {
-    if (!storedResults.current[currentPage]) {
-      fetchData();
-    } else {
-      setResults(storedResults.current[currentPage]);
-    }
-  }, [currentPage]);
-
-  return {
-    results,
-    isLoading,
-    hasError: error !== null,
-    error,
-    totalResults,
-  };
 };
