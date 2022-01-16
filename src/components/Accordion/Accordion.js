@@ -504,21 +504,17 @@ const Accordion = () => {
   const recipeDetails = [
     {
       type: 'ingredients',
-      data: recipe.extendedIngredients
-        .map(
-          (ingredient) => `name: ${ingredient.nameClean} ${ingredient.amount} ${ingredient.measures.metric.unitShort}`,
-        )
-        .join(''),
+      data: recipe.extendedIngredients.map(
+        (ingredient) => `${ingredient.nameClean} ${ingredient.amount} ${ingredient.measures.metric.unitShort}`,
+      ),
     },
     {
       type: 'equipment',
-      data: recipe.analyzedInstructions[0].steps
-        .map((step) => step.equipment.map((equip) => equip.name).join(''))
-        .join(''),
+      data: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name).join('')),
     },
     // { type: 'summary', data: recipe.summary },
-    { type: 'summary', data: excludeTags(recipe.summary) },
-    { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step).join('\n 👉') },
+    { type: 'summary', data: [excludeTags(recipe.summary)] },
+    { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step) },
   ];
 
   const recipiInfoItems = recipeDetails.map((recipeInfo, index) => (
