@@ -3,8 +3,9 @@ import { string, bool, func, node, oneOf, oneOfType, any } from 'prop-types';
 import { createPortal } from 'react-dom';
 import { getTabbableElements } from '../../utils';
 import styles from './Dialog.module.scss';
+import classNames from 'classnames';
 
-export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', img, ...restProps }) {
+export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className,...restProps }) {
   const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
@@ -27,7 +28,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', img, .
 
     // 첫번째 탭 이동 가능한 요소에 포커싱
     firstTabbableElement.focus();
-
     // 이벤트 타입
     let eventType = 'keydown';
 
@@ -67,21 +67,21 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', img, .
       document.body.style.top = '';
       window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
     };
-  }, [handleClose]);
+  }, [handleClose, label]);
 
   return createPortal(
     <>
       <div
         ref={dialogRef}
-        className={styles.container}
+        className={classNames(styles.container, className)}
         role="dialog"
         aria-modal="true"
         aria-hidden={!isVisible}
-        aria-label="React Portal﹕모달 다이얼로그"
+        aria-label={`${label} Dialog`}
         {...restProps}
       >
         <div className={styles.content}>{children}</div>
-        <Dialog.CloseButton onClose={handleClose} />
+        <Dialog.CloseButton onClose={handleClose} label={label}/>
       </div>
       {img ? <Dialog.Image img={img} /> : null}
     </>,
@@ -90,11 +90,12 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', img, .
 }
 
 Dialog.propTypes = {
-  isVisible: bool,
+  isVisible: bool.isRequired,
   onClose: func.isRequired,
   children: node.isRequired,
   nodeId: string,
   img: string,
+  label: string.isRequired,
   restProps: any,
 };
 
@@ -110,13 +111,13 @@ Dialog.Dim.propTypes = {
 
 /* -------------------------------------------------------------------------- */
 
-Dialog.CloseButton = function DialogCloseButton({ onClose }) {
+Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
   return (
     <button
       type="button"
       className={styles.closeButton}
-      aria-label="모달 다이얼로그 닫기"
-      title="모달 다이얼로그 닫기"
+      aria-label={`Close ${label} dialog.`}
+      title={`Close ${label} dialog.`}
       onClick={onClose}
     >
       <svg width="24" height="24" fillRule="evenodd" clipRule="evenodd">
@@ -127,7 +128,8 @@ Dialog.CloseButton = function DialogCloseButton({ onClose }) {
 };
 
 Dialog.CloseButton.propTypes = {
-  onClose: func,
+  onClose: func.isRequired,
+  label: string.isRequired
 };
 
 /* -------------------------------------------------------------------------- */
