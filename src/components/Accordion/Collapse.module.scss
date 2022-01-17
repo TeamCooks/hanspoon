@@ -1,0 +1,6 @@
+@use '@styles/utils' as *;
+
+.recipeInfoItem {
+  //   border: 3px red solid;
+  margin-bottom: 20px !important; // cascading 문제 있는 것으로 보임.
+}

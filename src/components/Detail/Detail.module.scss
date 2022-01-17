@@ -1,0 +1,19 @@
+@use '@styles/utils' as *;
+
+.heading {
+  font-size: 24px;
+  color: $primary_orange;
+}
+
+.foodImageContainer {
+  margin: 15px 0;
+}
+
+.foodImage {
+  width: 100%;
+  border: 7px $black solid;
+}
+
+.creditsText {
+  font-size: 10px;
+}

@@ -1,42 +1,46 @@
 import PropTypes from 'prop-types';
 import styles from './Card.module.scss';
 import classNames from 'classnames';
+import { excludeTags } from '@utils/misc';
 
 export function Card({
+  id = 0,
   type,
   background,
-  summary,
+  hasSummary,
   headingPosition,
+  headingSize,
+  padding,
   imgSrc = 'http://placehold.it/312x230',
-  foodName,
-  summaryText = '',
+  title,
+  summary = '',
 }) {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(id);
+  }
   return (
-    <div className={type === 'square' ? styles['inlineBlock'] : ''}>
-      <figure className={classNames(styles['cardWrap'], styles[background], type === 'square' ? 'inlineBlock' : '')}>
-        {headingPosition === 'topLeft' ? (
-          <figcaption className={classNames(styles['title'], styles[headingPosition])}>{foodName}</figcaption>
-        ) : (
-          ''
-        )}
-        <img className={styles[type]} src={imgSrc} alt={foodName + '사진'} />
-        {headingPosition !== 'topLeft' ? (
-          <figcaption className={classNames(styles['title'], styles[headingPosition])}>{foodName}</figcaption>
-        ) : (
-          ''
-        )}
-        <span className={styles[summary]} dangerouslySetInnerHTML={{ __html: summaryText }} />
-      </figure>
-    </div>
+    <a role="button" onClick={handleClick}>
+      <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
+        <figure
+          className={classNames(styles['cardWrap'], styles[background], { [styles.inlineBlock]: type === 'square' })}
+        >
+          <img className={styles[type]} src={imgSrc} alt={title + 'picture'} />
+          <figcaption className={classNames(styles['title'], styles[headingPosition])}>{title}</figcaption>
+          <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
+        </figure>
+      </div>
+    </a>
   );
 }
 
 Card.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.oneOf(['wide', 'square']),
   background: PropTypes.oneOf(['white', 'none']),
-  summary: PropTypes.bool,
+  hasSummary: PropTypes.bool,
   headingPosition: PropTypes.oneOf(['bottomLeft', 'bottomCenter', 'topLeft']),
   imgSrc: PropTypes.string,
-  foodName: PropTypes.string,
-  summaryText: PropTypes.string,
+  title: PropTypes.string,
+  summary: PropTypes.string,
 };
