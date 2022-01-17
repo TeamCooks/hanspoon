@@ -1,10 +1,11 @@
 import { Card } from '../Card/Card';
+import { Heading } from '../Heading/Heading';
 import styles from './HotRecipes.module.scss';
 
 export function HotRecipes() {
   return (
     <section className={styles.section}>
-      <h2 className={styles.contentHeader}>HotRecipes</h2>
+      <Heading as="h2">RandomRecipe</Heading>
       <ul className={styles.cardItems}>
         <li>
           <Card

@@ -3,6 +3,7 @@ import { Card } from '../Card/Card';
 import { SkeletonCard } from '../Card/SkeletonCard';
 
 import { Button } from '../Button/Button';
+import { Heading } from '../Heading/Heading';
 import { getRandomRecipe } from '@api/requestData';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import styles from './RandomRecipe.module.scss';
@@ -39,7 +40,7 @@ export function RandomRecipe() {
   if (loading) {
     return (
       <section className={styles.section}>
-        <h2 className={styles.contentHeader}>RandomRecipe</h2>
+        <Heading as="h2">RandomRecipe</Heading>
         <button>
           <GiPerspectiveDiceSixFacesRandom />
           REROLL
@@ -54,7 +55,8 @@ export function RandomRecipe() {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.contentHeader}>RandomRecipe</h2>
+      <Heading as="h2">RandomRecipe</Heading>
+      {/* <h2 className={styles.contentHeader}>RandomRecipe</h2> */}
       <button
         className="randomButton"
         onClick={() => {
