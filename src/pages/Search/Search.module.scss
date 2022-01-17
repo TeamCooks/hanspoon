@@ -9,24 +9,38 @@
 }
 
 .control {
-  @include flexbox(row, center);
-  gap: rem(20px);
-  .pageButton {
+  @include flexbox(row, center, center);
+  gap: rem(20px) 4;
+  button {
     border: none;
     background: transparent;
-    font-weight: 500;
-    &:hover {
-      opacity: 0.5;
+    color: $primary-orange;
+  }
+  .pageNumberList {
+    @include flexbox(row, center, center);
+   
+    .pageButton {
+      border: 1px solid $primary-orange;
+      border-radius: rem(5px);
+      background: $white;
+      width: rem(32px);
+      height: rem(32px);
+      margin: rem(6px);
+      @include flexbox(row, center, center);
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 }
 
 .pageList {
   @include flexbox();
-  
-  
 
   .current {
-    color: $primary-orange;
+    .pageButton {
+      color: $white;
+      background-color: $primary-orange;
+    }
   }
 }

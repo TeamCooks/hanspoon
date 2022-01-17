@@ -1,49 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { searchRecipes } from '@api/requestData';
 import { Card } from '../../components';
+import { useSearch } from '../../Hooks';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
-
-const RESULTS_PER_PAGE = 12;
 
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [fetchedData, setFetchedData] = useState({});
-  const [currentSearchResults, setCurrentSearchResults] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
-  // const { totalResults, data, isLoading, hasError, error } = useSearch(keyword);
+  const { totalResults, results, isLoading, hasError, error } = useSearch(keyword, currentPage);
 
   const handleClick = (num) => {
     setCurrentPage(num);
   };
+
   useEffect(() => {
     setCurrentPage(1);
-    (async () => {
-      const { results, totalResults: fetchedTotalResults } = await searchRecipes(keyword, RESULTS_PER_PAGE);
-      setTotalResults(fetchedTotalResults);
-      setFetchedData({ 1: results });
-      setCurrentSearchResults(results);
-    })();
   }, [keyword]);
-  
-  useEffect(() => {
-    (async () => {
-      if (!fetchedData[currentPage]) {
-        const { results } = await searchRecipes(keyword, RESULTS_PER_PAGE, [currentPage - 1] * RESULTS_PER_PAGE);
-        setFetchedData({ ...fetchedData, [currentPage]: results });
-        setCurrentSearchResults(results);
-      } else {
-        setCurrentSearchResults(fetchedData[currentPage]);
-      }
-    })();
-  }, [currentPage]);
 
   return (
     <div className={classNames(styles.container)}>
       <ul className={styles.searchResultsList}>
-        {currentSearchResults.map(({ id, image, title }) => (
+        {results.map(({ id, image, title }) => (
           <li key={id}>
             <Card
               type="square"
@@ -68,10 +48,25 @@ export default function Search() {
 
 Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handleClick }) => {
   const lastPageNum = Math.ceil(totalResults / limit);
-  const pageStartNum = Math.floor((currentPage - 1) / limit) * limit + 1;
-  const pageEndNum = pageStartNum + limit - 1 < lastPageNum ? pageStartNum + limit - 1 : lastPageNum;
+  const pageStartNum = Math.max(currentPage - 2, 1);
+  const pageEndNum = Math.min(currentPage + 2, lastPageNum);
   return (
-    <ul className={className}>
+    <ul className={classNames(className, styles.pageNumberList)}>
+      {currentPage > 3 ? (
+        <li>
+          <button
+            type="button"
+            className={styles.pageButton}
+            aria-pressed={false}
+            aria-label={`Go to previous pages.`}
+            onClick={() => {
+              handleClick(currentPage - 3);
+            }}
+          >
+            <IoEllipsisHorizontalSharp />
+          </button>
+        </li>
+      ) : null}
       {Array.from({ length: pageEndNum - pageStartNum + 1 }, (_, i) => {
         return (
           <li key={i} className={classNames({ [styles.current]: currentPage === pageStartNum + i })}>
@@ -89,6 +84,21 @@ Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handl
           </li>
         );
       })}
+      {currentPage < lastPageNum - 2 ? (
+        <li>
+          <button
+            type="button"
+            className={styles.pageButton}
+            aria-pressed={false}
+            aria-label={`Go to next pages.`}
+            onClick={() => {
+              handleClick(currentPage + 3);
+            }}
+          >
+            <IoEllipsisHorizontalSharp />{' '}
+          </button>
+        </li>
+      ) : null}
     </ul>
   );
 };
@@ -105,13 +115,13 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
           handleClick(currentPage - 1);
         }}
       >
-        PREV
+        <IoIosArrowBack />
       </button>
       <Search.PageList
         className={styles.pageList}
         currentPage={currentPage}
         totalResults={totalResults}
-        limit={RESULTS_PER_PAGE}
+        limit={5}
         onClick={handleClick}
       />
       <button
@@ -119,47 +129,12 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
         className={styles.pageButton}
         aria-label={`Go to next results page.`}
         onClick={() => {
-          if (currentPage > Math.floor(totalResults / RESULTS_PER_PAGE)) return;
+          if (currentPage > Math.floor(totalResults / 5)) return;
           handleClick(currentPage + 1);
         }}
       >
-        NEXT
+        <IoIosArrowForward />
       </button>
     </div>
   );
-};
-
-const useSearch = (keyword, shouldFetch) => {
-  const [data, setData] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const { results, totalResults } = await searchRecipes(keyword);
-        setData((previousData) => previousData.concat(results));
-        setTotalResults(totalResults);
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    // if (shouldFetch()) {
-    fetchData();
-    // }
-  }, [keyword]);
-
-  return {
-    data,
-    isLoading,
-    hasError: error !== null,
-    error,
-    totalResults,
-  };
 };

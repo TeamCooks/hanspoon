@@ -1,0 +1,38 @@
+@use '@styles/' as *;
+
+.memberDialog {
+  @include flexbox(column, center, center);
+  gap: rem(20px);
+}
+.heading {
+  font-size: rem(30px);
+}
+
+.authError {
+  height: rem(16px);
+  background-color: blue;
+}
+
+.form {
+  @include flexbox(column);
+  width: 50vw;
+  max-width: rem(500px);
+  min-width: rem(250px);
+  gap: rem(6px);
+  input, button {
+    padding: 0 rem(24px);
+    height: rem(36px);
+    border: none;
+    border-radius: rem(18px) rem(18px);
+  }
+  button {
+    line-height: rem(36px);
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
+  
+  .fieldError {
+    height: rem(16px);
+  }
+}
