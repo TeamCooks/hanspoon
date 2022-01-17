@@ -60,6 +60,13 @@ export const signInSchema = Yup.object({
   email: Yup.string().email('Invalid email address').required('Required'),
 });
 
+const PLACEHOLDER = {
+  username: 'Username',
+  email: 'Email',
+  password: 'Password',
+  passwordConfirm: 'Confirm password'
+}
+
 export const signUpSchema = Yup.object({
   username: Yup.string().min(3, 'Must be 3 characters or more').required('Required'),
   password: Yup.string().min(8, 'Must be 8 characters or more').required('Required'),
@@ -102,4 +109,5 @@ export function AuthError({ type }) {
   return <div className="auth-error">{AUTH_ERROR_MSG[type]}</div>;
 }
 
-export { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, AUTH_FUNC, FIELDS };
+export { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, AUTH_FUNC, FIELDS, PLACEHOLDER };
+

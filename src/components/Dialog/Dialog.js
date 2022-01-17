@@ -5,7 +5,7 @@ import { getTabbableElements } from '../../utils';
 import styles from './Dialog.module.scss';
 import classNames from 'classnames';
 
-export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className,...restProps }) {
+export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
   const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
@@ -55,7 +55,7 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
 
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY.current}px`;
-    
+
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
@@ -73,15 +73,15 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
     <>
       <div
         ref={dialogRef}
-        className={classNames(styles.container, className)}
+        className={styles.container}
         role="dialog"
         aria-modal="true"
         aria-hidden={!isVisible}
         aria-label={`${label} Dialog`}
         {...restProps}
       >
-        <div className={styles.content}>{children}</div>
-        <Dialog.CloseButton onClose={handleClose} label={label}/>
+        <div className={classNames(className, styles.content)}>{children}</div>
+        <Dialog.CloseButton onClose={handleClose} label={label} />
       </div>
       {img ? <Dialog.Image img={img} /> : null}
     </>,
@@ -129,7 +129,7 @@ Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
 
 Dialog.CloseButton.propTypes = {
   onClose: func.isRequired,
-  label: string.isRequired
+  label: string.isRequired,
 };
 
 /* -------------------------------------------------------------------------- */

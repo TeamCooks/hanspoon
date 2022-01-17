@@ -4,9 +4,9 @@ import { Dialog } from '..';
 import { useFormik } from 'formik';
 import styles from './Auth.module.scss';
 import imgUrl from '@assets/default.jpg';
-import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, AUTH_FUNC } from '../../services';
+import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, AUTH_FUNC, PLACEHOLDER } from '../../services';
 
-export function Auth({ isVisible, handleCloseDialog }) {
+export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
 
   const toggleCurrentForm = (e) => {
@@ -17,14 +17,14 @@ export function Auth({ isVisible, handleCloseDialog }) {
   return isVisible ? (
     <Dialog
       isVisible={isVisible}
-      onClose={handleCloseDialog}
+      onClose={onClose}
       nodeId="dialog"
       img={imgUrl}
       label={currentForm}
       className={styles.memberDialog}
     >
       <h2 className={styles.heading}>{HEADING[currentForm]}</h2>
-      {currentForm === 'signin' ? <Auth.SignIn /> : <Auth.SignUp />}
+      {currentForm === 'signin' ? <Auth.SignIn onClose={onClose} /> : <Auth.SignUp onClose={onClose} />}
       <a href="#" role="button" onClick={toggleCurrentForm}>
         {TOGGLE_MESSAGE[currentForm]}
       </a>
@@ -37,7 +37,7 @@ Auth.propTypes = {
   handleCloseDialog: PropTypes.func.isRequired,
 };
 
-Auth.SignIn = function SignIn() {
+Auth.SignIn = function SignIn({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signin,
@@ -46,6 +46,7 @@ Auth.SignIn = function SignIn() {
       try {
         const user = await AUTH_FUNC.signin(values);
         setAuthError(false);
+        onClose();
         // 여기에 auth 정보를 context에 update하기
       } catch (e) {
         setAuthError(true);
@@ -54,8 +55,8 @@ Auth.SignIn = function SignIn() {
   });
   return (
     <>
-      {hasAuthError ? <Auth.Error message={AUTH_ERROR_MSG.signin} /> : null}
-      <form onSubmit={formik.handleSubmit}>
+      <Auth.Error>{hasAuthError ? AUTH_ERROR_MSG.signin : null} </Auth.Error>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
         <button type="submit" disabled={!formik.dirty || !formik.isValid}>
@@ -66,7 +67,11 @@ Auth.SignIn = function SignIn() {
   );
 };
 
-Auth.SignUp = function SignUp() {
+Auth.SignIn.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
+Auth.SignUp = function SignUp({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signup,
@@ -75,6 +80,7 @@ Auth.SignUp = function SignUp() {
       try {
         const user = await AUTH_FUNC.signup(values);
         setAuthError(false);
+        onClose();
         // 여기에 auth 정보를 context에 update하기
       } catch (e) {
         setAuthError(true);
@@ -84,7 +90,7 @@ Auth.SignUp = function SignUp() {
   return (
     <>
       <Auth.Error>{hasAuthError ? AUTH_ERROR_MSG.signup : null}</Auth.Error>
-      <form onSubmit={formik.handleSubmit}>
+      <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'username'} formik={formik} />
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
@@ -97,8 +103,11 @@ Auth.SignUp = function SignUp() {
   );
 };
 
-Auth.Error = function Error({ children }) {
-  return <div className={styles.authError}>{children}</div>;
+Auth.SignUp.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+Auth.Error = function Error({ ...restProps }) {
+  return <div className={styles.authError} {...restProps} />;
 };
 
 Auth.Error.propTypes = {
@@ -120,10 +129,11 @@ Auth.Field = function Field({ fieldName, formik }) {
   }
   return (
     <>
-      <label htmlFor={fieldName}>{fieldName.toUpperCase()}</label>
+      <label className='a11y-hidden' htmlFor={fieldName}>{fieldName.toUpperCase()}</label>
       <input
         id={fieldName}
         name={fieldName}
+        placeholder={PLACEHOLDER[fieldName]}
         type={type}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
