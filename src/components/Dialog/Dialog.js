@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { getTabbableElements } from '../../utils';
 import styles from './Dialog.module.scss';
 import classNames from 'classnames';
-
+import { IconButton } from '../Button/IconButton';
 export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
   const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
@@ -112,19 +112,7 @@ Dialog.Dim.propTypes = {
 /* -------------------------------------------------------------------------- */
 
 Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
-  return (
-    <button
-      type="button"
-      className={styles.closeButton}
-      aria-label={`Close ${label} dialog.`}
-      title={`Close ${label} dialog.`}
-      onClick={onClose}
-    >
-      <svg width="24" height="24" fillRule="evenodd" clipRule="evenodd">
-        <path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-      </svg>
-    </button>
-  );
+  return <IconButton ariaLabel={`Close ${label} dialog.`} state="close" type="button" variant="default" color="white" size="large" className={styles.closeButton} onClick={onClose} />
 };
 
 Dialog.CloseButton.propTypes = {
