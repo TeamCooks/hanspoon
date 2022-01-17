@@ -1,0 +1,13 @@
+@use '../../styles/index.scss' as *;
+
+.pageNotFound {
+  @include flexbox(column, center, center);
+  text-align: center;
+  gap: rem(20px);
+  // height: calc(100vh - $headerHeight);
+  height: 80vh;
+}
+
+.heading {
+  font-size: rem(40px);
+}

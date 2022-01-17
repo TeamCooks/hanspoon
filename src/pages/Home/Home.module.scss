@@ -1,0 +1,8 @@
+@use '@styles/utils' as *;
+
+.section {
+  @include desktop {
+    display: flex;
+    flex-direction: row;
+  }
+}

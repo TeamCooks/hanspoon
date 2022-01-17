@@ -1,0 +1,26 @@
+@use '@styles/' as *;
+
+.section {
+  @include desktop {
+    flex-grow: 2;
+    padding: rem(20px);
+    min-width: rem(400px);
+  }
+}
+
+.contentHeader {
+  font-size: rem(32px);
+  color: #ec7b30;
+  font-weight: bold;
+  padding: rem(16px);
+}
+
+.cardItems {
+  display: flex;
+  flex-direction: column;
+  @include desktop {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,12 @@
+@use '@styles/' as *;
+
+.section {
+  margin-bottom: rem(80px) !important;
+  flex-grow: 1;
+
+  @include desktop {
+    max-width: 30%;
+    min-width: rem(512px);
+    padding: rem(20px);
+  }
+}

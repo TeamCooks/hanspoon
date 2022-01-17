@@ -1,0 +1,27 @@
+@use './utils/' as *;
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: $background_gray;
+}
+
+.error {
+  border: 4px solid $primary_green;
+  min-height: 300px;
+  color: blue;
+}
+
+.NavLinkList {
+  color: $gray--300;
+  text-align: center;
+  @include flexbox();
+
+  .NavLink {
+    margin: 15px;
+  }
+}
