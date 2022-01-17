@@ -12,6 +12,7 @@ const Layout = lazyComponent('Layout');
 const Authorized = lazyComponent('Authorized');
 const PageNotFound = lazyComponent('PageNotFound');
 const Search = lazyComponent('Search');
+const Example = lazyComponent('Example');
 
 function App() {
   const routeElement = useRoutes([
@@ -27,6 +28,7 @@ function App() {
         { path: 'signin', element: <SignIn /> },
         { path: 'signup', element: <SignUp /> },
         { path: 'search/:keyword', element: <Search /> },
+        { path: 'example', element: <Example /> },
       ],
     },
   ]);
