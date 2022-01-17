@@ -1,0 +1,129 @@
+@use '@styles/' as *;
+
+// skeleton animation
+@-webkit-keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+@keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+// type
+.wide {
+  width: 100%;
+  height: 50vw;
+  background: gray;
+
+  @include desktop {
+    // width: 312px;
+    // height: 250px;
+    width: 100%;
+    height: 250px;
+  }
+}
+
+.square {
+  width: rem(200px);
+  height: rem(200px);
+  background: gray;
+}
+
+.skeletonImage {
+  overflow: hidden;
+  position: relative;
+
+  -webkit-animation: skeleton-gradient 1.8s infinite ease-in-out;
+  animation: skeleton-gradient 1.8s infinite ease-in-out;
+}
+
+// background
+.cardWrap {
+  display: flex;
+  flex-direction: column;
+  padding: rem(16px);
+  position: relative;
+  @include desktop {
+    width: 450px;
+  }
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.white {
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.none {
+  background: none;
+}
+
+.title {
+  margin: rem(16px) 0 !important;
+  width: 70%;
+  max-width: 100%;
+  height: rem(20px);
+  background: gray;
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  -webkit-animation: skeleton-gradient 1.8s infinite ease-in-out;
+  animation: skeleton-gradient 1.8s infinite ease-in-out;
+}
+
+// hasSummary
+.true {
+  display: block;
+  width: 100%;
+  height: rem(20px);
+  background: gray;
+  position: relative;
+  overflow: hidden;
+
+  -webkit-animation: skeleton-gradient 1.8s infinite ease-in-out;
+  animation: skeleton-gradient 1.8s infinite ease-in-out;
+}
+
+.false {
+  display: none;
+}
+
+// headingPosition
+.bottom {
+  background: gray;
+  &Left {
+    left: 0;
+  }
+  &Center {
+    text-align: center;
+  }
+}
+
+.topLeft {
+  background: gray;
+  order: -1;
+}

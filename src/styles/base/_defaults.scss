@@ -146,6 +146,7 @@ main.main {
   @include desktop {
     max-width: 1800px;
     padding: rem(60px);
+    margin: 0 auto;
   }
   @include mobile {
     padding: rem(10px);
