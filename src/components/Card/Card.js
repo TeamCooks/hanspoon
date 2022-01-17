@@ -17,6 +17,7 @@ export function Card({
 }) {
   function handleClick(e) {
     e.preventDefault();
+    console.log(id);
   }
   return (
     <a role="button" onClick={handleClick}>

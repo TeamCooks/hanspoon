@@ -4,7 +4,15 @@ import { Dialog } from '..';
 import { useFormik } from 'formik';
 import styles from './Auth.module.scss';
 import imgUrl from '@assets/default.jpg';
-import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, AUTH_FUNC, PLACEHOLDER } from '../../services';
+import {
+  TOGGLE_MESSAGE,
+  HEADING,
+  INITIAL_VALUES,
+  SCHEMA,
+  AUTH_ERROR_MSG,
+  AUTH_FUNC,
+  PLACEHOLDER,
+} from '../../services';
 
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
@@ -34,7 +42,7 @@ export function Auth({ isVisible, onClose }) {
 
 Auth.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  handleCloseDialog: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 Auth.SignIn = function SignIn({ onClose }) {
@@ -129,7 +137,9 @@ Auth.Field = function Field({ fieldName, formik }) {
   }
   return (
     <>
-      <label className='a11y-hidden' htmlFor={fieldName}>{fieldName.toUpperCase()}</label>
+      <label className="a11y-hidden" htmlFor={fieldName}>
+        {fieldName.toUpperCase()}
+      </label>
       <input
         id={fieldName}
         name={fieldName}
