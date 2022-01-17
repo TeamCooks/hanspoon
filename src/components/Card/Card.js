@@ -10,8 +10,6 @@ export function Card({
   background,
   hasSummary,
   headingPosition,
-  headingSize,
-  padding,
   imgSrc = 'http://placehold.it/312x230',
   title,
   summary = '',
@@ -31,10 +29,10 @@ export function Card({
       <a href="#" role="button" onClick={handleOpenDialog}>
         <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
           <figure
-            className={classNames(styles['cardWrap'], styles[background], { [styles.inlineBlock]: type === 'square' })}
+            className={classNames(styles.cardWrap, styles[background], { [styles.inlineBlock]: type === 'square' })}
           >
-            <img className={styles[type]} src={imgSrc} alt={title + 'picture'} />
-            <figcaption className={classNames(styles['title'], styles[headingPosition])}>{title}</figcaption>
+            <img className={styles[type]} src={imgSrc} alt={title} />
+            <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
             <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
           </figure>
         </div>
@@ -46,9 +44,9 @@ export function Card({
           nodeId="dialog"
           img={imgSrc}
           label={title}
-          className={styles.memberDialog}
+          className={styles.detailDialog}
         >
-          <h2 className={styles.heading}>이곳이 바로 상세페이지입니다</h2>
+          <h2 className={styles.heading}>{id+'번 레시피에 대한 상세 내용이 여기 들어갑니다.'}</h2>
         </Dialog>
       ) : null}
     </>
