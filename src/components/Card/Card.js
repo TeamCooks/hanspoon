@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { excludeTags } from '@utils/misc';
 
 export function Card({
-  id,
+  id = 0,
   type,
   background,
   hasSummary,
@@ -17,9 +17,7 @@ export function Card({
 }) {
   function handleClick(e) {
     e.preventDefault();
-    console.log(id);
   }
-
   return (
     <a role="button" onClick={handleClick}>
       <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
@@ -36,7 +34,7 @@ export function Card({
 }
 
 Card.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.oneOf(['wide', 'square']),
   background: PropTypes.oneOf(['white', 'none']),
   hasSummary: PropTypes.bool,
