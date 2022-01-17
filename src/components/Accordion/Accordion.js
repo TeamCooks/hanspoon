@@ -2,7 +2,7 @@ import React from 'react';
 import { excludeTags } from '../../utils';
 import Collapse from './Collapse';
 
-const Accordion = () => {
+const Accordion = (props) => {
   const recipe = {
     vegetarian: false,
     vegan: false,
@@ -512,7 +512,6 @@ const Accordion = () => {
       type: 'equipment',
       data: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name).join('')),
     },
-    // { type: 'summary', data: recipe.summary },
     { type: 'summary', data: [excludeTags(recipe.summary)] },
     { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step) },
   ];
