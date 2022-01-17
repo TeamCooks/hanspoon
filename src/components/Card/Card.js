@@ -46,7 +46,7 @@ export function Card({
           label={title}
           className={styles.detailDialog}
         >
-          <Detail id={id} />
+          <Detail id={id} imgSrc={imgSrc} title={title} />
         </Dialog>
       ) : null}
     </>
