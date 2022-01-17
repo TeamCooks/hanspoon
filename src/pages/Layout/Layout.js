@@ -10,6 +10,11 @@ export default function Layout() {
       Layout 컴포넌트입니다. 여기에는 헤더와 푸터, 네비게이션 바가 들어와야 합니다.
       <ul className="NavLinkList">
         <li>
+          <Link className="NavLink" to="/example">
+            버튼예시
+          </Link>
+        </li>
+        <li>
           <Link className="NavLink" to="/">
             홈으로
           </Link>
