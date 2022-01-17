@@ -1,0 +1,46 @@
+@use './../../styles/utils/' as *;
+
+.nav {
+  position: relative;
+}
+
+.list {
+  &.active {
+    display: block;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: $menu_bg;
+    color: white;
+    padding: 5px 0;
+    white-space: nowrap;
+  }
+
+  display: none;
+}
+
+.list::before {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: -9px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 10px 5px;
+  border-color: transparent transparent $menu_bg transparent;
+}
+
+.item {
+  text-align: center;
+
+  & > * {
+    width: 100%;
+    display: block;
+    padding: 15px 25px;
+  }
+}
+
+.item:hover {
+  background-color: lighten($menu_bg, 20%);
+}
