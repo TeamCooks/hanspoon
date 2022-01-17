@@ -1,4 +1,6 @@
 import React from 'react';
+import { excludeTags } from '../../utils';
+import Collapse from './Collapse';
 
 const Accordion = () => {
   const recipe = {
@@ -499,26 +501,27 @@ const Accordion = () => {
     spoonacularSourceUrl: 'https://spoonacular.com/smoked-salmon-pasta-660382',
   };
 
-  const recipeInfos = [
+  const recipeDetails = [
     {
       type: 'ingredients',
-      data: recipe.extendedIngredients
-        .map(
-          (ingredient) => `name: ${ingredient.nameClean} ${ingredient.measures.metric.unitShort} ${ingredient.amount}`,
-        )
-        .join('\n'),
+      data: recipe.extendedIngredients.map(
+        (ingredient) => `${ingredient.nameClean} ${ingredient.amount} ${ingredient.measures.metric.unitShort}`,
+      ),
     },
     {
       type: 'equipment',
-      data: '2~',
+      data: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name).join('')),
     },
-    { type: 'summary', data: recipe.summary },
-    { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step).join('\n 👉') },
+    // { type: 'summary', data: recipe.summary },
+    { type: 'summary', data: [excludeTags(recipe.summary)] },
+    { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step) },
   ];
 
-  const infosList = recipeInfos.map((recipeInfo, index) => <li key={index}>{recipeInfo.data}</li>);
+  const recipiInfoItems = recipeDetails.map((recipeInfo, index) => (
+    <Collapse key={index} heading={recipeInfo.type} content={recipeInfo.data} />
+  ));
 
-  return <ul>{infosList}</ul>;
+  return <ul>{recipiInfoItems}</ul>;
 };
 
 export default Accordion;
