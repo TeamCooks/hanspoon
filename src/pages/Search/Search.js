@@ -26,6 +26,7 @@ export default function Search() {
         {results.map(({ id, image, title }) => (
           <li key={id}>
             <Card
+              id={id}
               type="square"
               background="white"
               hasSummary={false}
