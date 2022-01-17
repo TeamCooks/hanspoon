@@ -1,0 +1,50 @@
+@use './../../styles/utils/' as *;
+
+.button {
+  padding: 10px;
+  border: none;
+}
+
+.text {
+  background: none;
+}
+
+.default.white {
+  color: $white;
+}
+
+.outlined {
+  border: 1px solid currentColor;
+  background: none;
+}
+
+.outlined.orange {
+  color: $primary-orange;
+}
+
+.outlined.green {
+  color: $primary-green;
+}
+
+.outlined.white {
+  color: $white;
+}
+
+.filled.orange {
+  background-color: $primary-orange;
+  color: $white;
+}
+
+.filled.green {
+  background-color: $primary-green;
+  color: $white;
+}
+
+.filled.white {
+  background-color: $white;
+  color: $black;
+}
+
+.round {
+  border-radius: 30px;
+}
