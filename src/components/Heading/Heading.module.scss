@@ -1,0 +1,8 @@
+@use '@styles/utils' as *;
+
+.heading {
+  font-size: rem(32px);
+  color: #ec7b30;
+  font-weight: bold;
+  padding: rem(16px) 0;
+}
