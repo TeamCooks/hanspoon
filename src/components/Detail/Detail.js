@@ -3,7 +3,7 @@ import styles from './Detail.module.scss';
 import Accordion from '../Accordion/Accordion';
 import { getRecipeById } from '@api/requestData';
 
-export const Detail = ({ id }) => {
+export const Detail = ({ id, title, imgSrc }) => {
   const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
@@ -12,13 +12,13 @@ export const Detail = ({ id }) => {
     })();
   }, []);
 
-  const { title, creditsText, image } = recipe;
+  const { creditsText } = recipe;
 
   return (
     <article>
       <h1 className={`${styles.heading}`}>{title}</h1>
       <figure className={`${styles.foodImageContainer}`}>
-        <img className={`${styles.foodImage}`} src={`${image}`} alt={`${title}`} />
+        <img className={`${styles.foodImage}`} src={`${imgSrc}`} alt={`${title}`} />
         <figcaption className={`${styles.creditsText}`}>{creditsText}</figcaption>
       </figure>
       <button>Like Button 컴포넌트</button>
