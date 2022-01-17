@@ -15,8 +15,14 @@
 }
 
 .square {
-  width: rem(200px);
-  height: rem(200px);
+  width: 100%;
+  @include mobile {
+    height: 50vw;
+  }
+  @include desktop {
+    width: rem(280px);
+    height: rem(280px);
+  }
   object-fit: cover;
 }
 
@@ -30,9 +36,11 @@
 }
 
 .inlineBlock {
-  display: inline-block;
-  width: 350px;
+  // width: 350px;
   text-align: center;
+  @include desktop {
+    display: inline-block;
+  }
 }
 
 .white {

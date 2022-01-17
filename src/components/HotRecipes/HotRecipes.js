@@ -9,7 +9,7 @@ export function HotRecipes() {
       <ul className={styles.cardItems}>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
@@ -20,7 +20,7 @@ export function HotRecipes() {
         </li>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
@@ -31,7 +31,7 @@ export function HotRecipes() {
         </li>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
@@ -42,7 +42,7 @@ export function HotRecipes() {
         </li>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
@@ -53,7 +53,7 @@ export function HotRecipes() {
         </li>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
@@ -64,7 +64,7 @@ export function HotRecipes() {
         </li>
         <li>
           <Card
-            type="wide"
+            type="square"
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
