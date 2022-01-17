@@ -3,7 +3,7 @@ import styles from './Card.module.scss';
 import classNames from 'classnames';
 import { excludeTags } from '@utils/misc';
 import { useState } from 'react';
-import { Dialog } from '..';
+import { Dialog, Detail } from '..';
 export function Card({
   id = 0,
   type,
@@ -46,7 +46,7 @@ export function Card({
           label={title}
           className={styles.detailDialog}
         >
-          <h2 className={styles.heading}>{id+'번 레시피에 대한 상세 내용이 여기 들어갑니다.'}</h2>
+          <Detail id={id} />
         </Dialog>
       ) : null}
     </>
