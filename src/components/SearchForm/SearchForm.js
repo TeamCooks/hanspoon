@@ -1,7 +1,7 @@
 import styles from './SearchForm.module.scss';
 import { useEffect, useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { IconButton } from '../../components';
 
 export function SearchForm() {
   const [keyword, setKeyword] = useState('');
@@ -40,9 +40,14 @@ export function SearchForm() {
         value={keyword}
         onChange={handleChange}
       />
-      <button className={styles.button} aria-label="search">
-        <FiSearch />
-      </button>
+      <IconButton
+        type="submit"
+        variant="default"
+        state="search"
+        ariaLabel="search"
+        className={styles.button}
+        size="small"
+      />
     </form>
   );
 }
