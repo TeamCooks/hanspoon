@@ -28,10 +28,10 @@ export default function Search() {
             <Card
               type="square"
               background="white"
-              summary={false}
+              hasSummary={false}
               headingPosition="bottomCenter"
               imgSrc={`https://spoonacular.com/recipeImages/${image}`}
-              foodName={title}
+              title={title}
             />
           </li>
         ))}
