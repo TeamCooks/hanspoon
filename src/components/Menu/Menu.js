@@ -1,7 +1,7 @@
 import styles from './Menu.module.scss';
 import { Link } from 'react-router-dom';
-import { BsPersonCircle } from 'react-icons/bs';
 import { useState } from 'react';
+import { IconButton, Button } from '../../components';
 
 export function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +12,16 @@ export function Menu() {
 
   return (
     <nav className={styles.nav}>
-      <button
-        className={[styles.button, styles.circle].join(' ')}
-        aria-label="User Menu"
+      <IconButton
+        type="button"
+        variant="default"
+        state="user"
+        size="large"
+        ariaLabel="User Menu"
         aria-haspopup="true"
         aria-expanded={isOpen}
         onClick={handleClick}
-      >
-        <BsPersonCircle />
-      </button>
+      />
       <ul className={`${styles.list} ${isOpen ? styles.active : ''}`}>
         <li className={styles.item}>
           <Link to="/my-recipes" tabIndex={isOpen ? 0 : -1}>
@@ -28,9 +29,9 @@ export function Menu() {
           </Link>
         </li>
         <li className={styles.item}>
-          <button className={styles.button} tabIndex={isOpen ? 0 : -1}>
+          <Button type="button" variant="text" tabIndex={isOpen ? 0 : -1}>
             Sign Out
-          </button>
+          </Button>
         </li>
       </ul>
     </nav>

@@ -1,5 +1,5 @@
 import styles from './Header.module.scss';
-import { SearchForm, Menu } from '../../components';
+import { SearchForm, Menu, Button } from '../../components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Auth } from '../Auth/Auth';
@@ -29,15 +29,16 @@ export function Header() {
       {isSignIn ? (
         <Menu />
       ) : (
-        <button
+        <Button
           type="button"
+          variant="text"
           aria-haspopup="dialog"
           aria-label="Open SignIn Dialog"
           title="Open SignIn Dialog"
           onClick={handleOpenDialog}
         >
           로그인
-        </button>
+        </Button>
       )}
       <Auth isVisible={isVisible} onClose={handleCloseDialog} />
     </header>
