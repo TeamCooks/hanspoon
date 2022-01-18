@@ -5,9 +5,9 @@ import styles from './HotRecipes.module.scss';
 export function HotRecipes() {
   return (
     <section className={styles.section}>
-      <Heading as="h2">RandomRecipe</Heading>
+      <Heading as="h2">HotRecipes</Heading>
       <ul className={styles.cardItems}>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"
@@ -18,7 +18,7 @@ export function HotRecipes() {
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
         </li>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"
@@ -29,7 +29,7 @@ export function HotRecipes() {
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
         </li>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"
@@ -40,7 +40,7 @@ export function HotRecipes() {
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
         </li>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"
@@ -51,7 +51,7 @@ export function HotRecipes() {
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
         </li>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"
@@ -62,7 +62,7 @@ export function HotRecipes() {
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
         </li>
-        <li>
+        <li className={styles.item}>
           <Card
             type="square"
             background="none"

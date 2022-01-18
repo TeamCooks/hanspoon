@@ -18,7 +18,7 @@
   }
   .pageNumberList {
     @include flexbox(row, center, center);
-   
+
     .pageButton {
       border: 1px solid $primary-orange;
       border-radius: rem(5px);
@@ -42,5 +42,15 @@
       color: $white;
       background-color: $primary-orange;
     }
+  }
+}
+
+.item {
+  width: 20%;
+  text-align: center;
+
+  @media (max-width: 1172px) {
+    width: 50%;
+    text-align: center;
   }
 }

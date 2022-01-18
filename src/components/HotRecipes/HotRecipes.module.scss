@@ -4,7 +4,6 @@
   @include desktop {
     flex-grow: 2;
     padding: rem(20px);
-    min-width: rem(400px);
   }
 }
 
@@ -22,5 +21,17 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+  }
+}
+
+.item {
+  @media (max-width: 1547px) {
+    width: 50%;
+    text-align: center;
+  }
+
+  @media (max-width: 1172px) {
+    width: 100%;
+    text-align: center;
   }
 }
