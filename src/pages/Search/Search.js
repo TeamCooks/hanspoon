@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, Loading } from '../../components';
+import { Card, Heading, Loading } from '../../components';
 import { useSearch } from '../../Hooks';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
@@ -20,31 +20,36 @@ export default function Search() {
     setCurrentPage(1);
   }, [keyword]);
 
-  return isLoading ? (
-    <Loading message="Loading search results" />
-  ) : (
+  return (
     <div className={classNames(styles.container)}>
-      <ul className={styles.searchResultsList}>
-        {results.map(({ id, image, title }) => (
-          <li className={styles.item} key={id}>
-            <Card
-              id={id}
-              type="square"
-              background="none"
-              hasSummary={false}
-              headingPosition="bottomCenter"
-              imgSrc={`https://spoonacular.com/recipeImages/${image}`}
-              title={title}
-            />
-          </li>
-        ))}
-      </ul>
-      <Search.PageControl
-        className={classNames(styles.bottom, styles.control)}
-        onClick={handleClick}
-        currentPage={currentPage}
-        totalResults={totalResults}
-      />
+      <Heading as="h2">Search Results</Heading>
+      {isLoading ? (
+        <Loading message="Loading search results" />
+      ) : (
+        <>
+          <ul className={styles.searchResultsList}>
+            {results.map(({ id, image, title }) => (
+              <li className={styles.item} key={id}>
+                <Card
+                  id={id}
+                  type="square"
+                  background="none"
+                  hasSummary={false}
+                  headingPosition="bottomCenter"
+                  imgSrc={`https://spoonacular.com/recipeImages/${image}`}
+                  title={title}
+                />
+              </li>
+            ))}
+          </ul>
+          <Search.PageControl
+            className={classNames(styles.bottom, styles.control)}
+            onClick={handleClick}
+            currentPage={currentPage}
+            totalResults={totalResults}
+          />
+        </>
+      )}
     </div>
   );
 }
