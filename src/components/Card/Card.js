@@ -33,8 +33,8 @@ export function Card({
           >
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
-            <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
           </figure>
+          <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
         </div>
       </a>
       {isVisible ? (

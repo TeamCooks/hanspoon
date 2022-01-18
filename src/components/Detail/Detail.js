@@ -24,8 +24,8 @@ export const Detail = ({ id }) => {
       </figure>
       <button>Like Button 컴포넌트</button>
       <div>Badge 컴포넌트</div>
-      <Label type="time" text="45" />
-      <Label type="bookmark" text="3" />
+      <p>Ready in 45 minutes</p>
+      <p>15 saved</p>
       <Accordion recipe={recipe} />
     </article>
   );

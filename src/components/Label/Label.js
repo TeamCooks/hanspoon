@@ -17,25 +17,21 @@ export function Label({ type, text }) {
       case 'time':
         return (
           <>
-            {<RiTimerFill style={iconStyle} />} Ready in <span className={styles.bold}>{text} minutes </span>
+            <RiTimerFill style={iconStyle} /> Ready in <strong className={styles.bold}>{text} minutes </strong>
           </>
         );
       case 'bookmark':
         return (
           <>
             {<BsBookmarkHeartFill style={iconStyle} />}
-            <span className={styles.bold}>{text}</span> saved
+            <strong className={styles.bold}>{text}</strong> saved
           </>
         );
       default:
         return null;
     }
   };
-  return (
-    <div>
-      <span className={styles.label}>{renderByType(type)}</span>
-    </div>
-  );
+  return <p className={styles.label}>{renderByType(type)}</p>;
 }
 
 Label.propTypes = {
