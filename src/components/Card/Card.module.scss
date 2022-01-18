@@ -39,6 +39,12 @@
   object-fit: cover;
 }
 
+.cardButton {
+  border: none;
+  background-color: transparent;
+  text-align: left;
+}
+
 // background
 .cardWrap {
   display: flex;
@@ -72,7 +78,7 @@
 }
 
 // hasSummary
-.true {
+.summary {
   display: block;
   line-height: rem(24px);
   @include mobile {
@@ -80,10 +86,6 @@
     overflow: hidden;
     white-space: nowrap;
   }
-}
-
-.false {
-  display: none;
 }
 
 // headingPosition
