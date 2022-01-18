@@ -6,7 +6,6 @@ import styles from './Dialog.module.scss';
 import classNames from 'classnames';
 import { IconButton } from '../Button/IconButton';
 export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
-  const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
 
@@ -52,9 +51,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
 
     // 이벤트 구독
     document.addEventListener(eventType, eventListener);
-
-    // document.body.style.position = 'fixed';
-    // document.body.style.top = `-${scrollY.current}px`;
     document.body.style['overflow-y'] = 'hidden';
     document.getElementById('root').setAttribute('aria-hidden', 'true');
 
@@ -64,11 +60,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
       document.removeEventListener(eventType, eventListener);
       document.getElementById('root').removeAttribute('aria-hidden');
       document.body.style['overflow-y'] = '';
-      // unmount 시 원래 스크롤 위치로 보내기
-      // scrollY.current = document.body.style.top;
-      // document.body.style.position = '';
-      // document.body.style.top = '';
-      // window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
     };
   }, [handleClose, label]);
 

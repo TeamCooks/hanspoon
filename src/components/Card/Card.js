@@ -26,7 +26,13 @@ export function Card({
   };
   return (
     <>
-      <button type="button" onClick={handleOpenDialog} aria-label={`Open dialog of ${title}`} aria-haspopup="dialog" >
+      <button
+        className={styles.cardButton}
+        type="button"
+        onClick={handleOpenDialog}
+        aria-label={`Open dialog of ${title}`}
+        aria-haspopup="dialog"
+      >
         <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
           <figure
             className={classNames(styles.cardWrap, styles[background], { [styles.inlineBlock]: type === 'square' })}
