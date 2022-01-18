@@ -53,19 +53,21 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
     // 이벤트 구독
     document.addEventListener(eventType, eventListener);
 
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY.current}px`;
+    // document.body.style.position = 'fixed';
+    // document.body.style.top = `-${scrollY.current}px`;
+    document.body.style['overflow-y'] = 'hidden';
 
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
+      console.log('whhhhhhhhy');
       document.removeEventListener(eventType, eventListener);
-
+      document.body.style['overflow-y'] = '';
       // unmount 시 원래 스크롤 위치로 보내기
-      scrollY.current = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
+      // scrollY.current = document.body.style.top;
+      // document.body.style.position = '';
+      // document.body.style.top = '';
+      // window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
     };
   }, [handleClose, label]);
 
