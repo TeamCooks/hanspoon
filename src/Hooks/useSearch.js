@@ -2,6 +2,43 @@ import { searchRecipes } from '@api/requestData';
 import { useEffect, useRef, useState } from 'react';
 const RESULTS_PER_PAGE = 12;
 
+// search/pending
+  // isLoading true
+  // error null
+  // data null
+// search/fulfilled
+  // isLoading false
+  // error null
+  // data { result, totalResult }
+// search/rejected
+  // isLoading false
+  // error { message }
+  // data null
+
+// function reducer (state, action)  {
+//   switch(action.type) {
+//     case 'search/fulfilled': 
+//       return {
+//         ...state,
+//         isLoading: false,
+//         data: action.payload
+//       }
+//     case 'search/rejected': 
+//       return {
+//         ...state,
+//         isLoading: false,
+//         error: {message: action.payload}
+//       }
+//     default:
+//   }
+// }
+
+// const { state, dispatch }  = useReducer(reducer, {
+//   isLoading: true,
+//   error: null,
+//   data: null
+// })
+
 export const useSearch = (keyword, currentPage, limit=RESULTS_PER_PAGE) => {
   const [results, setResults] = useState([]);
   const storedResults = useRef({});
@@ -38,7 +75,7 @@ export const useSearch = (keyword, currentPage, limit=RESULTS_PER_PAGE) => {
     } else {
       setResults(storedResults.current[currentPage]);
     }
-  }, [currentPage]);
+  }, [keyword, currentPage]);
 
   return {
     results,
