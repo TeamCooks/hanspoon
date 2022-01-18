@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, setDoc, doc, Timestamp } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
@@ -32,3 +32,8 @@ export const signUp = async ({ username, email, password }) => {
     throw new Error(errorCode);
   }
 };
+
+export const logOut = () => {
+  signOut(auth);
+};
+
