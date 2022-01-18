@@ -6,6 +6,7 @@
 
 .foodImageContainer {
   margin: 15px 0;
+  position: relative;
 }
 
 .foodImage {
@@ -19,6 +20,12 @@
   font-size: 10px;
 }
 
-.save {
+.saveButton {
   position: absolute;
+  right: 0;
+  bottom: 0;
+  &:hover svg {
+    color: $heart_pink;
+    filter: drop-shadow();
+  }
 }

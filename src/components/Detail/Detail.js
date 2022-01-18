@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import styles from './Detail.module.scss';
 import Accordion from '../Accordion/Accordion';
-<<<<<<< HEAD
 import { excludeTags } from '../../utils';
-=======
 import { Label } from '../Label/Label';
->>>>>>> bd7c0fe1eeb5c5f39ab55bff70aea981901df10d
 import { getRecipeById } from '@api/requestData';
 import { Heading } from '../Heading/Heading';
 import { IconButton } from '../';
+import styles from './Detail.module.scss';
 
-export const Detail = ({ id, title, imgSrc }) => {
+export function Detail({ id, title, imgSrc }) {
+  const saved = 75;
   const [recipe, setRecipe] = useState({
     extendedIngredients: [],
     analyzedInstructions: [{ steps: [] }],
@@ -42,25 +40,27 @@ export const Detail = ({ id, title, imgSrc }) => {
 
   return (
     <article className={styles.detail}>
-      <Heading as="h2">{title}</Heading>
-      <figure className={styles.foodImageContainer}>
-        <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
-        <figcaption className={styles.creditsText}>{creditsText}</figcaption>
-        <IconButton
-          className={styles.save}
-          variant="filled"
-          type="button"
-          state="heart"
-          ariaLabel="search"
-          color="green"
-          size="large"
-          shape="circle"
-        />
-      </figure>
-      <div>Badge 컴포넌트</div>
-      <p>Ready in 45 minutes</p>
-      <p>15 saved</p>
+      <div className={styles.recipeBrief}>
+        <Heading as="h2">{title}</Heading>
+        <figure className={styles.foodImageContainer}>
+          <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
+          <figcaption className={styles.creditsText}>{creditsText}</figcaption>
+          <IconButton
+            className={styles.saveButton}
+            variant="filled"
+            type="button"
+            state="heart"
+            ariaLabel="search"
+            color="green"
+            size="large"
+            shape="circle"
+          />
+        </figure>
+        <div>Badge 컴포넌트</div>
+        <p>Ready in {recipe.readyInMinutes} minutes</p>
+        <p>{saved} saved</p>
+      </div>
       <Accordion recipeDetails={recipeDetails} />
     </article>
   );
-};
+}

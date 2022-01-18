@@ -7,13 +7,14 @@
 .collapseHeading {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid $white;
 }
 
 .heading {
   display: inline-block;
-  font-size: 20px;
+  font-size: 36px;
 }
 
 .recipeInfoItem {
-  margin-bottom: 20px !important; // cascading 문제 있는 것으로 보임.
+  margin-bottom: 60px !important; // cascading 문제 있는 것으로 보임.
 }
