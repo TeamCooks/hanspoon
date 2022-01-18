@@ -16,22 +16,26 @@ export function Label({ type, text }) {
     switch (type) {
       case 'time':
         return (
-          <span className={styles.label}>
-            {<RiTimerFill style={iconStyle} />}Ready in <span className={styles.bold}>{text} minutes</span>
-          </span>
+          <>
+            {<RiTimerFill style={iconStyle} />} Ready in <span className={styles.bold}>{text} minutes </span>
+          </>
         );
       case 'bookmark':
         return (
-          <span className={styles.label}>
+          <>
             {<BsBookmarkHeartFill style={iconStyle} />}
             <span className={styles.bold}>{text}</span> saved
-          </span>
+          </>
         );
       default:
         return null;
     }
   };
-  return <div>{renderByType(type)}</div>;
+  return (
+    <div>
+      <span className={styles.label}>{renderByType(type)}</span>
+    </div>
+  );
 }
 
 Label.propTypes = {
