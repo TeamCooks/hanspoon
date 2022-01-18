@@ -56,12 +56,13 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
     // document.body.style.position = 'fixed';
     // document.body.style.top = `-${scrollY.current}px`;
     document.body.style['overflow-y'] = 'hidden';
+    document.getElementById('root').setAttribute('aria-hidden', 'true');
 
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
-      console.log('whhhhhhhhy');
       document.removeEventListener(eventType, eventListener);
+      document.getElementById('root').removeAttribute('aria-hidden');
       document.body.style['overflow-y'] = '';
       // unmount 시 원래 스크롤 위치로 보내기
       // scrollY.current = document.body.style.top;
@@ -114,7 +115,18 @@ Dialog.Dim.propTypes = {
 /* -------------------------------------------------------------------------- */
 
 Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
-  return <IconButton ariaLabel={`Close ${label} dialog.`} state="close" type="button" variant="default" color="white" size="large" className={styles.closeButton} onClick={onClose} />
+  return (
+    <IconButton
+      ariaLabel={`Close ${label} dialog.`}
+      state="close"
+      type="button"
+      variant="default"
+      color="white"
+      size="large"
+      className={styles.closeButton}
+      onClick={onClose}
+    />
+  );
 };
 
 Dialog.CloseButton.propTypes = {
