@@ -5,7 +5,7 @@ import styles from './Label.module.scss';
 import { BsBookmarkHeartFill } from 'react-icons/bs';
 import { RiTimerFill } from 'react-icons/ri';
 
-export function Label({ type, text }) {
+export function Label({ type, value }) {
   const iconStyle = {
     marginRight: '20px',
     fontSize: '26px',
@@ -17,14 +17,14 @@ export function Label({ type, text }) {
       case 'time':
         return (
           <>
-            <RiTimerFill style={iconStyle} /> Ready in <strong className={styles.bold}>{text} minutes </strong>
+            <RiTimerFill style={iconStyle} /> Ready in <strong className={styles.bold}>{value} minutes </strong>
           </>
         );
       case 'bookmark':
         return (
           <>
             {<BsBookmarkHeartFill style={iconStyle} />}
-            <strong className={styles.bold}>{text}</strong> saved
+            <strong className={styles.bold}>{value}</strong> saved
           </>
         );
       default:
@@ -36,5 +36,5 @@ export function Label({ type, text }) {
 
 Label.propTypes = {
   type: PropTypes.oneOf(['time', 'bookmark']).isRequired,
-  text: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
