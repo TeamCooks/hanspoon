@@ -13,6 +13,7 @@ import {
   AUTH_FUNC,
   PLACEHOLDER,
 } from '../../services';
+import { useAuth } from '../../Hooks';
 
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
@@ -47,12 +48,13 @@ Auth.propTypes = {
 
 Auth.SignIn = function SignIn({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
+  const {signIn} = useAuth();
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signin,
     validationSchema: SCHEMA.signin,
     onSubmit: async (values) => {
       try {
-        const user = await AUTH_FUNC.signin(values);
+        const user = await signIn(values);
         setAuthError(false);
         onClose();
         // 여기에 auth 정보를 context에 update하기
@@ -81,12 +83,14 @@ Auth.SignIn.propTypes = {
 
 Auth.SignUp = function SignUp({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
+  const {signUp} = useAuth();
+
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signup,
     validationSchema: SCHEMA.signup,
     onSubmit: async (values) => {
       try {
-        const user = await AUTH_FUNC.signup(values);
+        const user = await signUp(values);
         setAuthError(false);
         onClose();
         // 여기에 auth 정보를 context에 update하기
