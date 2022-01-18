@@ -1,0 +1,12 @@
+@use '@styles/' as *;
+
+.label {
+  color: #cbcbcb;
+  font-size: rem(24px);
+  display: block;
+  padding: rem(10px) 0;
+}
+
+.bold {
+  font-weight: bold;
+}

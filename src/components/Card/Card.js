@@ -41,6 +41,7 @@ export function Card({
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
             {hasSummary && <span className={styles.summary}>{excludeTags(summary)}</span>}
           </figure>
+          <p className={styles[hasSummary]}>{excludeTags(summary)}</p>
         </div>
       </button>
       {isVisible ? (
