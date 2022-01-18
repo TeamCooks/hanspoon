@@ -23,7 +23,7 @@ export function Label({ type, value }) {
       case 'bookmark':
         return (
           <>
-            {<BsBookmarkHeartFill style={iconStyle} />}
+            <BsBookmarkHeartFill style={iconStyle} />
             <strong className={styles.bold}>{value}</strong> saved
           </>
         );
