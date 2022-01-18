@@ -1,8 +1,14 @@
 import React from 'react';
-import styles from './CollapseHeading.module.scss';
+import { GoChevronDown } from 'react-icons/go';
+import styles from './Accordion.module.scss';
 
 const CollapseHeading = (props) => {
-  return <h3 className={`${styles.heading}`}>{props.heading}</h3>;
+  return (
+    <div className={styles.collapseHeading}>
+      <h3 className={styles.heading}>{props.heading}</h3>
+      <GoChevronDown />
+    </div>
+  );
 };
 
 export default CollapseHeading;

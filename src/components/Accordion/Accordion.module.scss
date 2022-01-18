@@ -1,0 +1,19 @@
+@use '@styles/utils' as *;
+
+.accordion {
+  color: $white;
+}
+
+.collapseHeading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.recipeInfoItem {
+  margin-bottom: 20px !important; // cascading 문제 있는 것으로 보임.
+}
