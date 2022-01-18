@@ -26,17 +26,25 @@ export function Card({
   };
   return (
     <>
-      <a href="#" role="button" onClick={handleOpenDialog}>
+      <button
+        className={styles.cardButton}
+        type="button"
+        onClick={handleOpenDialog}
+        aria-label={`Open dialog of ${title}`}
+        aria-haspopup="dialog"
+      >
         <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
           <figure
             className={classNames(styles.cardWrap, styles[background], { [styles.inlineBlock]: type === 'square' })}
           >
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
+            {hasSummary && <span className={styles.summary}>{excludeTags(summary)}</span>}
+            <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
           </figure>
-          <span className={styles[hasSummary]}>{excludeTags(summary)}</span>
+          
         </div>
-      </a>
+      </button>
       {isVisible ? (
         <Dialog
           isVisible={isVisible}

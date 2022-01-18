@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: "[컴포넌트 이름] - 설명"
+about: "라벨로 페이지를 선택해주세요 \U0001F4CC"
 title: ''
 labels: enhancement
 assignees: ''
