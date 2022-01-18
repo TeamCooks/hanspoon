@@ -1,0 +1,45 @@
+@use '@styles/' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 30px;
+  padding: 12px;
+  color: $white;
+}
+
+.dairyFree,
+.lactoOvo {
+  background-color: $badge_purple;
+}
+
+.lactoOvo > svg {
+  font-size: 20px;
+}
+
+.vegetarian,
+.vegan {
+  background-color: $badge_green;
+}
+
+.glutenFree,
+.popular,
+.paleo,
+.primal {
+  background-color: $badge_pink;
+}
+
+.healthy,
+.pescetarian {
+  background-color: $badge_navy;
+}
+
+/*
+.small {
+}
+
+.large {
+}
+*/
