@@ -26,7 +26,11 @@ body *::after {
 
 // 기본 여백 제거 ------------------------------------------------------------------ /
 // [class] {
+<<<<<<< HEAD
 // margin: 0;
+=======
+//   margin: 0;
+>>>>>>> bd7c0fe1eeb5c5f39ab55bff70aea981901df10d
 // }
 
 // 기본 아웃라인 제거 (웹접근성 체크 포인트 - 기본 아웃라인 제거 후에는 반드시 커스텀 아웃라인 스타일 정의가 필요함) ------------------------------------------------------------------ /
@@ -52,6 +56,7 @@ h5,
 h6 {
   font-size: 100%;
   font-weight: inherit;
+  margin: 0;
 }
 
 // 목록 안쪽 여백 및 불릿 제거 ---------------------------------------------------------- /
@@ -111,6 +116,11 @@ textarea {
   -webkit-appearance: none;
 }
 
+// figure 기본 스타일 제거
+figure {
+  margin: 0;
+}
+
 // 숨김 컨텐츠 처리 ------------------------------------------------------------- /
 .a11y-hidden {
   overflow: hidden;
@@ -144,8 +154,8 @@ textarea {
 
 main.main {
   @include desktop {
-    max-width: 1800px;
-    padding: rem(60px);
+    max-width: 1500px;
+    // padding: 0 rem(60px);
     margin: 0 auto;
   }
   @include mobile {

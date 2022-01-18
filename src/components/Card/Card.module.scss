@@ -16,14 +16,33 @@
 
 .square {
   width: 100%;
+
   @include mobile {
     height: 50vw;
   }
   @include desktop {
-    width: rem(280px);
-    height: rem(280px);
+    width: rem(260px);
+    height: rem(260px);
+    // 2행
+    @media (max-width: 1547px) {
+      width: 100%;
+      height: 20vw;
+    }
+
+    // 1행
+    @media (max-width: 1172px) {
+      // width: 100%;
+      width: 40vw;
+      height: 25vw;
+    }
   }
   object-fit: cover;
+}
+
+.cardButton {
+  border: none;
+  background-color: transparent;
+  text-align: left;
 }
 
 // background
@@ -36,7 +55,6 @@
 }
 
 .inlineBlock {
-  // width: 350px;
   text-align: center;
   @include desktop {
     display: inline-block;
@@ -60,7 +78,7 @@
 }
 
 // hasSummary
-.true {
+.summary {
   display: block;
   line-height: rem(24px);
   @include mobile {
@@ -68,10 +86,6 @@
     overflow: hidden;
     white-space: nowrap;
   }
-}
-
-.false {
-  display: none;
 }
 
 // headingPosition
@@ -89,22 +103,4 @@
   font-size: rem(24px);
   color: orange;
   order: -1;
-}
-
-// headingSize
-.fontBig {
-  font-size: rem(38px);
-}
-
-.fontSmall {
-  font-size: rem(26px);
-}
-
-// padding
-.paddingBig {
-  padding: rem(10px);
-}
-
-.paddingSmall {
-  padding: rem(30px);
 }

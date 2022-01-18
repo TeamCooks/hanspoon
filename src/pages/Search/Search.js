@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card } from '../../components';
+import { Card, Loading } from '../../components';
 import { useSearch } from '../../Hooks';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
@@ -20,15 +20,17 @@ export default function Search() {
     setCurrentPage(1);
   }, [keyword]);
 
-  return (
+  return isLoading ? (
+    <Loading message="Loading search results" />
+  ) : (
     <div className={classNames(styles.container)}>
       <ul className={styles.searchResultsList}>
         {results.map(({ id, image, title }) => (
-          <li key={id}>
+          <li className={styles.item} key={id}>
             <Card
               id={id}
               type="square"
-              background="white"
+              background="none"
               hasSummary={false}
               headingPosition="bottomCenter"
               imgSrc={`https://spoonacular.com/recipeImages/${image}`}

@@ -4,9 +4,8 @@ import { createPortal } from 'react-dom';
 import { getTabbableElements } from '../../utils';
 import styles from './Dialog.module.scss';
 import classNames from 'classnames';
-
+import { IconButton } from '../Button/IconButton';
 export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
-  const scrollY = useRef(window.scrollY);
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
 
@@ -52,20 +51,16 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
 
     // 이벤트 구독
     document.addEventListener(eventType, eventListener);
-
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY.current}px`;
+    document.body.style['overflow-y'] = 'hidden';
+    document.body.setAttribute('aria-hidden', 'true');
 
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
       document.removeEventListener(eventType, eventListener);
-
-      // unmount 시 원래 스크롤 위치로 보내기
-      scrollY.current = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      window.scrollTo(0, parseInt(scrollY.current || '0') * -1);
+      document.body.removeAttribute('aria-hidden');
+      document.body.style['overflow-y'] = '';
+      
     };
   }, [handleClose, label]);
 
@@ -113,17 +108,16 @@ Dialog.Dim.propTypes = {
 
 Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
   return (
-    <button
+    <IconButton
+      ariaLabel={`Close ${label} dialog.`}
+      state="close"
       type="button"
+      variant="default"
+      color="white"
+      size="large"
       className={styles.closeButton}
-      aria-label={`Close ${label} dialog.`}
-      title={`Close ${label} dialog.`}
       onClick={onClose}
-    >
-      <svg width="24" height="24" fillRule="evenodd" clipRule="evenodd">
-        <path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-      </svg>
-    </button>
+    />
   );
 };
 

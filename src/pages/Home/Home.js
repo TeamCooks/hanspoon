@@ -9,10 +9,10 @@ export default function Home() {
       <Helmet>
         <title>{setDocumentTitle('home')}</title>
       </Helmet>
-      <section className={styles.section}>
+      <div className={styles.section}>
         <RandomRecipe />
         <HotRecipes />
-      </section>
+      </div>
     </>
   );
 }

@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from './Detail.module.scss';
 import Accordion from '../Accordion/Accordion';
+<<<<<<< HEAD
 import { excludeTags } from '../../utils';
+=======
+import { Label } from '../Label/Label';
+>>>>>>> bd7c0fe1eeb5c5f39ab55bff70aea981901df10d
 import { getRecipeById } from '@api/requestData';
 import { Heading } from '../Heading/Heading';
 import { IconButton } from '../';
