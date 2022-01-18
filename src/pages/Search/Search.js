@@ -24,11 +24,11 @@ export default function Search() {
     <div className={classNames(styles.container)}>
       <ul className={styles.searchResultsList}>
         {results.map(({ id, image, title }) => (
-          <li key={id}>
+          <li className={styles.item} key={id}>
             <Card
               id={id}
               type="square"
-              background="white"
+              background="none"
               hasSummary={false}
               headingPosition="bottomCenter"
               imgSrc={`https://spoonacular.com/recipeImages/${image}`}

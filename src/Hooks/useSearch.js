@@ -1,8 +1,8 @@
 import { searchRecipes } from '@api/requestData';
 import { useEffect, useRef, useState } from 'react';
-const RESULTS_PER_PAGE = 12;
+const RESULTS_PER_PAGE = 10;
 
-export const useSearch = (keyword, currentPage, limit=RESULTS_PER_PAGE) => {
+export const useSearch = (keyword, currentPage, limit = RESULTS_PER_PAGE) => {
   const [results, setResults] = useState([]);
   const storedResults = useRef({});
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,7 @@ export const useSearch = (keyword, currentPage, limit=RESULTS_PER_PAGE) => {
       const { results: fetchedResults, totalResults: fetchedTotalResults } = await searchRecipes(
         keyword,
         limit,
-        (currentPage-1) * limit,
+        (currentPage - 1) * limit,
       );
       storedResults.current[currentPage] = fetchedResults;
       setResults(fetchedResults);
