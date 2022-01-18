@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Detail.module.scss';
 import Accordion from '../Accordion/Accordion';
+import { Label } from '../Label/Label';
 import { getRecipeById } from '@api/requestData';
 
 export const Detail = ({ id }) => {

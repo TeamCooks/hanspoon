@@ -12,5 +12,6 @@ export * from './SignUp/SignUp';
 export * from './Menu/Menu';
 export * from './Button/Button';
 export * from './Button/IconButton';
+export * from './Badge/Badge';
 export * from './Loading/Loading';
 export * from './Heading/Heading';
