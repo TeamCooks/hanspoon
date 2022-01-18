@@ -52,14 +52,15 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
     // 이벤트 구독
     document.addEventListener(eventType, eventListener);
     document.body.style['overflow-y'] = 'hidden';
-    document.getElementById('root').setAttribute('aria-hidden', 'true');
+    document.body.setAttribute('aria-hidden', 'true');
 
     // 이펙트 클린업(정리) 함수
     return () => {
       // 이벤트 구독 취소
       document.removeEventListener(eventType, eventListener);
-      document.getElementById('root').removeAttribute('aria-hidden');
+      document.body.removeAttribute('aria-hidden');
       document.body.style['overflow-y'] = '';
+      
     };
   }, [handleClose, label]);
 
