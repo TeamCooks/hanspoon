@@ -57,7 +57,7 @@ export function Detail({ id, title, imgSrc }) {
           />
         </figure>
         <div>Badge 컴포넌트</div>
-        <Label type={'time'} value={recipe.readyInMinutes} />
+        <Label type={'time'} value={recipe.readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved} />
       </div>
       <Accordion recipeDetails={recipeDetails} />
