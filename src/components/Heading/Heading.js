@@ -7,7 +7,7 @@ export function Heading({ as: Component, className, children }) {
 }
 
 Heading.propTypes = {
-  as: PropTypes.string.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']).isRequired,
+  as: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']).isRequired,
   className: PropTypes.string,
   children: PropTypes.any.isRequired
 }
