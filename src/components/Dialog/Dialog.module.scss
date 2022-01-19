@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(36, 36, 36, 0.8);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
 }
 
 .backgroundImage {
@@ -34,7 +34,8 @@
   margin: 0;
 }
 
-.foot {}
+.foot {
+}
 
 .closeButton {
   cursor: pointer;

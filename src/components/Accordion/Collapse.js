@@ -1,14 +1,18 @@
 import React from 'react';
 import CollapseHeading from './CollapseHeading';
 import CollapseContent from './CollapseContent';
-import styles from './Collapse.module.scss';
+import styles from './Accordion.module.scss';
 
 const Collapse = (props) => {
   return (
-    <div className={`${styles.recipeInfoItem}`}>
-      <CollapseHeading heading={props.heading} />
-      <CollapseContent content={props.content} />
-    </div>
+    <li className={`${styles.recipeInfoItem}`}>
+      <details>
+        <summary>
+          <CollapseHeading heading={props.heading} />
+        </summary>
+        <CollapseContent content={props.content} />
+      </details>
+    </li>
   );
 };
 

@@ -1,19 +1,35 @@
 @use '@styles/utils' as *;
 
-.heading {
-  font-size: 24px;
-  color: $primary_orange;
+.detail {
+  color: $white;
+}
+
+.recipeBrief {
+  max-width: 600px;
 }
 
 .foodImageContainer {
   margin: 15px 0;
+  position: relative;
 }
 
 .foodImage {
   width: 100%;
-  border: 7px $black solid;
+  max-width: 600px;
+  border: 7px $white solid;
 }
 
 .creditsText {
+  color: $white;
   font-size: 10px;
+}
+
+.saveButton {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  &:hover svg {
+    color: $heart_pink;
+    filter: drop-shadow();
+  }
 }
