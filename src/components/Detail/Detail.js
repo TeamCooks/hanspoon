@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import Accordion from '../Accordion/Accordion';
-import { excludeTags } from '../../utils';
-import { Label } from '../Label/Label';
+import { excludeTags } from '@utils';
 import { getRecipeById } from '@api/requestData';
 import { Heading } from '../Heading/Heading';
 import { IconButton } from '../';
+import { Label } from '../';
+import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 
 export function Detail({ id, title, imgSrc }) {
@@ -57,8 +57,8 @@ export function Detail({ id, title, imgSrc }) {
           />
         </figure>
         <div>Badge 컴포넌트</div>
-        <p>Ready in {recipe.readyInMinutes} minutes</p>
-        <p>{saved} saved</p>
+        <Label type={'time'} value={recipe.readyInMinutes} />
+        <Label type={'bookmark'} value={saved} />
       </div>
       <Accordion recipeDetails={recipeDetails} />
     </article>

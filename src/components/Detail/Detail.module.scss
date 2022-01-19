@@ -4,6 +4,10 @@
   color: $white;
 }
 
+.recipeBrief {
+  max-width: 600px;
+}
+
 .foodImageContainer {
   margin: 15px 0;
   position: relative;
@@ -22,8 +26,8 @@
 
 .saveButton {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 30px;
+  bottom: 30px;
   &:hover svg {
     color: $heart_pink;
     filter: drop-shadow();
