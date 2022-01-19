@@ -49,11 +49,22 @@
 }
 
 .item {
-  width: 20%;
   text-align: center;
+  width: 240px;
 
-  @media (max-width: 1172px) {
+  @media (max-width: 1500px) {
+    width: 25%;
+  }
+
+  @media (max-width: 1200px) {
+    width: 33%;
+  }
+
+  @media (max-width: 900px) {
     width: 50%;
-    text-align: center;
+  }
+
+  @include mobile {
+    width: 100%;
   }
 }
