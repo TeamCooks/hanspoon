@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { Card, Loading } from '../../components';
+import { Card, Heading, Loading } from '../../components';
 import { useSearch } from '../../Hooks';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
@@ -20,31 +21,40 @@ export default function Search() {
     setCurrentPage(1);
   }, [keyword]);
 
-  return isLoading ? (
-    <Loading message="Loading search results" />
-  ) : (
+  return (
     <div className={classNames(styles.container)}>
-      <ul className={styles.searchResultsList}>
-        {results.map(({ id, image, title }) => (
-          <li className={styles.item} key={id}>
-            <Card
-              id={id}
-              type="square"
-              background="none"
-              hasSummary={false}
-              headingPosition="bottomCenter"
-              imgSrc={`https://spoonacular.com/recipeImages/${image}`}
-              title={title}
-            />
-          </li>
-        ))}
-      </ul>
-      <Search.PageControl
-        className={classNames(styles.bottom, styles.control)}
-        onClick={handleClick}
-        currentPage={currentPage}
-        totalResults={totalResults}
-      />
+      {isLoading ? (
+        <Loading message="Loading search results" />
+      ) : results.length === 0 || totalResults === 0 ? (
+        <Search.NoResults keyword={keyword} />
+      ) : (
+        <>
+          <Heading as="h2" className={styles.heading}>
+            Search Results
+          </Heading>
+          <ul className={styles.searchResultsList}>
+            {results.map(({ id, image, title }) => (
+              <li className={styles.item} key={id}>
+                <Card
+                  id={id}
+                  type="square"
+                  background="none"
+                  hasSummary={false}
+                  headingPosition="bottomCenter"
+                  imgSrc={`https://spoonacular.com/recipeImages/${image}`}
+                  title={title}
+                />
+              </li>
+            ))}
+          </ul>
+          <Search.PageControl
+            className={classNames(styles.bottom, styles.control)}
+            onClick={handleClick}
+            currentPage={currentPage}
+            totalResults={totalResults}
+          />
+        </>
+      )}
     </div>
   );
 }
@@ -106,6 +116,14 @@ Search.PageList = ({ className, currentPage, limit, totalResults, onClick: handl
   );
 };
 
+Search.PageList.propTypes = {
+  className: PropTypes.string,
+  currentPage: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  totalResults: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
 Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResults }) => {
   return (
     <div className={classNames(className, styles.control)}>
@@ -140,4 +158,24 @@ Search.PageControl = ({ currentPage, className, onClick: handleClick, totalResul
       </button>
     </div>
   );
+};
+
+Search.PageControl.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  totalResults: PropTypes.number.isRequired,
+};
+
+Search.NoResults = ({ keyword }) => {
+  return (
+    <div className={styles.noResults}>
+      <Heading as="h2" className={styles.heading}>{`No results found for '${keyword}'!`}</Heading>
+      <p>Try another keyword.</p>
+    </div>
+  );
+};
+
+Search.NoResults.propTypes = {
+  keyword: PropTypes.string.isRequired,
 };

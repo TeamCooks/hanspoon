@@ -3,10 +3,22 @@
 .section {
   margin-bottom: rem(80px) !important;
   flex-grow: 1;
+  position: relative;
 
   @include desktop {
     max-width: 30%;
     min-width: rem(512px);
     padding: rem(20px);
+  }
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: rem(16px);
+
+  @include desktop {
+    margin: rem(36px);
   }
 }
