@@ -6,8 +6,12 @@ import styles from './Accordion.module.scss';
 const Collapse = (props) => {
   return (
     <li className={`${styles.recipeInfoItem}`}>
-      <CollapseHeading heading={props.heading} />
-      <CollapseContent content={props.content} />
+      <details>
+        <summary>
+          <CollapseHeading heading={props.heading} />
+        </summary>
+        <CollapseContent content={props.content} />
+      </details>
     </li>
   );
 };
