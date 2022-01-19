@@ -1,38 +1,77 @@
 @use '@styles/' as *;
 
 .memberDialog {
-  @include flexbox(column, center, center);
-  gap: rem(20px);
+  width: 40vw;
+  min-width: rem(300px);
+  padding: 15vh 0;
+  margin: 0 auto;
 }
 .heading {
   font-size: rem(30px);
+  text-align: center;
 }
 
 .authError {
-  height: rem(16px);
-  background-color: blue;
+  display: none;
+  color: $white;
+  border: 2px solid red;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-radius: rem(5px);
+  padding: rem(16px);
+  margin: rem(20px) 0;
+  text-align: center;
+  &.show {
+    display: block;
+  }
+  @media (max-width: 636px) {
+    padding: rem(12px) rem(84px);
+  }
 }
 
 .form {
+  margin: rem(18px) rem(5px);
   @include flexbox(column);
-  width: 50vw;
-  max-width: rem(500px);
-  min-width: rem(250px);
-  gap: rem(6px);
-  input, button {
+  input,
+  button {
     padding: 0 rem(24px);
     height: rem(36px);
     border: none;
     border-radius: rem(18px) rem(18px);
   }
+
+  .invalid {
+    border: 3px solid $primary-orange;
+    box-shadow: 0 0 1px 0 $primary-orange; 
+  }
+
   button {
     line-height: rem(36px);
     &[disabled] {
       cursor: not-allowed;
     }
   }
-  
+
   .fieldError {
-    height: rem(16px);
+    height: rem(32px);
+    line-height: 1.8;
+    font-size: rem(16p);
+    color: $primary-orange;
+    padding: 0 rem(20px);
+  }
+}
+
+.toggle {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  color: $white;
+  text-align: center;
+  margin: rem(16px) 0;
+  &:hover {
+    color: $primary-orange;
+  }
+  @media (max-width: 636px) {
+    padding: 0 rem(64px);
   }
 }
