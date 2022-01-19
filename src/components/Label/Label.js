@@ -36,5 +36,5 @@ export function Label({ type, value }) {
 
 Label.propTypes = {
   type: PropTypes.oneOf(['time', 'bookmark']).isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };
