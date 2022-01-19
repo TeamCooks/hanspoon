@@ -14,3 +14,4 @@ export * from './Button/IconButton';
 export * from './Badge/Badge';
 export * from './Loading/Loading';
 export * from './Label/Label';
+export * from './Heading/Heading';

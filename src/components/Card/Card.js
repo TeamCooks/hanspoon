@@ -33,15 +33,12 @@ export function Card({
         aria-label={`Open dialog of ${title}`}
         aria-haspopup="dialog"
       >
-        <div className={classNames({ [styles.inlineBlock]: type === 'square' })}>
-          <figure
-            className={classNames(styles.cardWrap, styles[background], { [styles.inlineBlock]: type === 'square' })}
-          >
+        <div className={classNames(styles.cardWrap, styles[background], { [styles.inlineBlock]: type === 'square' })}>
+          <figure>
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
-            {hasSummary && <span className={styles.summary}>{excludeTags(summary)}</span>}
           </figure>
-          <p className={styles[hasSummary]}>{excludeTags(summary)}</p>
+          {hasSummary && <p className={styles.summary}>{excludeTags(summary)}</p>}
         </div>
       </button>
       {isVisible ? (

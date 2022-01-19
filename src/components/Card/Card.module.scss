@@ -32,7 +32,7 @@
     // 1행
     @media (max-width: 1172px) {
       // width: 100%;
-      width: 40vw;
+      // width: 40vw;
       height: 25vw;
     }
   }
@@ -40,9 +40,13 @@
 }
 
 .cardButton {
+  width: 100%;
   border: none;
   background-color: transparent;
   text-align: left;
+  @include mobile {
+    width: 100%;
+  }
 }
 
 // background
@@ -56,6 +60,7 @@
 
 .inlineBlock {
   text-align: center;
+  width: 100%;
   @include desktop {
     display: inline-block;
   }
@@ -73,7 +78,7 @@
 .title {
   font-size: rem(18px);
   font-weight: bold;
-  padding: rem(16px) 0;
+  padding-top: rem(16px);
   width: 100%;
 }
 
