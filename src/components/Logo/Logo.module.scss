@@ -1,0 +1,18 @@
+@use '@styles/' as *;
+
+.logo {
+  display: flex;
+  font-size: rem(24px);
+  align-items: center;
+
+  h1 {
+    width: 118px;
+    margin-left: 10px;
+    transition: 400ms all ease;
+
+    @include mobile {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+}
