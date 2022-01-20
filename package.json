@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
+    "constate": "^3.3.0",
     "firebase": "^9.6.2",
     "formik": "^2.2.9",
     "react": "^17.0.2",

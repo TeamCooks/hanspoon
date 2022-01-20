@@ -20,9 +20,9 @@
 
 .content {
   z-index: 200;
-  padding: 4rem;
+  // padding: 4rem;
   color: #121212;
-  height: 100%;
+  // height: 100%;
   overflow: auto;
 }
 
@@ -30,9 +30,9 @@
   outline: 3px solid rgba(249, 0, 0, 0.6);
 }
 
-.content * {
-  margin: 0;
-}
+// .content * {
+//   margin: 0;
+// }
 
 .foot {
 }

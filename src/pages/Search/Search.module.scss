@@ -54,6 +54,8 @@
 
   @media (max-width: 1172px) {
     width: 50%;
-    text-align: center;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 }
