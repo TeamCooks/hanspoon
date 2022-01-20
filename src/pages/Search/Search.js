@@ -37,7 +37,7 @@ export default function Search() {
               <li className={styles.item} key={id}>
                 <Card
                   id={id}
-                  type="square"
+                  type="smallSquare"
                   background="none"
                   hasSummary={false}
                   headingPosition="bottomCenter"

@@ -7,8 +7,6 @@
   object-fit: cover;
 
   @include desktop {
-    // width: 312px;
-    // height: 250px;
     width: 100%;
     height: 250px;
   }
@@ -29,14 +27,33 @@
       height: 20vw;
     }
 
-    // 1행
-    @media (max-width: 1172px) {
-      // width: 100%;
-      // width: 40vw;
+    @media (max-width: 1100px) {
       height: 25vw;
     }
   }
   object-fit: cover;
+}
+
+.smallSquare {
+  width: 100%;
+  object-fit: cover;
+  height: 20vw;
+
+  @media (min-width: 1500px) {
+    height: 10vw;
+  }
+
+  @media (max-width: 1500px) {
+    height: 20vw;
+  }
+
+  @media (max-width: 1200px) {
+    height: 25vw;
+  }
+
+  @include mobile {
+    height: 50vw;
+  }
 }
 
 .cardButton {

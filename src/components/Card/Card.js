@@ -59,7 +59,7 @@ export function Card({
 
 Card.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  type: PropTypes.oneOf(['wide', 'square']),
+  type: PropTypes.oneOf(['wide', 'square', 'smallSquare']),
   background: PropTypes.oneOf(['white', 'none']),
   hasSummary: PropTypes.bool,
   headingPosition: PropTypes.oneOf(['bottomLeft', 'bottomCenter', 'topLeft']),
