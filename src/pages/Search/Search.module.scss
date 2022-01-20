@@ -3,8 +3,16 @@
 .container {
   background-color: transparent;
   padding: rem(16px);
+  margin: 0 auto;
   .searchResultsList {
     @include flexbox(row, space-between, flex-start, wrap);
+  }
+  @media (max-width: 1480px) {
+    max-width: 1200px;
+    width: calc(100% - 2rem);
+  }
+  @media (max-width: 1056px) {
+    width: calc(100% - 2rem);
   }
 }
 
@@ -50,17 +58,13 @@
 
 .item {
   text-align: center;
-  width: 240px;
+  width: rem(240px);
 
-  @media (max-width: 1500px) {
-    width: 25%;
-  }
-
-  @media (max-width: 1200px) {
-    width: 33%;
-  }
-
-  @media (max-width: 900px) {
+  @media (max-width: 1056px) {
     width: 50%;
+  }
+
+  @include mobile {
+    width: 100%;
   }
 }
