@@ -24,21 +24,11 @@ body *::after {
   box-sizing: border-box;
 }
 
-// 기본 여백 제거 ------------------------------------------------------------------ /
-// [class] {
-//   margin: 0;
-// }
-
-// 기본 아웃라인 제거 (웹접근성 체크 포인트 - 기본 아웃라인 제거 후에는 반드시 커스텀 아웃라인 스타일 정의가 필요함) ------------------------------------------------------------------ /
-// a, input, button, select, textarea{
-//   outline: 0;
-// }
-
 // 본문 기본 폰트, 글자 크기, 굵기, 배경 색상 지정 --------------------------------------------- /
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
-@import url('https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
 body {
-  font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
   font-size: inherit;
   position: relative;
 }
@@ -126,26 +116,6 @@ figure {
   width: 1px;
   height: 1px;
   margin: -1px;
-}
-
-// SNS 배경이미지  ------------------------------------------------------------- /
-.sprite {
-  min-height: rem(36px);
-  padding-left: rem(36px);
-  //background-image: url(/src/images/sprite_sns.png);
-  background-repeat: no-repeat;
-
-  $sprites: facebook, twitter, instagram, blog;
-  $x: 0;
-  $y: 0;
-
-  @each $sprite in $sprites {
-    $i: index($sprites, $sprite);
-    &#{$sprite} {
-      background-position: $x $y;
-    }
-    $y: $y - 36px;
-  }
 }
 
 main.main {

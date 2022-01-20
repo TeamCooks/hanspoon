@@ -5,7 +5,7 @@
   padding: rem(16px);
   margin: 0 auto;
   .searchResultsList {
-    @include flexbox(row, space-between, flex-start, wrap);
+    @include flexbox(row, space-around, flex-start, wrap);
   }
   @media (max-width: 1480px) {
     max-width: 1200px;

@@ -47,7 +47,7 @@
   button {
     line-height: rem(36px);
     &[disabled] {
-      background-color: $gray--300;
+      background-color: $gray_300;
       cursor: not-allowed;
     }
   }
