@@ -6,10 +6,11 @@ import styles from './Auth.module.scss';
 import classNames from 'classnames';
 import imgUrl from '@assets/default.jpg';
 import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, PLACEHOLDER } from '../../services';
-import { useAuth } from '../../Hooks';
+import { useAuthUser, useSignIn, useSignUp } from '../../contexts/AuthContext';
 
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
+  const authUser = useAuthUser();
 
   const toggleCurrentForm = (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ export function Auth({ isVisible, onClose }) {
   };
 
   useEffect(() => {
+    console.log({ authUser });
     return () => {
       setCurrentForm('signin');
     };
@@ -34,7 +36,7 @@ export function Auth({ isVisible, onClose }) {
       <Heading as="h2" className={styles.heading}>
         {HEADING[currentForm]}
       </Heading>
-      {currentForm === 'signin' ? <Auth.SignIn onClose={onClose} /> : <Auth.SignUp onClose={onClose} />}
+      {currentForm === 'signin' ? <Auth.SignIn onClose={onClose} /> : <Auth.SignUp onClose={onClose} onSignUp={()=> setCurrentForm('signin')}/>}
       <button className={styles.toggle} onClick={toggleCurrentForm}>
         {TOGGLE_MESSAGE[currentForm]}
       </button>
@@ -49,7 +51,7 @@ Auth.propTypes = {
 
 Auth.SignIn = function SignIn({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
-  const { signIn } = useAuth();
+  const signIn = useSignIn();
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signin,
     validationSchema: SCHEMA.signin,
@@ -84,10 +86,9 @@ Auth.SignIn.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-Auth.SignUp = function SignUp({ onClose }) {
+Auth.SignUp = function SignUp({ onClose, onSignUp }) {
   const [hasAuthError, setAuthError] = useState(false);
-  const { signUp } = useAuth();
-
+  const signUp = useSignUp();
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signup,
     validationSchema: SCHEMA.signup,
@@ -95,8 +96,9 @@ Auth.SignUp = function SignUp({ onClose }) {
       try {
         const user = await signUp(values);
         setAuthError(false);
-        onClose();
-        // 여기에 auth 정보를 context에 update하기
+        window.alert('Signed up successfully. Please sign in.')
+        onSignUp();
+        // onClose();
       } catch (e) {
         setAuthError(true);
       }
