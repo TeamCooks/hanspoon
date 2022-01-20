@@ -67,7 +67,12 @@ export function RandomRecipe() {
       <Heading as="h2">RandomRecipe</Heading>
       <Button
         className={styles.button}
-        style={{ padding: '10px 18px', display: 'flex', alignItems: 'center', gap: '10px' }}
+        style={{
+          padding: '10px 18px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+        }}
         shape="round"
         variant="outlined"
         color="orange"
