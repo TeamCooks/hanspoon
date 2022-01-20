@@ -17,6 +17,7 @@
 }
 
 .noResults {
+  padding-top: 20vh;
   p {
     text-align: center;
   }
@@ -28,13 +29,13 @@
   button {
     border: none;
     background: transparent;
-    color: $primary-orange;
+    color: $primary_orange;
   }
   .pageNumberList {
     @include flexbox(row, center, center);
 
     .pageButton {
-      border: 1px solid $primary-orange;
+      border: 1px solid $primary_orange;
       border-radius: rem(5px);
       background: $white;
       width: rem(32px);
@@ -57,7 +58,7 @@
   .current {
     .pageButton {
       color: $white;
-      background-color: $primary-orange;
+      background-color: $primary_orange;
     }
   }
 }

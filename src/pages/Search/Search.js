@@ -16,6 +16,9 @@ export default function Search() {
   const handleClick = (num) => {
     setCurrentPage(num);
   };
+  // useEffect(() => {
+  //   throw new Error('blabla');
+  // }, []);
 
   useEffect(() => {
     setCurrentPage(1);

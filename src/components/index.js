@@ -16,3 +16,4 @@ export * from './Loading/Loading';
 export * from './Label/Label';
 export * from './Heading/Heading';
 export * from './Logo/Logo';
+export * from './ErrorBoundary/ErrorBoundary';

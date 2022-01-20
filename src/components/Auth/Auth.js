@@ -71,7 +71,7 @@ Auth.SignIn = function SignIn({ onClose }) {
   return (
     <>
       <Auth.Error className={classNames({ [styles.show]: hasAuthError })}>
-        {hasAuthError ? AUTH_ERROR_MSG.signin : null}{' '}
+        {hasAuthError ? AUTH_ERROR_MSG.signin : null}
       </Auth.Error>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'email'} formik={formik} />

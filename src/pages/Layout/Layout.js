@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { Wrapper } from './Wrapper';
 import { Header } from './../../components';
