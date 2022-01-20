@@ -36,23 +36,14 @@
 
 .smallSquare {
   width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  height: 20vw;
-
-  @media (min-width: 1500px) {
-    height: 10vw;
-  }
-
-  @media (max-width: 1500px) {
-    height: 20vw;
-  }
-
-  @media (max-width: 1200px) {
-    height: 25vw;
-  }
-
   @include mobile {
-    height: 50vw;
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 1056px) {
+    aspect-ratio: 16 / 9;
   }
 }
 

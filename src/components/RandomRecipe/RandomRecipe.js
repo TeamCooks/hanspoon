@@ -16,10 +16,9 @@ export function RandomRecipe() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function getData() {
+  const getData = async () => {
     try {
       setLoading(true);
-
       const { recipes } = await getRandomRecipe();
       const { id, title, summary, image } = recipes[0];
       setId(id);
@@ -28,39 +27,45 @@ export function RandomRecipe() {
       setImage(image);
     } catch (e) {
       setError(e);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }
+  };
+
+  let timer;
+  const handleClick = () => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        getData();
+      }, 200);
+    }
+  };
 
   useEffect(() => {
     getData();
   }, []);
 
-  if (loading) {
+  const renderCard = () => {
+    if (error) {
+      return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
+    }
+    if (loading) {
+      return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
+    }
     return (
-      <section className={styles.section}>
-        <Heading as="h2">RandomRecipe</Heading>
-        <Button
-          className={styles.button}
-          style={{ padding: '10px 18px', display: 'flex', alignItems: 'center', gap: '10px' }}
-          shape="round"
-          variant="outlined"
-          color="orange"
-          type="button"
-          onClick={() => {
-            getData();
-          }}
-        >
-          <GiPerspectiveDiceSixFacesRandom style={{ fontSize: '25px' }} />
-          REROLL
-        </Button>
-        <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />
-      </section>
+      <Card
+        id={id}
+        type="wide"
+        background="white"
+        hasSummary={true}
+        headingPosition="bottomLeft"
+        imgSrc={image}
+        title={title}
+        summary={summary}
+      />
     );
-  }
-  if (error) {
-    return <div>An error occurred while loading food.</div>;
-  }
+  };
 
   return (
     <section className={styles.section}>
@@ -72,23 +77,12 @@ export function RandomRecipe() {
         variant="outlined"
         color="orange"
         type="button"
-        onClick={() => {
-          getData();
-        }}
+        onClick={handleClick}
       >
         <GiPerspectiveDiceSixFacesRandom style={{ fontSize: '25px' }} />
         REROLL
       </Button>
-      <Card
-        id={id}
-        type="wide"
-        background="white"
-        hasSummary={true}
-        headingPosition="bottomLeft"
-        imgSrc={image}
-        title={title}
-        summary={summary}
-      />
+      <div className={styles.randomRecipeCardWrap}>{renderCard()}</div>
     </section>
   );
 }
