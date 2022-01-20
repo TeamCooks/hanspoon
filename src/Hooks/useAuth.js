@@ -4,12 +4,11 @@ import { logOut, signIn as APISignIn, signUp as APISignUp } from "../api/request
 export const useAuth = () => {
   const [ authUser, setAuthUser ] = useState(null);
   const signIn = async requestData => {
-    const user = await APISignIn(requestData);
-    setAuthUser(user);
+    const userData = await APISignIn(requestData);
+    setAuthUser(userData);
   }
   const signUp = async requestData => {
-    const user = await APISignUp(requestData);
-    setAuthUser(user);
+    const userData = await APISignUp(requestData);
   }
   const signOut = () => {
     logOut();
