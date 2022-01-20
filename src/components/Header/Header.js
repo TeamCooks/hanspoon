@@ -1,6 +1,6 @@
 import styles from './Header.module.scss';
-import { SearchForm, Menu, Button } from '../../components';
-import { Link } from 'react-router-dom';
+import { SearchForm, Menu, Button, Logo } from '../../components';
+
 import { useState } from 'react';
 import { Auth } from '../Auth/Auth';
 import { useAuthUser } from '../../contexts/AuthContext';
@@ -19,10 +19,8 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.wrapper}>
-        <Link to="/">Han Spoon</Link>
-        <SearchForm />
-      </div>
+      <Logo />
+      <SearchForm />
       {authUser !== null ? (
         <Menu />
       ) : (

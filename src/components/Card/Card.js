@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { excludeTags } from '@utils/misc';
 import { useState } from 'react';
 import { Dialog, Detail } from '..';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 export function Card({
   id = 0,
   type,
@@ -15,20 +16,24 @@ export function Card({
   summary = '',
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleOpenDialog = (e) => {
-    e.preventDefault();
     setIsVisible(true);
   };
 
   const handleCloseDialog = () => {
+    navigate(-1);
     setIsVisible(false);
   };
+
   return (
     <>
-      <button
+      <Link
+        to={`${location.pathname}?id=${id}`}
+        role="button"
         className={styles.cardButton}
-        type="button"
         onClick={handleOpenDialog}
         aria-label={`Open dialog of ${title}`}
         aria-haspopup="dialog"
@@ -40,7 +45,7 @@ export function Card({
           </figure>
           {hasSummary && <p className={styles.summary}>{excludeTags(summary)}</p>}
         </div>
-      </button>
+      </Link>
       {isVisible ? (
         <Dialog
           isVisible={isVisible}

@@ -9,7 +9,7 @@
 
 .contentHeader {
   font-size: rem(32px);
-  color: #ec7b30;
+  color: $primary_orange;
   font-weight: bold;
   padding: rem(16px);
 }
@@ -34,4 +34,8 @@
     width: 100%;
     text-align: center;
   }
+}
+
+.hotRecipes {
+  padding: rem(16px) rem(24px) 0;
 }
