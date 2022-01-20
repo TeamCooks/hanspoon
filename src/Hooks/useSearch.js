@@ -1,29 +1,29 @@
 import { searchRecipes } from '@api/requestData';
 import { useEffect, useRef, useState } from 'react';
-const RESULTS_PER_PAGE = 10;
+const RESULTS_PER_PAGE = 12;
 
 // search/pending
-  // isLoading true
-  // error null
-  // data null
+// isLoading true
+// error null
+// data null
 // search/fulfilled
-  // isLoading false
-  // error null
-  // data { result, totalResult }
+// isLoading false
+// error null
+// data { result, totalResult }
 // search/rejected
-  // isLoading false
-  // error { message }
-  // data null
+// isLoading false
+// error { message }
+// data null
 
 // function reducer (state, action)  {
 //   switch(action.type) {
-//     case 'search/fulfilled': 
+//     case 'search/fulfilled':
 //       return {
 //         ...state,
 //         isLoading: false,
 //         data: action.payload
 //       }
-//     case 'search/rejected': 
+//     case 'search/rejected':
 //       return {
 //         ...state,
 //         isLoading: false,
@@ -39,7 +39,7 @@ const RESULTS_PER_PAGE = 10;
 //   data: null
 // })
 
-export const useSearch = (keyword, currentPage, limit=RESULTS_PER_PAGE) => {
+export const useSearch = (keyword, currentPage, limit = RESULTS_PER_PAGE) => {
   const [results, setResults] = useState([]);
   const storedResults = useRef({});
   const [isLoading, setIsLoading] = useState(false);
