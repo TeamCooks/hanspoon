@@ -1,10 +1,11 @@
 @use '@styles/' as *;
 
 .memberDialog {
-  width: 40vw;
-  min-width: rem(300px);
-  padding: 15vh 0;
+  // width: 40vw;
+  min-width: rem(280px);
+  padding: 15vh 0 0 0;
   margin: 0 auto;
+  // text-align: center;
 }
 .heading {
   font-size: rem(30px);
@@ -17,19 +18,24 @@
   border: 2px solid red;
   background-color: rgba(255, 0, 0, 0.4);
   border-radius: rem(5px);
-  padding: rem(16px);
-  margin: rem(20px) 0;
+  padding: rem(16px) 0;
+  margin: rem(18px) auto;
+  width: 40vw;
+  min-width: rem(280px);
   text-align: center;
   &.show {
     display: block;
   }
-  @media (max-width: 636px) {
-    padding: rem(12px) rem(84px);
+  @media (max-width: 500px) {
+    padding: rem(12px) rem(72px);
   }
 }
 
 .form {
-  margin: rem(18px) rem(5px);
+  margin: rem(18px) auto;
+  width: 40vw;
+  min-width: rem(280px);
+
   @include flexbox(column);
   input,
   button {
@@ -46,7 +52,12 @@
 
   button {
     line-height: rem(36px);
-    &[disabled] {
+    &:not(:disabled){
+      &:focus, &:hover {
+        background-color: darken($primary-green, 10%);
+      }
+    }
+    &:disabled {
       background-color: $gray--300;
       cursor: not-allowed;
     }
@@ -68,11 +79,13 @@
   background-color: transparent;
   color: $white;
   text-align: center;
-  margin: rem(16px) 0;
-  &:hover {
+  margin: rem(18px) auto;
+  width: 40vw;
+  min-width: rem(280px);
+  &:hover, &:focus {
     color: $primary-orange;
   }
-  @media (max-width: 636px) {
-    padding: 0 rem(64px);
+  @media (max-width: 500px) {
+    padding: rem(12px) rem(72px);
   }
 }
