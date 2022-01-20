@@ -63,8 +63,4 @@
   @media (max-width: 900px) {
     width: 50%;
   }
-
-  @include mobile {
-    width: 100%;
-  }
 }

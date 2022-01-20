@@ -1,20 +1,13 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { Dialog } from '..';
+import { useState, useEffect } from 'react';
+import { Dialog, Heading } from '..';
 import { useFormik } from 'formik';
 import styles from './Auth.module.scss';
+import classNames from 'classnames';
 import imgUrl from '@assets/default.jpg';
-import {
-  TOGGLE_MESSAGE,
-  HEADING,
-  INITIAL_VALUES,
-  SCHEMA,
-  AUTH_ERROR_MSG,
-  AUTH_FUNC,
-  PLACEHOLDER,
-} from '../../services';
-import { useAuth } from '../../Hooks';
-
+import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, PLACEHOLDER } from '../../services';
+import { useSignIn, useSignUp } from '../../contexts/AuthContext';
+import { Button } from '..';
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
 
@@ -22,6 +15,12 @@ export function Auth({ isVisible, onClose }) {
     e.preventDefault();
     setCurrentForm(currentForm === 'signin' ? 'signup' : 'signin');
   };
+
+  useEffect(() => {
+    return () => {
+      setCurrentForm('signin');
+    };
+  }, [isVisible]);
 
   return isVisible ? (
     <Dialog
@@ -32,11 +31,17 @@ export function Auth({ isVisible, onClose }) {
       label={currentForm}
       className={styles.memberDialog}
     >
-      <h2 className={styles.heading}>{HEADING[currentForm]}</h2>
-      {currentForm === 'signin' ? <Auth.SignIn onClose={onClose} /> : <Auth.SignUp onClose={onClose} />}
-      <a href="#" role="button" onClick={toggleCurrentForm}>
+      <Heading as="h2" className={styles.heading}>
+        {HEADING[currentForm]}
+      </Heading>
+      {currentForm === 'signin' ? (
+        <Auth.SignIn onClose={onClose} />
+      ) : (
+        <Auth.SignUp onClose={onClose} onSignUp={() => setCurrentForm('signin')} />
+      )}
+      <button className={styles.toggle} onClick={toggleCurrentForm}>
         {TOGGLE_MESSAGE[currentForm]}
-      </a>
+      </button>
     </Dialog>
   ) : null;
 }
@@ -48,7 +53,7 @@ Auth.propTypes = {
 
 Auth.SignIn = function SignIn({ onClose }) {
   const [hasAuthError, setAuthError] = useState(false);
-  const {signIn} = useAuth();
+  const signIn = useSignIn();
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signin,
     validationSchema: SCHEMA.signin,
@@ -65,13 +70,22 @@ Auth.SignIn = function SignIn({ onClose }) {
   });
   return (
     <>
-      <Auth.Error>{hasAuthError ? AUTH_ERROR_MSG.signin : null} </Auth.Error>
+      <Auth.Error className={classNames({ [styles.show]: hasAuthError })}>
+        {hasAuthError ? AUTH_ERROR_MSG.signin : null}{' '}
+      </Auth.Error>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
-        <button type="submit" disabled={!formik.dirty || !formik.isValid}>
-          Submit
-        </button>
+        <Button
+          // style={{ padding: ' 24%' }}
+          shape="round"
+          variant="filled"
+          color="green"
+          type="submit"
+          disabled={!formik.dirty || !formik.isValid}
+        >
+          Sign In
+        </Button>
       </form>
     </>
   );
@@ -81,10 +95,9 @@ Auth.SignIn.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-Auth.SignUp = function SignUp({ onClose }) {
+Auth.SignUp = function SignUp({ onClose, onSignUp }) {
   const [hasAuthError, setAuthError] = useState(false);
-  const {signUp} = useAuth();
-
+  const signUp = useSignUp();
   const formik = useFormik({
     initialValues: INITIAL_VALUES.signup,
     validationSchema: SCHEMA.signup,
@@ -92,8 +105,9 @@ Auth.SignUp = function SignUp({ onClose }) {
       try {
         const user = await signUp(values);
         setAuthError(false);
-        onClose();
-        // 여기에 auth 정보를 context에 update하기
+        window.alert('Signed up successfully. Please sign in.');
+        onSignUp();
+        // onClose();
       } catch (e) {
         setAuthError(true);
       }
@@ -101,7 +115,9 @@ Auth.SignUp = function SignUp({ onClose }) {
   });
   return (
     <>
-      <Auth.Error>{hasAuthError ? AUTH_ERROR_MSG.signup : null}</Auth.Error>
+      <Auth.Error className={classNames({ [styles.show]: hasAuthError })}>
+        {hasAuthError ? AUTH_ERROR_MSG.signup : null}
+      </Auth.Error>
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'username'} formik={formik} />
         <Auth.Field fieldName={'email'} formik={formik} />
@@ -118,8 +134,8 @@ Auth.SignUp = function SignUp({ onClose }) {
 Auth.SignUp.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
-Auth.Error = function Error({ ...restProps }) {
-  return <div className={styles.authError} {...restProps} />;
+Auth.Error = function Error({ className, ...restProps }) {
+  return <div className={classNames(className, styles.authError)} {...restProps} />;
 };
 
 Auth.Error.propTypes = {
@@ -146,6 +162,7 @@ Auth.Field = function Field({ fieldName, formik }) {
       </label>
       <input
         id={fieldName}
+        className={classNames({ [styles.invalid]: formik.touched[fieldName] && formik.errors[fieldName] })}
         name={fieldName}
         placeholder={PLACEHOLDER[fieldName]}
         type={type}

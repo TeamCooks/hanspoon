@@ -3,11 +3,12 @@ import { Suspense } from 'react';
 import { lazyComponent } from './utils/lazyComponent';
 import './styles/index.scss';
 import './styles/global.scss';
+import Layout from './pages/Layout/Layout';
+import Home from './pages/Home/Home';
 import { Detail } from './components/Detail/Detail';
 import { Loading } from './components';
 
-const Home = lazyComponent('Home');
-const Layout = lazyComponent('Layout');
+// const Home = lazyComponent('Home');
 const Authorized = lazyComponent('Authorized');
 const PageNotFound = lazyComponent('PageNotFound');
 const Search = lazyComponent('Search');
@@ -28,7 +29,6 @@ function App() {
       ],
     },
   ]);
-
   return <Suspense fallback={<Loading message="Start loading" />}>{routeElement}</Suspense>;
 }
 export default App;
