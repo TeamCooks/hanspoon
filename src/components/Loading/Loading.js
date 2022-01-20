@@ -28,7 +28,7 @@ export function Loading({ message }) {
 
   return (
     <LoadingIcons.ThreeDots
-      fill="#EC7B30"
+      fill="#e56a18"
       height="1em"
       style={{
         position: 'fixed',
