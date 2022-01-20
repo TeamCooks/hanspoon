@@ -6,14 +6,17 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './contexts/AuthContext';
+import { ErrorBoundary } from './components';
 
 ReactDOM.render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </ErrorBoundary>
       </BrowserRouter>
     </HelmetProvider>
   </React.StrictMode>,
