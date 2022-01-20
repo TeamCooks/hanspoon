@@ -1,9 +1,33 @@
 import { IconButton, Button, Badge } from '../../components';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { saveRecipe, removeRecipe } from '@api/myRecipes';
+import { useState } from 'react';
 
 export default function Example() {
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleClick = () => {
+    if (isSaved === false) {
+      saveRecipe('5TZfszqpkyecYkZfzSwKXb3diuM2', { recipeId: '66030', imgUrl: 'dafadf', title: 'adfads' });
+    } else {
+      removeRecipe('5TZfszqpkyecYkZfzSwKXb3diuM2', '66030');
+    }
+
+    setIsSaved(!isSaved);
+  };
+
   return (
     <div>
+      <IconButton
+        onClick={handleClick}
+        variant="filled"
+        type="button"
+        state="heart"
+        ariaLabel="search"
+        color="green"
+        size="large"
+        shape="circle"
+      />
       <div
         style={{
           backgroundColor: 'gray',
