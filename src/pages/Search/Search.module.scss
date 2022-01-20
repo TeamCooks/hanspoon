@@ -8,6 +8,12 @@
   }
 }
 
+.noResults {
+  p {
+    text-align: center;
+  }
+}
+
 .control {
   @include flexbox(row, center, center);
   gap: rem(20px) 4;
