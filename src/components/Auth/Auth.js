@@ -6,11 +6,10 @@ import styles from './Auth.module.scss';
 import classNames from 'classnames';
 import imgUrl from '@assets/default.jpg';
 import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, PLACEHOLDER } from '../../services';
-import { useAuthUser, useSignIn, useSignUp } from '../../contexts/AuthContext';
-
+import { useSignIn, useSignUp } from '../../contexts/AuthContext';
+import { Button } from '..';
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
-  const authUser = useAuthUser();
 
   const toggleCurrentForm = (e) => {
     e.preventDefault();
@@ -18,7 +17,6 @@ export function Auth({ isVisible, onClose }) {
   };
 
   useEffect(() => {
-    console.log({ authUser });
     return () => {
       setCurrentForm('signin');
     };
@@ -36,7 +34,11 @@ export function Auth({ isVisible, onClose }) {
       <Heading as="h2" className={styles.heading}>
         {HEADING[currentForm]}
       </Heading>
-      {currentForm === 'signin' ? <Auth.SignIn onClose={onClose} /> : <Auth.SignUp onClose={onClose} onSignUp={()=> setCurrentForm('signin')}/>}
+      {currentForm === 'signin' ? (
+        <Auth.SignIn onClose={onClose} />
+      ) : (
+        <Auth.SignUp onClose={onClose} onSignUp={() => setCurrentForm('signin')} />
+      )}
       <button className={styles.toggle} onClick={toggleCurrentForm}>
         {TOGGLE_MESSAGE[currentForm]}
       </button>
@@ -74,9 +76,16 @@ Auth.SignIn = function SignIn({ onClose }) {
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
-        <button type="submit" disabled={!formik.dirty || !formik.isValid}>
-          Submit
-        </button>
+        <Button
+          // style={{ padding: ' 24%' }}
+          shape="round"
+          variant="filled"
+          color="green"
+          type="submit"
+          disabled={!formik.dirty || !formik.isValid}
+        >
+          Sign In
+        </Button>
       </form>
     </>
   );
@@ -96,7 +105,7 @@ Auth.SignUp = function SignUp({ onClose, onSignUp }) {
       try {
         const user = await signUp(values);
         setAuthError(false);
-        window.alert('Signed up successfully. Please sign in.')
+        window.alert('Signed up successfully. Please sign in.');
         onSignUp();
         // onClose();
       } catch (e) {
