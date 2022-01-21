@@ -4,8 +4,12 @@
 리액트를 이용한 [spoonacular](https://spoonacular.com/) 클론 프로젝트입니다.<br>
 기존 사이트 문제점을 분석하고 개선을 목표로 하는 프로젝트입니다.
 
+<br>
+
 ## 📆 기간
 2021.01.06 ~ 2022.01.28
+
+<br>
 
 ## ⬅️ before
 1. 고전적인 UI/UX
@@ -15,6 +19,8 @@
 5. 접근성 점수는 높지만 실제로 모달에서 키보드 트랩이 되지 않음
 6. 시멘틱하지 않은 HTML 태그 사용
 
+<br>
+
 ## ➡️ After
 1. 모던한 UI/UX 및 사용자의 니즈를 파악한 설계
 2. 모바일부터 태블릿, 데스크탑까지 호환되는 반응형
@@ -23,18 +29,26 @@
 5. 모달에서도 키보드 트랩이 가능하도록 구현
 6. 시멘틱한 태그를 사용하여 SEO 점수 향상 및 유지보수시 이해하기 쉬운 설계
 
+<br>
+
 
 ## 📚 사용한 메인 기술 및 라이브러리
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/react(cra)-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=black"> <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> <img src="https://img.shields.io/badge/firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> <img src="https://img.shields.io/badge/webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black">
 
+<br>
+
 ## 📝 프로젝트 Wiki
 https://github.com/TeamCooks/hanspoon/wiki
+
+<br>
 
 ## 🎓 팀 구성
 
 |   [박태준](https://github.com/joker77z) | [서혜연](https://github.com/skojphy) | [이한결](https://github.com/hanana1253) | [이효원](https://github.com/hhhyyo) |
 |:---:|:---:|:---:|:---:|
 | <img src="https://avatars.githubusercontent.com/joker77z" width="100"> | <img src="https://avatars.githubusercontent.com/skojphy" width="100"> | <img src="https://avatars.githubusercontent.com/hanana1253" width="100"> | <img src="https://avatars.githubusercontent.com/hhhyyo" width="100"> |
+
+<br>
 
 ## 🛠 설치 방법
 
