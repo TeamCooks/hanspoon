@@ -4,7 +4,6 @@ import { lazyComponent } from './utils/lazyComponent';
 import './styles/index.scss';
 import './styles/global.scss';
 import Layout from './pages/Layout/Layout';
-// import Home from './pages/Home/Home';
 import { Detail } from './components/Detail/Detail';
 import { Loading } from './components';
 
