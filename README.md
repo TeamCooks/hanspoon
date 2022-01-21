@@ -1,7 +1,7 @@
 # HanSpoon
 
 ## 개요
-리액트를 이용한 [spoonacular](https://spoonacular.com/) 클론 프로젝트입니다.
+리액트를 이용한 [spoonacular](https://spoonacular.com/) 클론 프로젝트입니다.<br>
 기존 사이트 문제점을 분석하고 개선을 목표로 하는 프로젝트입니다.
 
 ## 기간
@@ -31,6 +31,10 @@
 https://github.com/TeamCooks/hanspoon/wiki
 
 ## 팀 구성
+
+|   [박태준](https://github.com/joker77z) | [서혜연](https://github.com/skojphy) | [이한결](https://github.com/hanana1253) | [이효원](https://github.com/hhhyyo) |
+|:---:|:---:|:---:|:---:|
+| <img src="https://avatars.githubusercontent.com/joker77z" width="100"> | <img src="https://avatars.githubusercontent.com/skojphy" width="100"> | <img src="https://avatars.githubusercontent.com/hanana1253" width="100"> | <img src="https://avatars.githubusercontent.com/hhhyyo" width="100"> |
 
 ## 설치 방법
 
