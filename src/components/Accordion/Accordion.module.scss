@@ -1,7 +1,12 @@
 @use '@styles/utils' as *;
 
 .accordion {
+  display: block;
   color: $white;
+  width: 100%;
+  height: 70vh;
+  padding-right: 10px;
+  overflow: scroll;
 }
 
 .recipeInfoItem {
@@ -10,6 +15,7 @@
 
 summary {
   list-style: none;
+  cursor: pointer;
 }
 
 .collapseHeading {
@@ -20,5 +26,10 @@ summary {
 
 .heading {
   display: inline-block;
-  font-size: 36px;
+  font-size: rem(36px);
+}
+
+.collapseContent {
+  font-size: rem(18px);
+  color: $gray--200;
 }
