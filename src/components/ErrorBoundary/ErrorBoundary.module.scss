@@ -1,0 +1,11 @@
+@use '@styles/utils' as *;
+
+.errorHeading {
+  padding-top: 20vh;
+  text-align: center;
+}
+.link {
+  display: block;
+  width: rem(200px);
+  margin: 0 auto;
+}

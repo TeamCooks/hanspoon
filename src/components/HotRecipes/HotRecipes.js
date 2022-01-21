@@ -5,7 +5,9 @@ import styles from './HotRecipes.module.scss';
 export function HotRecipes() {
   return (
     <section className={styles.section}>
-      <Heading as="h2">HotRecipes</Heading>
+      <Heading as="h2" className={styles.hotRecipes}>
+        HotRecipes
+      </Heading>
       <ul className={styles.cardItems}>
         <li className={styles.item}>
           <Card

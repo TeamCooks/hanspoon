@@ -41,8 +41,8 @@ const SCHEMA = {
 }
 
 const AUTH_ERROR_MSG = {
-  signin: 'Login failed. Please try again.',
-  signup: 'Signup failed. Please try again.',
+  signin: 'Log-in failed. Please try again.',
+  signup: 'Sign-up failed. Please try again.',
 };
 
 const FIELDS = {
