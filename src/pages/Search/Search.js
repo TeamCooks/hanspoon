@@ -41,7 +41,7 @@ export default function Search() {
                   background="none"
                   hasSummary={false}
                   headingPosition="bottomCenter"
-                  imgSrc={`https://spoonacular.com/recipeImages/${image}`}
+                  imgSrc={`https://spoonacular.com/recipeImages/${id}-312x231`}
                   title={title}
                 />
               </li>
