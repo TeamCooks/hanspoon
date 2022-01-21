@@ -1,11 +1,27 @@
-@use '@styles/utils' as *;
+@use '@styles' as *;
 
 .detail {
+  @include desktop {
+    display: flex;
+    gap: 3%;
+    flex-direction: row;
+  }
   color: $white;
+  padding: 130px 120px 100px;
 }
 
 .recipeBrief {
-  max-width: 600px;
+  @include desktop {
+    padding: rem(20px);
+    width: 100%;
+  }
+}
+
+.recipeAccordion {
+  @include desktop {
+    padding: rem(20px);
+    width: 100%;
+  }
 }
 
 .foodImageContainer {

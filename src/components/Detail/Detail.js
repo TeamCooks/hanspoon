@@ -60,7 +60,7 @@ export function Detail({ id, title, imgSrc }) {
         <Label type={'time'} value={recipe.readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved} />
       </div>
-      <Accordion recipeDetails={recipeDetails} />
+      <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
     </article>
   );
 }
