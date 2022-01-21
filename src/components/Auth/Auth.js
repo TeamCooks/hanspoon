@@ -17,9 +17,7 @@ export function Auth({ isVisible, onClose }) {
   };
 
   useEffect(() => {
-    return () => {
-      setCurrentForm('signin');
-    };
+    setCurrentForm('signin');
   }, [isVisible]);
 
   return isVisible ? (
@@ -39,9 +37,9 @@ export function Auth({ isVisible, onClose }) {
       ) : (
         <Auth.SignUp onClose={onClose} onSignUp={() => setCurrentForm('signin')} />
       )}
-      <button className={styles.toggle} onClick={toggleCurrentForm}>
+      <Button variant="text" type="button" className={styles.toggle} onClick={toggleCurrentForm}>
         {TOGGLE_MESSAGE[currentForm]}
-      </button>
+      </Button>
     </Dialog>
   ) : null;
 }
@@ -76,14 +74,7 @@ Auth.SignIn = function SignIn({ onClose }) {
       <form className={styles.form} onSubmit={formik.handleSubmit}>
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
-        <Button
-          // style={{ padding: ' 24%' }}
-          shape="round"
-          variant="filled"
-          color="green"
-          type="submit"
-          disabled={!formik.dirty || !formik.isValid}
-        >
+        <Button shape="round" variant="filled" color="green" type="submit" disabled={!formik.dirty || !formik.isValid}>
           Sign In
         </Button>
       </form>
@@ -107,7 +98,6 @@ Auth.SignUp = function SignUp({ onClose, onSignUp }) {
         setAuthError(false);
         window.alert('Signed up successfully. Please sign in.');
         onSignUp();
-        // onClose();
       } catch (e) {
         setAuthError(true);
       }
@@ -123,9 +113,9 @@ Auth.SignUp = function SignUp({ onClose, onSignUp }) {
         <Auth.Field fieldName={'email'} formik={formik} />
         <Auth.Field fieldName={'password'} formik={formik} />
         <Auth.Field fieldName={'passwordConfirm'} formik={formik} />
-        <button type="submit" disabled={!formik.dirty || !formik.isValid}>
-          Submit
-        </button>
+        <Button shape="round" variant="filled" color="green" type="submit" disabled={!formik.dirty || !formik.isValid}>
+          Sign Up
+        </Button>
       </form>
     </>
   );
