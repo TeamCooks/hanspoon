@@ -26,16 +26,26 @@ export function Detail({ id, title, imgSrc }) {
   const recipeDetails = [
     {
       type: 'ingredients',
-      data: recipe.extendedIngredients.map(
-        (ingredient) => `${ingredient.nameClean} ${ingredient.amount} ${ingredient.measures.metric.unitShort}`,
-      ),
+      data: recipe.extendedIngredients.map((ingredient) => ({
+        name: ingredient.nameClean,
+        amount: ingredient.amount,
+        unit: ingredient.measures.metric.unitShort,
+      })),
     },
     {
       type: 'equipment',
-      data: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name).join('')),
+      data2: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name)),
+      data: [
+        ...new Set(
+          recipe.analyzedInstructions[0].steps.flatMap((step) => step.equipment.flatMap((equip) => equip.name)),
+        ),
+      ],
     },
-    { type: 'summary', data: [excludeTags(recipe.summary)] },
-    { type: 'instructions', data: recipe.analyzedInstructions[0].steps.map((step) => step.step) },
+    { type: 'summary', data2: [excludeTags(recipe.summary)], data: excludeTags(recipe.summary) },
+    {
+      type: 'instructions',
+      data: recipe.analyzedInstructions[0].steps.map((step) => step.step),
+    },
   ];
 
   return (
