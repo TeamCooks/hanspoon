@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { getFirestore, collection, setDoc, doc, Timestamp } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
@@ -11,6 +17,7 @@ const db = getFirestore();
 export const signIn = async ({ email, password }) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
+    window.localStorage.setItem('userUid', user.uid);
     return user;
   } catch (error) {
     const errorCode = error.code;
@@ -35,5 +42,14 @@ export const signUp = async ({ username, email, password }) => {
 
 export const logOut = () => {
   signOut(auth);
+  window.localStorage.removeItem('userUid');
 };
 
+export const saveRecipe = async ({ id, user }) => {
+  const userRef = doc(db, 'users', 'user.uid');
+  await setDoc(userRef, {
+    id,
+    favorites: { food: 'Pizza', color: 'Blue', subject: 'recess' },
+    age: 12,
+  });
+};
