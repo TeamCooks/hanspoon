@@ -1,6 +1,7 @@
 import styles from './Menu.module.scss';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { IconButton, Button } from '../../components';
 import { useSignOut } from '../../contexts/AuthContext';
 
@@ -11,8 +12,20 @@ export function Menu() {
     setIsOpen(!isOpen);
   };
 
+  const handleBlur = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.nav} onBlur={handleBlur}>
       <IconButton
         type="button"
         variant="default"
@@ -23,18 +36,18 @@ export function Menu() {
         aria-expanded={isOpen}
         onClick={handleClick}
       />
-      <ul className={`${styles.list} ${isOpen ? styles.active : ''}`}>
-        <li className={styles.item}>
-          <Link to="/my-recipes" tabIndex={isOpen ? 0 : -1}>
-            My Recipes
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Button type="button" variant="text" tabIndex={isOpen ? 0 : -1} onClick={signOut}>
-            Sign Out
-          </Button>
-        </li>
-      </ul>
+      {isOpen && (
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <Link to="/my-recipes">My Recipes</Link>
+          </li>
+          <li className={styles.item}>
+            <Button type="button" variant="text" onClick={signOut}>
+              Sign Out
+            </Button>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 }
