@@ -11,6 +11,7 @@ import classNames from 'classnames';
 const STATE = {
   dairyFree: 'dairy-free',
   lactoOvo: 'lacto-ovo',
+  lactoOvoVegetarian: 'lacto-ovo',
   vegetarian: 'vegetarian',
   vegan: 'vegan',
   glutenFree: 'gluten-free',
@@ -22,12 +23,26 @@ const STATE = {
 };
 
 const renderIcon = (state) => {
-  const { dairyFree, lactoOvo, vegetarian, vegan, glutenFree, popular, paleo, primal, healthy, pescetarian } = STATE;
+  const {
+    dairyFree,
+    lactoOvo,
+    lactoOvoVegetarian,
+    vegetarian,
+    vegan,
+    glutenFree,
+    popular,
+    paleo,
+    primal,
+    healthy,
+    pescetarian,
+  } = STATE;
 
   switch (state) {
     case dairyFree:
       return <DairyFree />;
     case lactoOvo:
+      return <LactoOvo />;
+    case lactoOvoVegetarian:
       return <LactoOvo />;
     case vegetarian:
       return <FaLeaf />;
@@ -46,6 +61,7 @@ const renderIcon = (state) => {
     case pescetarian:
       return <FaFish />;
     default:
+      return null;
   }
 };
 
@@ -59,6 +75,6 @@ export function Badge({ state, size, className }) {
 }
 
 Badge.propTypes = {
-  state: PropTypes.oneOf(Object.keys(STATE)).isRequired,
+  state: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'large']).isRequired,
 };
