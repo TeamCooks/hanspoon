@@ -7,6 +7,9 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
+import defaultImg from '@assets/default.jpg';
+import { Helmet } from 'react-helmet-async';
+import { setDocumentTitle } from '../../utils';
 
 export default function Search() {
   const { keyword } = useParams();
@@ -22,40 +25,49 @@ export default function Search() {
   }, [keyword]);
 
   return (
-    <div className={classNames(styles.container)}>
-      {isLoading ? (
-        <Loading message="Loading search results" />
-      ) : results.length === 0 || totalResults === 0 ? (
-        <Search.NoResults keyword={keyword} />
-      ) : (
-        <>
-          <Heading as="h2" className={styles.heading}>
-            Search Results
-          </Heading>
-          <ul className={styles.searchResultsList}>
-            {results.map(({ id, image, title }) => (
-              <li className={styles.item} key={id}>
-                <Card
-                  id={id}
-                  type="smallSquare"
-                  background="none"
-                  hasSummary={false}
-                  headingPosition="bottomCenter"
-                  imgSrc={`https://spoonacular.com/recipeImages/${image}`}
-                  title={title}
-                />
-              </li>
-            ))}
-          </ul>
-          <Search.PageControl
-            className={classNames(styles.bottom, styles.control)}
-            onClick={handleClick}
-            currentPage={currentPage}
-            totalResults={totalResults}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>{setDocumentTitle(`Search results for ${keyword}`)}</title>
+      </Helmet>
+      <div className={classNames(styles.container)}>
+        {isLoading ? (
+          <Loading message="Loading search results" />
+        ) : results.length === 0 || totalResults === 0 ? (
+          <Search.NoResults keyword={keyword} />
+        ) : (
+          <>
+            <Heading as="h2" className={styles.heading}>
+              Search Results
+            </Heading>
+            <ul className={styles.searchResultsList}>
+              {results.map(({ id, title }) => {
+                let imgSrc = `https://spoonacular.com/recipeImages/${id}-312x231`;
+                if (!id) imgSrc = defaultImg;
+                return (
+                  <li className={styles.item} key={id}>
+                    <Card
+                      id={id}
+                      type="smallSquare"
+                      background="none"
+                      hasSummary={false}
+                      headingPosition="bottomCenter"
+                      imgSrc={imgSrc}
+                      title={title}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+            <Search.PageControl
+              className={classNames(styles.bottom, styles.control)}
+              onClick={handleClick}
+              currentPage={currentPage}
+              totalResults={totalResults}
+            />
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -1,12 +1,28 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { getFirestore, collection, setDoc, doc, Timestamp } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const db = getFirestore();
+
+export const getAuthStatus = async () => {
+  return new Promise((resolve, reject) => {
+    try {
+      onAuthStateChanged(auth, (user) => resolve(user));
+    } catch(e) {
+      reject(e);
+    }
+  });
+}
 
 export const signIn = async ({ email, password }) => {
   try {
@@ -36,4 +52,3 @@ export const signUp = async ({ username, email, password }) => {
 export const logOut = () => {
   signOut(auth);
 };
-
