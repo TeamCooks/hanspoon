@@ -28,7 +28,7 @@ export const saveRecipe = async (userId, recipeData) => {
   await setDoc(myRecipesRef, {
     id: recipeData.recipeId,
     title: recipeData.title,
-    image: recipeData.imgSrc,
+    img: recipeData.imgSrc,
     savedAt: Timestamp.fromDate(new Date()),
   });
 
