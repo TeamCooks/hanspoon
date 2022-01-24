@@ -6,7 +6,14 @@ import styles from './Accordion.module.scss';
 const Collapse = (props) => {
   let collapseContent = null;
   switch (props.heading) {
-    case 'ingredients' || 'equipment':
+    case 'ingredients':
+      collapseContent = (
+        <ul className={styles.collapseContent}>
+          <CollapseContent type={props.heading} content={props.content} />
+        </ul>
+      );
+      break;
+    case 'equipment':
       collapseContent = (
         <ul className={styles.collapseContent}>
           <CollapseContent type={props.heading} content={props.content} />
@@ -22,7 +29,7 @@ const Collapse = (props) => {
       break;
     case 'instructions':
       collapseContent = (
-        <ol className={styles.collapseContent}>
+        <ol className={styles.collapseContent} type="1">
           <CollapseContent type={props.heading} content={props.content} />
         </ol>
       );

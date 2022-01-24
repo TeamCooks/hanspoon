@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { excludeTags } from '@utils';
 import { getRecipeById } from '@api/requestData';
 import { Heading } from '../Heading/Heading';
-import { IconButton } from '../';
-import { Label } from '../';
+import { IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 
 export function Detail({ id, title, imgSrc }) {
-  const saved = 75;
+  const saved = 75; // DB에서 불러오는 것으로 수정해야 함.
   const [recipe, setRecipe] = useState({
     extendedIngredients: [],
     analyzedInstructions: [{ steps: [] }],
@@ -21,7 +20,7 @@ export function Detail({ id, title, imgSrc }) {
     })();
   }, [id]);
 
-  const { creditsText } = recipe;
+  const { creditsText, diets } = recipe;
 
   const recipeDetails = [
     {
@@ -34,14 +33,13 @@ export function Detail({ id, title, imgSrc }) {
     },
     {
       type: 'equipment',
-      data2: recipe.analyzedInstructions[0].steps.map((step) => step.equipment.map((equip) => equip.name)),
       data: [
         ...new Set(
           recipe.analyzedInstructions[0].steps.flatMap((step) => step.equipment.flatMap((equip) => equip.name)),
         ),
       ],
     },
-    { type: 'summary', data2: [excludeTags(recipe.summary)], data: excludeTags(recipe.summary) },
+    { type: 'summary', data: excludeTags(recipe.summary) },
     {
       type: 'instructions',
       data: recipe.analyzedInstructions[0].steps.map((step) => step.step),
@@ -66,6 +64,15 @@ export function Detail({ id, title, imgSrc }) {
             shape="circle"
           />
         </figure>
+        {diets && (
+          <ul>
+            <li>
+              {diets.map((diet) => (
+                <Badge state={diet} size="small" />
+              ))}
+            </li>
+          </ul>
+        )}
         <div>Badge 컴포넌트</div>
         <Label type={'time'} value={recipe.readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved} />
