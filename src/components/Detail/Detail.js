@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { excludeTags } from '@utils';
+import { excludeTags, camelCase } from '@utils';
 import { getRecipeById } from '@api/requestData';
 import { Heading } from '../Heading/Heading';
 import { IconButton, Label, Badge } from '../';
@@ -67,13 +67,12 @@ export function Detail({ id, title, imgSrc }) {
         {diets && (
           <ul>
             <li>
-              {diets.map((diet) => (
-                <Badge state={diet} size="small" />
+              {diets.map((diet, index) => (
+                <Badge key={index} state={camelCase(diet)} size="small" />
               ))}
             </li>
           </ul>
         )}
-        <div>Badge 컴포넌트</div>
         <Label type={'time'} value={recipe.readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved} />
       </div>

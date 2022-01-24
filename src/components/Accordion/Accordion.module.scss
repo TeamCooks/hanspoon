@@ -34,7 +34,12 @@ summary {
   color: $gray_200;
 }
 
-ol.collapseContent li::marker {
-  list-style-type: decimal;
+ol.collapseContent {
+  list-style-type: decimal !important;
+  background-color: blue;
+}
+
+ol.collapseContent li {
+  list-style-type: decimal !important;
   background-color: blue;
 }
