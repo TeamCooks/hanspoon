@@ -66,7 +66,7 @@ export const getHotRecipes = async (num=6) => {
   const hotRecipesSnapshot = await getDoc(q);
   const hotRecipes = [];
   hotRecipesSnapshot.forEach(doc =>{
-    hotRecipes.push(doc());
+    hotRecipes.push(doc.data());
   })
   return hotRecipes;
 }
