@@ -40,9 +40,9 @@ export default function Search() {
               Search Results
             </Heading>
             <ul className={styles.searchResultsList}>
-              {results.map(({ id, title }) => {
+              {results.map(({ id, title, image }) => {
                 let imgSrc = `https://spoonacular.com/recipeImages/${id}-312x231`;
-                if (!id) imgSrc = defaultImg;
+                if (!image) imgSrc = defaultImg;
                 return (
                   <li className={styles.item} key={id}>
                     <Card
