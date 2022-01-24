@@ -4,5 +4,8 @@
   font-size: rem(32px);
   color: $primary_orange;
   font-weight: bold;
-  padding: rem(16px) 0;
+  padding-top: rem(16px);
+  @include mobile {
+    font-size: rem(26px);
+  }
 }

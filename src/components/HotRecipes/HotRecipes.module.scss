@@ -19,6 +19,9 @@
 .cardItems {
   display: flex;
   flex-direction: column;
+  @include mobile {
+    margin: 0;
+  }
   @include desktop {
     flex-direction: row;
     flex-wrap: wrap;
@@ -39,5 +42,11 @@
 }
 
 .hotRecipes {
-  padding: rem(16px) rem(24px);
+  @include mobile {
+    margin-top: rem(40px);
+  }
+
+  @media (min-width: 1546px) {
+    padding-left: rem(60px);
+  }
 }
