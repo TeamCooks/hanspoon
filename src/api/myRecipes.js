@@ -11,6 +11,9 @@ import {
   collection,
   getDocs,
   Timestamp,
+  orderBy,
+  limit,
+  query
 } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
@@ -56,3 +59,14 @@ export const getMyRecipes = async (userId) => {
   });
   return myRecipes;
 };
+
+export const getHotRecipes = async (num=6) => {
+  const hotRecipesRef = collection(db, 'savedRecipes');
+  const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
+  const hotRecipesSnapshot = await getDoc(q);
+  const hotRecipes = [];
+  hotRecipesSnapshot.forEach(doc =>{
+    hotRecipes.push(doc());
+  })
+  return hotRecipes;
+}
