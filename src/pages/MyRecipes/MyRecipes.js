@@ -34,7 +34,7 @@ export default function MyRecipes() {
       <div className={classNames(styles.container)}>
         {isLoading ? (
           <Loading message="Loading my recipes" />
-        ) : isLoading && myRecipes.length === 0 ? (
+        ) : myRecipes.length === 0 ? (
           <Pagination.NoResults headline="Nothing saved" description="Save recipes!" />
         ) : (
           <>
