@@ -3,7 +3,9 @@
 .section {
   @include desktop {
     flex-grow: 2;
-    padding: rem(20px);
+    padding-top: rem(20px);
+    height: 90vh;
+    overflow: auto;
   }
 }
 
@@ -37,5 +39,5 @@
 }
 
 .hotRecipes {
-  padding: rem(16px) rem(24px) 0;
+  padding: rem(16px) rem(24px);
 }

@@ -1,14 +1,14 @@
 @use '@styles/' as *;
 
 .section {
-  margin-bottom: rem(80px) !important;
   flex-grow: 1;
   position: relative;
+  height: 90vh;
 
   @include desktop {
     max-width: 30%;
     min-width: rem(512px);
-    padding: rem(20px);
+    padding-top: rem(20px);
   }
 }
 

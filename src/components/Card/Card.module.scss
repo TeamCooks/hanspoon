@@ -92,8 +92,15 @@
 
 // hasSummary
 .summary {
-  display: block;
   line-height: rem(24px);
+  @include desktop {
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   @include mobile {
     text-overflow: ellipsis;
     overflow: hidden;
