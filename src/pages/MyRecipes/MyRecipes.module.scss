@@ -1,0 +1,32 @@
+@use '@styles/utils' as *;
+
+.container {
+  background-color: transparent;
+  padding: rem(16px);
+  margin: 0 auto;
+  
+  @media (max-width: 1480px) {
+    max-width: 1200px;
+    width: calc(100% - 2rem);
+  }
+  @media (max-width: 1056px) {
+    width: calc(100% - 2rem);
+  }
+}
+
+.heading {
+  text-align: center;
+}
+
+.item {
+  text-align: center;
+  width: rem(240px);
+
+  @media (max-width: 1056px) {
+    width: 50%;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
