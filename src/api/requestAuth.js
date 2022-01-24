@@ -14,6 +14,16 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
+export const getAuthStatus = async () => {
+  return new Promise((resolve, reject) => {
+    try {
+      onAuthStateChanged(auth, (user) => resolve(user));
+    } catch(e) {
+      reject(e);
+    }
+  });
+}
+
 export const signIn = async ({ email, password }) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
