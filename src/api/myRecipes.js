@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc, collection, getDocs } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
 
@@ -39,3 +39,13 @@ export const removeRecipe = async (userId, recipeId) => {
     saved: increment(-1),
   });
 };
+
+export const getMyRecipes = async (userId) => {
+  const myRecipesRef = collection(db, 'users', userId, 'my-recipes');
+  const myRecipesSnapShot = await getDocs(myRecipesRef);
+  const myRecipes = [];
+  myRecipesSnapShot.forEach(doc => {
+    myRecipes.push(doc.data());
+  })
+  return myRecipes;
+}
