@@ -1,11 +1,11 @@
 @use '@styles/' as *;
 
 .memberDialog {
+  max-width: rem(400px);
   width: 40vw;
   min-width: rem(300px);
   padding: 15vh 0 0 0;
   margin: 0 auto;
-  // text-align: center;
 }
 .heading {
   font-size: rem(30px);
@@ -20,6 +20,7 @@
   border-radius: rem(5px);
   padding: rem(16px) 0;
   margin: rem(18px) auto;
+  max-width: rem(400px);
   width: 40vw;
   min-width: rem(280px);
   text-align: center;
@@ -33,21 +34,19 @@
 
 .form {
   margin: rem(18px) auto;
-  width: 40vw;
   min-width: rem(280px);
-
   @include flexbox(column);
+  gap: rem(4px);
   input,
   button {
     padding: 0 rem(24px);
     height: rem(36px);
     border: none;
-    border-radius: rem(18px) rem(18px);
+    border-radius: rem(5px) rem(5px);
   }
 
   .invalid {
-    border: 3px solid $primary_orange;
-    box-shadow: 0 0 1px 0 $primary_orange; 
+    box-shadow: 0 0 1px 5px $primary_orange; 
   }
 
   button {
@@ -75,6 +74,7 @@
 .toggle {
   display: block;
   width: 100%;
+  min-width: rem(280px);
   border: none;
   background-color: transparent;
   color: $white;
