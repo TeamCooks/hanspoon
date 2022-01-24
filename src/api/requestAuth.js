@@ -27,7 +27,6 @@ export const getAuthStatus = async () => {
 export const signIn = async ({ email, password }) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-    window.localStorage.setItem('userUid', user.uid);
     return user;
   } catch (error) {
     const errorCode = error.code;
@@ -52,7 +51,6 @@ export const signUp = async ({ username, email, password }) => {
 
 export const logOut = () => {
   signOut(auth);
-  window.localStorage.removeItem('userUid');
 };
 
 export const saveRecipe = async ({ id, user }) => {
