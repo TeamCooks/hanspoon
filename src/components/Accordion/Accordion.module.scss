@@ -33,3 +33,8 @@ summary {
   font-size: rem(18px);
   color: $gray_200;
 }
+
+ol.collapseContent li::marker {
+  list-style-type: decimal;
+  background-color: blue;
+}
