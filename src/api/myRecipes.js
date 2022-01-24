@@ -1,21 +1,32 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  deleteDoc,
+  updateDoc,
+  increment,
+  getDoc,
+  collection,
+  getDocs,
+  Timestamp,
+} from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-export const saveRecipe = async (userId, { recipeId, imgUrl, title }) => {
-  const myRecipesRef = doc(db, 'users', userId, 'my-recipes', recipeId);
-  const savedRecipesRef = doc(db, 'savedRecipes', recipeId);
+export const saveRecipe = async (userId, recipeData) => {
+  const myRecipesRef = doc(db, 'users', userId, 'my-recipes', recipeData.recipeId);
+  const savedRecipesRef = doc(db, 'savedRecipes', recipeData.recipeId);
   const savedRecipesSnap = await getDoc(savedRecipesRef);
 
   await setDoc(myRecipesRef, {
-    id: recipeId,
-    image: imgUrl,
-    title: title,
-    createdAt: Timestamp.fromDate(new Date()),
+    id: recipeData.recipeId,
+    title: recipeData.title,
+    image: recipeData.imgSrc,
+    savedAt: Timestamp.fromDate(new Date()),
   });
 
   if (savedRecipesSnap.exists()) {
@@ -23,12 +34,7 @@ export const saveRecipe = async (userId, { recipeId, imgUrl, title }) => {
       saved: increment(1),
     });
   } else {
-    await setDoc(savedRecipesRef, {
-      id: recipeId,
-      img: imgUrl,
-      title: title,
-      saved: 1,
-    });
+    await setDoc(savedRecipesRef, { ...recipeData, saved: 1 });
   }
 };
 
@@ -45,8 +51,8 @@ export const getMyRecipes = async (userId) => {
   const myRecipesRef = collection(db, 'users', userId, 'my-recipes');
   const myRecipesSnapShot = await getDocs(myRecipesRef);
   const myRecipes = [];
-  myRecipesSnapShot.forEach(doc => {
+  myRecipesSnapShot.forEach((doc) => {
     myRecipes.push(doc.data());
-  })
+  });
   return myRecipes;
-}
+};
