@@ -1,6 +1,20 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  deleteDoc,
+  updateDoc,
+  increment,
+  getDoc,
+  collection,
+  getDocs,
+  Timestamp,
+  orderBy,
+  limit,
+  query
+} from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
 
@@ -11,7 +25,12 @@ export const saveRecipe = async (userId, recipeData) => {
   const savedRecipesRef = doc(db, 'savedRecipes', recipeData.recipeId);
   const savedRecipesSnap = await getDoc(savedRecipesRef);
 
-  await setDoc(myRecipesRef, { id: recipeData.recipeId, title: recipeData.title, img: recipeData.imgSrc });
+  await setDoc(myRecipesRef, {
+    id: recipeData.recipeId,
+    title: recipeData.title,
+    img: recipeData.imgSrc,
+    savedAt: Timestamp.fromDate(new Date()),
+  });
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
@@ -30,3 +49,24 @@ export const removeRecipe = async (userId, recipeId) => {
     saved: increment(-1),
   });
 };
+
+export const getMyRecipes = async (userId) => {
+  const myRecipesRef = collection(db, 'users', userId, 'my-recipes');
+  const myRecipesSnapShot = await getDocs(myRecipesRef);
+  const myRecipes = [];
+  myRecipesSnapShot.forEach((doc) => {
+    myRecipes.push(doc.data());
+  });
+  return myRecipes;
+};
+
+export const getHotRecipes = async (num=6) => {
+  const hotRecipesRef = collection(db, 'savedRecipes');
+  const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
+  const hotRecipesSnapshot = await getDoc(q);
+  const hotRecipes = [];
+  hotRecipesSnapshot.forEach(doc =>{
+    hotRecipes.push(doc.data());
+  })
+  return hotRecipes;
+}
