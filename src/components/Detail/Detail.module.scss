@@ -17,6 +17,11 @@
   }
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .recipeAccordion {
   @include desktop {
     padding: rem(20px);

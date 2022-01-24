@@ -5,9 +5,13 @@ import { Heading } from '../Heading/Heading';
 import { IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
+import { saveRecipe, removeRecipe } from '@api/myRecipes';
+import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Detail({ id, title, imgSrc }) {
   const saved = 75; // DB에서 불러오는 것으로 수정해야 함.
+  const [isSaved, setIsSaved] = useState(false);
+  const authUser = useAuthUser();
   const [recipe, setRecipe] = useState({
     extendedIngredients: [],
     analyzedInstructions: [{ steps: [] }],
@@ -46,23 +50,45 @@ export function Detail({ id, title, imgSrc }) {
     },
   ];
 
+  const handleClick = () => {
+    if (isSaved === false) {
+      const { creditsText, diets } = recipe;
+      saveRecipe(authUser.uid, { recipeId: id + '', imgSrc, title, creditsText, diets, recipeDetails });
+    } else {
+      removeRecipe(authUser.uid, id + '');
+    }
+    setIsSaved(!isSaved);
+  };
+
   return (
     <article className={styles.detail}>
       <div className={styles.recipeBrief}>
         <Heading as="h2">{title}</Heading>
+        <div className={styles.buttons}>
+          <IconButton
+            variant="default"
+            type="button"
+            state="link"
+            ariaLabel="copy link"
+            color="white"
+            size="small"
+            shape="circle"
+          />
+          <IconButton
+            variant="default"
+            type="button"
+            state={isSaved ? 'bookmarkFill' : 'bookmark'}
+            ariaLabel="save to my recipes"
+            color={isSaved ? 'orange' : 'white'}
+            size="small"
+            shape="circle"
+            onClick={handleClick}
+          />
+        </div>
+
         <figure className={styles.foodImageContainer}>
           <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
-          <IconButton
-            className={styles.saveButton}
-            variant="filled"
-            type="button"
-            state="heart"
-            ariaLabel="search"
-            color="green"
-            size="large"
-            shape="circle"
-          />
         </figure>
         {diets && (
           <ul>

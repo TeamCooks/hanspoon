@@ -6,28 +6,19 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-export const saveRecipe = async (userId, { recipeId, imgUrl, title }) => {
-  const myRecipesRef = doc(db, 'users', userId, 'my-recipes', recipeId);
-  const savedRecipesRef = doc(db, 'savedRecipes', recipeId);
+export const saveRecipe = async (userId, recipeData) => {
+  const myRecipesRef = doc(db, 'users', userId, 'my-recipes', recipeData.recipeId);
+  const savedRecipesRef = doc(db, 'savedRecipes', recipeData.recipeId);
   const savedRecipesSnap = await getDoc(savedRecipesRef);
 
-  await setDoc(myRecipesRef, {
-    id: recipeId,
-    img: imgUrl,
-    title: title,
-  });
+  await setDoc(myRecipesRef, { id: recipeData.recipeId, title: recipeData.title, img: recipeData.imgSrc });
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
       saved: increment(1),
     });
   } else {
-    await setDoc(savedRecipesRef, {
-      id: recipeId,
-      img: imgUrl,
-      title: title,
-      saved: 1,
-    });
+    await setDoc(savedRecipesRef, { ...recipeData, saved: 1 });
   }
 };
 
