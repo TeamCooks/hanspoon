@@ -52,7 +52,8 @@ export const removeRecipe = async (userId, recipeId) => {
 
 export const getMyRecipes = async (userId) => {
   const myRecipesRef = collection(db, 'users', userId, 'my-recipes');
-  const myRecipesSnapShot = await getDocs(myRecipesRef);
+  const q = query(myRecipesRef, orderBy('savedAt', 'desc'));
+  const myRecipesSnapShot = await getDocs(q);
   const myRecipes = [];
   myRecipesSnapShot.forEach((doc) => {
     myRecipes.push(doc.data());

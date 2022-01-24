@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export function CardList({ results }) {  
   return (
       <ul className={styles.list}>
-        {results.map(({ id, title, image }) => {
+        {results.map(({ id, title, image, img }) => {
           let imgUrl = `https://spoonacular.com/recipeImages/${id}-312x231`;
           if (!image) imgUrl = defaultImg;
           return (
@@ -18,7 +18,7 @@ export function CardList({ results }) {
                 background="none"
                 hasSummary={false}
                 headingPosition="bottomCenter"
-                imgSrc={imgUrl}
+                imgSrc={img || imgUrl}
                 title={title}
               />
             </li>
