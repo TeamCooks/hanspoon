@@ -18,16 +18,6 @@ export default function Example() {
 
   return (
     <div>
-      <IconButton
-        onClick={handleClick}
-        variant="filled"
-        type="button"
-        state="heart"
-        ariaLabel="search"
-        color="green"
-        size="large"
-        shape="circle"
-      />
       <div
         style={{
           backgroundColor: 'gray',
@@ -38,6 +28,25 @@ export default function Example() {
           alignItems: 'flex-start',
         }}
       >
+        <IconButton
+          variant="default"
+          type="button"
+          state="link"
+          ariaLabel="link"
+          color="white"
+          size="large"
+          shape="circle"
+        />
+        <IconButton
+          onClick={handleClick}
+          variant="default"
+          type="button"
+          state={isSaved ? 'bookmarkFill' : 'bookmark'}
+          ariaLabel="bookmark"
+          color={isSaved ? 'orange' : 'white'}
+          size="large"
+          shape="circle"
+        />
         <IconButton
           variant="filled"
           type="button"

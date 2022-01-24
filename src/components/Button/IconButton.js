@@ -3,7 +3,7 @@ import buttonStyle from './Button.module.scss';
 import iconButtonStyle from './IconButton.module.scss';
 import classNames from 'classnames';
 import { FiSearch } from 'react-icons/fi';
-import { BsPersonCircle, BsCartCheckFill } from 'react-icons/bs';
+import { BsPersonCircle, BsCartCheckFill, BsLink45Deg, BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
 import { HiHeart } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
 
@@ -13,10 +13,13 @@ const STATE = {
   heart: 'heart',
   close: 'close',
   cart: 'cart',
+  link: 'link',
+  bookmark: 'bookmark',
+  bookmarkFill: 'bookmarkFill',
 };
 
 const renderButtonIcon = (state) => {
-  const { search, user, heart, close, cart } = STATE;
+  const { search, user, heart, close, cart, link, bookmark, bookmarkFill } = STATE;
 
   switch (state) {
     case search:
@@ -29,6 +32,12 @@ const renderButtonIcon = (state) => {
       return <MdClose />;
     case cart:
       return <BsCartCheckFill />;
+    case link:
+      return <BsLink45Deg />;
+    case bookmarkFill:
+      return <BsFillBookmarkFill />;
+    case bookmark:
+      return <BsBookmark />;
     default:
   }
 };
@@ -55,7 +64,7 @@ export function IconButton({ ariaLabel, state, type, variant, color, size, shape
 
 IconButton.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
-  state: PropTypes.oneOf(['search', 'user', 'heart', 'close', 'cart']).isRequired,
+  state: PropTypes.oneOf(Object.keys(STATE)).isRequired,
   type: PropTypes.oneOf(['button', 'submit']).isRequired,
   variant: PropTypes.oneOf(['default', 'outlined', 'filled']).isRequired,
   color: PropTypes.oneOf(['green', 'orange', 'white']),
