@@ -1,10 +1,10 @@
-import { getMyRecipes } from '../../api/myRecipes';
+import { getMyRecipes } from '@api/myRecipes';
 import { useAuthUser } from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { Loading, Heading, CardList, Pagination } from '../../components';
 import styles from './MyRecipes.module.scss';
 import classNames from 'classnames';
-import { setDocumentTitle } from '../../utils';
+import { setDocumentTitle } from '@utils';
 import { Helmet } from 'react-helmet-async';
 
 export default function MyRecipes() {
