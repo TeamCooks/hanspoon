@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './firebaseConfig';
-import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, deleteDoc, updateDoc, increment, getDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
 
@@ -13,8 +13,9 @@ export const saveRecipe = async (userId, { recipeId, imgUrl, title }) => {
 
   await setDoc(myRecipesRef, {
     id: recipeId,
-    img: imgUrl,
+    image: imgUrl,
     title: title,
+    createdAt: Timestamp.fromDate(new Date()),
   });
 
   if (savedRecipesSnap.exists()) {
