@@ -5,6 +5,7 @@ import './styles/index.scss';
 import './styles/global.scss';
 import Layout from './pages/Layout/Layout';
 import Home from './pages/Home/Home';
+import Example from './pages/Example/Example';
 import { Detail } from './components/Detail/Detail';
 import { Loading } from './components';
 
@@ -12,7 +13,7 @@ const RequireAuth = lazyComponent('RequireAuth');
 const MyRecipes = lazyComponent('MyRecipes');
 const PageNotFound = lazyComponent('PageNotFound');
 const Search = lazyComponent('Search');
-const Example = lazyComponent('Example');
+// const Example = lazyComponent('Example');
 
 function App() {
   const routeElement = useRoutes([
@@ -21,9 +22,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: (
-              <Home />
-         ),
+          element: <Home />,
         },
         {
           path: 'my-recipes',

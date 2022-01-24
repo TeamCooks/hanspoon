@@ -13,17 +13,21 @@
   color: $white;
 }
 
+.default.orange {
+  color: $primary_orange;
+}
+
 .outlined {
   border: 1px solid currentColor;
   background: none;
 }
 
 .outlined.orange {
-  color: $primary-orange;
+  color: $primary_orange;
 }
 
 .outlined.green {
-  color: $primary-green;
+  color: $primary_green;
 }
 
 .outlined.white {
@@ -31,12 +35,12 @@
 }
 
 .filled.orange {
-  background-color: $primary-orange;
+  background-color: $primary_orange;
   color: $white;
 }
 
 .filled.green {
-  background-color: $primary-green;
+  background-color: $primary_green;
   color: $white;
 }
 
