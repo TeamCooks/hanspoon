@@ -52,12 +52,3 @@ export const signUp = async ({ username, email, password }) => {
 export const logOut = () => {
   signOut(auth);
 };
-
-export const saveRecipe = async ({ id, user }) => {
-  const userRef = doc(db, 'users', 'user.uid');
-  await setDoc(userRef, {
-    id,
-    favorites: { food: 'Pizza', color: 'Blue', subject: 'recess' },
-    age: 12,
-  });
-};
