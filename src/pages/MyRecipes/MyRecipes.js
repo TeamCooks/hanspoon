@@ -43,9 +43,6 @@ export default function MyRecipes() {
             </Heading>
             <CardList
               results={myRecipes}
-              currentPage={currentPage}
-              totalResults={myRecipes.length}
-              onClick={handleClick}
             />
             <Pagination onClick={handleClick} currentPage={currentPage} totalResults={myRecipes.length} />
           </>

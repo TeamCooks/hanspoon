@@ -14,6 +14,8 @@ import {
   orderBy,
   limit,
   query,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
@@ -28,16 +30,17 @@ export const saveRecipe = async (userId, recipeData) => {
   await setDoc(myRecipesRef, {
     id: recipeData.recipeId,
     title: recipeData.title,
-    img: recipeData.imgSrc,
+    imgSrc: recipeData.imgSrc,
     savedAt: Timestamp.fromDate(new Date()),
   });
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
       saved: increment(1),
+      savedBy: arrayUnion(userId),
     });
   } else {
-    await setDoc(savedRecipesRef, { ...recipeData, saved: 1 });
+    await setDoc(savedRecipesRef, { ...recipeData, saved: 1, savedBy: [userId] });
   }
 };
 
@@ -47,12 +50,14 @@ export const removeRecipe = async (userId, recipeId) => {
   await deleteDoc(myRecipesRef);
   await updateDoc(savedRecipesRef, {
     saved: increment(-1),
+    savedBy: arrayRemove(userId),
   });
 };
 
 export const getMyRecipes = async (userId) => {
   const myRecipesRef = collection(db, 'users', userId, 'my-recipes');
-  const myRecipesSnapShot = await getDocs(myRecipesRef);
+  const q = query(myRecipesRef, orderBy('savedAt', 'desc'));
+  const myRecipesSnapShot = await getDocs(q);
   const myRecipes = [];
   myRecipesSnapShot.forEach((doc) => {
     myRecipes.push(doc.data());
@@ -63,7 +68,7 @@ export const getMyRecipes = async (userId) => {
 export const getHotRecipes = async (num = 6) => {
   const hotRecipesRef = collection(db, 'savedRecipes');
   const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
-  const hotRecipesSnapshot = await getDoc(q);
+  const hotRecipesSnapshot = await getDocs(q);
   const hotRecipes = [];
   hotRecipesSnapshot.forEach((doc) => {
     hotRecipes.push(doc.data());
@@ -72,11 +77,11 @@ export const getHotRecipes = async (num = 6) => {
 };
 
 export const getSavedRecipe = async (recipeId) => {
-  const savedRecipesRef = doc(db, 'savedRecipes', recipeId);
-  const savedRecipesSnap = await getDoc(savedRecipesRef);
+  const savedRecipeRef = doc(db, 'savedRecipes', recipeId);
+  const savedRecipeSnap = await getDoc(savedRecipeRef);
 
-  if (savedRecipesSnap.exists()) {
-    return savedRecipesSnap.data();
+  if (savedRecipeSnap.exists()) {
+    return savedRecipeSnap.data();
   } else {
     return null;
   }
