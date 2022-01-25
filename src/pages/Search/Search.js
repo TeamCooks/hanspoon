@@ -35,7 +35,7 @@ export default function Search() {
             <Heading as="h2" className={styles.heading}>
               Search Results
             </Heading>
-            <CardList results={results} currentPage={currentPage} totalResults={totalResults} onClick={handleClick} />
+            <CardList results={results} />
             <Pagination onClick={handleClick} currentPage={currentPage} totalResults={totalResults} />
           </>
         )}
