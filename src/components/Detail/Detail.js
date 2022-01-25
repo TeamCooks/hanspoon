@@ -43,14 +43,14 @@ export function Detail({ id, title, imgSrc }) {
       type: 'equipment',
       data: [
         ...new Set(
-          recipe.analyzedInstructions[0].steps.flatMap((step) => step.equipment.flatMap((equip) => equip.name)),
+          recipe.analyzedInstructions[0]?.steps?.flatMap((step) => step.equipment?.flatMap((equip) => equip.name)),
         ),
       ],
     },
     { type: 'summary', data: excludeTags(recipe.summary) },
     {
       type: 'instructions',
-      data: recipe.analyzedInstructions[0].steps.map((step) => step.step),
+      data: recipe.analyzedInstructions[0]?.steps?.map((step) => step.step),
     },
   ];
 
