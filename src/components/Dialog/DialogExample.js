@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog } from './Dialog';
-import imgUrl from '../../assets/default.jpg';
+import imgUrl from '@assets/images/default.jpg';
+
 function Example() {
   const [isVisible, setIsVisible] = useState(false);
 
