@@ -92,14 +92,14 @@ export function Detail({ id, title, imgSrc }) {
 
       <div className={styles.recipeBrief}>
         <figure className={styles.foodImageContainer}>
-          <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
+          <img className={styles.foodImage} src={imgSrc} alt={title} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
         {diets && (
           <ul className={styles.badgeList}>
             {diets.map((diet, index) => (
-              <li>
-                <Badge key={index} state={camelCase(diet)} size="small" />
+              <li key={index}>
+                <Badge state={camelCase(diet)} size="small" />
               </li>
             ))}
           </ul>
