@@ -1,12 +1,10 @@
-@use '@styles/' as *;
+@use '@styles/utils' as *;
 
 .container {
   background-color: transparent;
   padding: rem(16px);
   margin: 0 auto;
-  .searchResultsList {
-    @include flexbox(row, space-around, flex-start, wrap);
-  }
+  
   @media (max-width: 1480px) {
     max-width: 1200px;
     width: calc(100% - 2rem);

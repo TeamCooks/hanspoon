@@ -62,7 +62,7 @@ export function Detail({ id, title, imgSrc }) {
 
   return (
     <article className={styles.detail}>
-      <div className={styles.recipeBrief}>
+      <div className={styles.heading}>
         <Heading as="h2">{title}</Heading>
         <div className={styles.buttons}>
           <IconButton
@@ -71,7 +71,7 @@ export function Detail({ id, title, imgSrc }) {
             state="link"
             ariaLabel="copy link"
             color="white"
-            size="small"
+            size="large"
             shape="circle"
           />
           <IconButton
@@ -80,23 +80,25 @@ export function Detail({ id, title, imgSrc }) {
             state={isSaved ? 'bookmarkFill' : 'bookmark'}
             ariaLabel="save to my recipes"
             color={isSaved ? 'orange' : 'white'}
-            size="small"
+            size="large"
             shape="circle"
             onClick={handleClick}
           />
         </div>
+      </div>
 
+      <div className={styles.recipeBrief}>
         <figure className={styles.foodImageContainer}>
           <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
         {diets && (
-          <ul>
-            <li>
-              {diets.map((diet, index) => (
+          <ul className={styles.badgeList}>
+            {diets.map((diet, index) => (
+              <li>
                 <Badge key={index} state={camelCase(diet)} size="small" />
-              ))}
-            </li>
+              </li>
+            ))}
           </ul>
         )}
         <Label type={'time'} value={recipe.readyInMinutes || 0} />
