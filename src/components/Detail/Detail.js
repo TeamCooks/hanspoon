@@ -89,7 +89,7 @@ export function Detail({ id, title, imgSrc }) {
 
       <div className={styles.recipeBrief}>
         <figure className={styles.foodImageContainer}>
-          <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
+          <img className={styles.foodImage} src={imgSrc} alt={title} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
         {diets && (
