@@ -54,3 +54,7 @@ ol.collapseContent {
   list-style: decimal-leading-zero;
   padding-left: 1.8em;
 }
+
+summary::-webkit-details-marker {
+  display: none;
+}
