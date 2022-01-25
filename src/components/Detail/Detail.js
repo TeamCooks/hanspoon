@@ -5,9 +5,12 @@ import { Heading } from '../Heading/Heading';
 import { IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
+import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/myRecipes';
+import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Detail({ id, title, imgSrc }) {
-  const saved = 75; // DB에서 불러오는 것으로 수정해야 함.
+  const [isSaved, setIsSaved] = useState(false);
+  const authUser = useAuthUser();
   const [recipe, setRecipe] = useState({
     extendedIngredients: [],
     analyzedInstructions: [{ steps: [] }],
@@ -16,13 +19,18 @@ export function Detail({ id, title, imgSrc }) {
 
   useEffect(() => {
     (async () => {
-      setRecipe(await getRecipeById(id));
+      const savedRecipe = await getSavedRecipe(id + '');
+      if (!savedRecipe) {
+        setRecipe(await getRecipeById(id));
+      } else {
+        setRecipe(savedRecipe);
+      }
     })();
-  }, [id]);
+  }, []);
 
-  const { creditsText, diets } = recipe;
+  const { creditsText, diets, readyInMinutes, saved } = recipe;
 
-  const recipeDetails = [
+  const recipeDetails = recipe.recipeDetails || [
     {
       type: 'ingredients',
       data: recipe.extendedIngredients.map((ingredient) => ({
@@ -46,35 +54,58 @@ export function Detail({ id, title, imgSrc }) {
     },
   ];
 
+  const handleClick = () => {
+    if (isSaved === false) {
+      saveRecipe(authUser.uid, { recipeId: id + '', imgSrc, title, readyInMinutes, creditsText, diets, recipeDetails });
+    } else {
+      removeRecipe(authUser.uid, id + '');
+    }
+    setIsSaved(!isSaved);
+  };
+
   return (
     <article className={styles.detail}>
-      <div className={styles.recipeBrief}>
+      <div className={styles.heading}>
         <Heading as="h2">{title}</Heading>
-        <figure className={styles.foodImageContainer}>
-          <img className={styles.foodImage} src={`${imgSrc}`} alt={`${title}`} />
-          <figcaption className={styles.creditsText}>{creditsText}</figcaption>
+        <div className={styles.buttons}>
           <IconButton
-            className={styles.saveButton}
-            variant="filled"
+            variant="default"
             type="button"
-            state="heart"
-            ariaLabel="search"
-            color="green"
+            state="link"
+            ariaLabel="copy link"
+            color="white"
             size="large"
             shape="circle"
           />
+          <IconButton
+            variant="default"
+            type="button"
+            state={isSaved ? 'bookmarkFill' : 'bookmark'}
+            ariaLabel="save to my recipes"
+            color={isSaved ? 'orange' : 'white'}
+            size="large"
+            shape="circle"
+            onClick={handleClick}
+          />
+        </div>
+      </div>
+
+      <div className={styles.recipeBrief}>
+        <figure className={styles.foodImageContainer}>
+          <img className={styles.foodImage} src={imgSrc} alt={title} />
+          <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
         {diets && (
-          <ul>
-            <li>
-              {diets.map((diet, index) => (
-                <Badge key={index} state={camelCase(diet)} size="small" />
-              ))}
-            </li>
+          <ul className={styles.badgeList}>
+            {diets.map((diet, index) => (
+              <li key={index}>
+                <Badge state={camelCase(diet)} size="small" />
+              </li>
+            ))}
           </ul>
         )}
-        <Label type={'time'} value={recipe.readyInMinutes || 0} />
-        <Label type={'bookmark'} value={saved} />
+        <Label type={'time'} value={readyInMinutes || 0} />
+        <Label type={'bookmark'} value={saved || 0} />
       </div>
       <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
     </article>

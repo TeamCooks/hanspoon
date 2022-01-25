@@ -1,14 +1,15 @@
 @use '@styles/' as *;
 
 .section {
-  margin-bottom: rem(80px) !important;
   flex-grow: 1;
   position: relative;
 
   @include desktop {
+    height: 90vh;
     max-width: 30%;
     min-width: rem(512px);
-    padding: rem(20px);
+    padding-top: rem(20px);
+    margin: 0 40px;
   }
 }
 
@@ -18,8 +19,15 @@
   right: 0;
   margin: rem(16px);
 
+  @include mobile {
+    margin: rem(8px) 0 rem(16px) rem(16px);
+    font-size: rem(12px);
+    padding: rem(1px) rem(6px);
+  }
+
   @include desktop {
-    margin: rem(36px);
+    margin: rem(36px) 0 rem(36px) rem(36px);
+    padding: rem(6px) rem(18px);
   }
 }
 

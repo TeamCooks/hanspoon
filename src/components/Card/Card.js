@@ -5,16 +5,9 @@ import { excludeTags } from '@utils/misc';
 import { useState } from 'react';
 import { Dialog, Detail } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-export function Card({
-  id = 0,
-  type,
-  background,
-  hasSummary,
-  headingPosition,
-  imgSrc = 'http://placehold.it/312x230',
-  title,
-  summary = '',
-}) {
+import imgUrl from '@assets/images/no-image.jpg';
+
+export function Card({ id = 0, type, background, hasSummary, headingPosition, imgSrc = imgUrl, title, summary = '' }) {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();

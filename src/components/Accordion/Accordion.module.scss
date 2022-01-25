@@ -1,9 +1,11 @@
 @use '@styles/utils' as *;
 
 .accordion {
+  @include desktop {
+    width: 45%;
+  }
   display: block;
   color: $white;
-  width: 100%;
   height: 70vh;
   padding-right: 10px;
   overflow: scroll;
@@ -22,6 +24,20 @@ summary {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid $white;
+  align-content: center;
+  svg {
+    color: $primary_orange;
+    width: 2em;
+    height: 2em;
+    transition: 0.2s;
+    margin: auto 0;
+  }
+}
+
+details[open] {
+  svg {
+    transform: rotate(-180deg);
+  }
 }
 
 .heading {
@@ -35,11 +51,6 @@ summary {
 }
 
 ol.collapseContent {
-  list-style-type: decimal !important;
-  background-color: blue;
-}
-
-ol.collapseContent li {
-  list-style-type: decimal !important;
-  background-color: blue;
+  list-style: decimal;
+  padding-left: 1.5em;
 }

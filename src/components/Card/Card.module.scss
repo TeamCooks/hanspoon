@@ -16,11 +16,12 @@
   width: 100%;
 
   @include mobile {
+    width: 100%;
     height: 50vw;
   }
   @include desktop {
-    width: rem(260px);
-    height: rem(260px);
+    width: 100%;
+    height: rem(200px);
     // 2행
     @media (max-width: 1547px) {
       width: 100%;
@@ -92,8 +93,15 @@
 
 // hasSummary
 .summary {
-  display: block;
   line-height: rem(24px);
+  @include desktop {
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   @include mobile {
     text-overflow: ellipsis;
     overflow: hidden;

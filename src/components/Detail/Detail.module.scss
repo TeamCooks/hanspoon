@@ -5,22 +5,31 @@
     display: flex;
     gap: 3%;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   color: $white;
-  padding: 130px 120px 100px;
+  padding: 50px 50px 50px;
+}
+
+.heading {
+  width: 100%;
 }
 
 .recipeBrief {
   @include desktop {
-    padding: rem(20px);
-    width: 100%;
+    width: 45%;
   }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
 }
 
 .recipeAccordion {
   @include desktop {
     padding: rem(20px);
-    width: 100%;
   }
 }
 
@@ -31,6 +40,8 @@
 
 .foodImage {
   width: 100%;
+  height: 75%;
+  object-fit: cover;
   max-width: 600px;
   border: 7px $white solid;
 }
@@ -38,6 +49,7 @@
 .creditsText {
   color: $white;
   font-size: 10px;
+  float: right;
 }
 
 .saveButton {
@@ -48,4 +60,11 @@
     color: $heart_pink;
     filter: drop-shadow();
   }
+}
+
+.badgeList {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  flex-wrap: wrap;
 }
