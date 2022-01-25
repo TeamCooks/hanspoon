@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getHotRecipes } from '@api/myRecipes';
+import { getHotRecipes } from '@api/customApi';
 import { Card } from '../Card/Card';
 import { Heading } from '../Heading/Heading';
 
