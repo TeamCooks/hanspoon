@@ -30,6 +30,9 @@
 }
 
 .item {
+  text-align: center;
+  width: rem(290px);
+
   @media (max-width: 1547px) {
     width: 50%;
     text-align: center;
@@ -42,11 +45,12 @@
 }
 
 .hotRecipes {
+  padding-left: rem(16px);
   @include mobile {
     margin-top: rem(40px);
   }
 
   @media (min-width: 1546px) {
-    padding-left: rem(60px);
+    padding-left: rem(28px);
   }
 }
