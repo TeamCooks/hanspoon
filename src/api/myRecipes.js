@@ -30,7 +30,7 @@ export const saveRecipe = async (userId, recipeData) => {
   await setDoc(myRecipesRef, {
     id: recipeData.recipeId,
     title: recipeData.title,
-    img: recipeData.imgSrc,
+    imgSrc: recipeData.imgSrc,
     savedAt: Timestamp.fromDate(new Date()),
   });
 
@@ -68,7 +68,7 @@ export const getMyRecipes = async (userId) => {
 export const getHotRecipes = async (num = 6) => {
   const hotRecipesRef = collection(db, 'savedRecipes');
   const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
-  const hotRecipesSnapshot = await getDoc(q);
+  const hotRecipesSnapshot = await getDocs(q);
   const hotRecipes = [];
   hotRecipesSnapshot.forEach((doc) => {
     hotRecipes.push(doc.data());
