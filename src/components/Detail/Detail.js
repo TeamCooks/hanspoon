@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { excludeTags, camelCase } from '@utils';
 import { getRecipeById } from '@api/requestData';
-import { Heading } from '../Heading/Heading';
-import { IconButton, Label, Badge } from '../';
+import { Heading, IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
@@ -43,14 +42,14 @@ export function Detail({ id, title, imgSrc }) {
       type: 'equipment',
       data: [
         ...new Set(
-          recipe.analyzedInstructions[0].steps.flatMap((step) => step.equipment.flatMap((equip) => equip.name)),
+          recipe.analyzedInstructions[0]?.steps?.flatMap((step) => step.equipment?.flatMap((equip) => equip.name)),
         ),
       ],
     },
     { type: 'summary', data: excludeTags(recipe.summary) },
     {
       type: 'instructions',
-      data: recipe.analyzedInstructions[0].steps.map((step) => step.step),
+      data: recipe.analyzedInstructions[0]?.steps?.map((step) => step.step),
     },
   ];
 

@@ -3,36 +3,42 @@ import CollapseHeading from './CollapseHeading';
 import CollapseContent from './CollapseContent';
 import styles from './Accordion.module.scss';
 
-const Collapse = (props) => {
+const Collapse = ({ heading, content }) => {
   let collapseContent = null;
-  switch (props.heading) {
+  switch (heading) {
     case 'ingredients':
       collapseContent = (
         <ul className={styles.collapseContent}>
-          <CollapseContent type={props.heading} content={props.content} />
+          <CollapseContent type={heading} content={content} />
         </ul>
       );
       break;
     case 'equipment':
-      collapseContent = (
-        <ul className={styles.collapseContent}>
-          <CollapseContent type={props.heading} content={props.content} />
-        </ul>
-      );
+      collapseContent =
+        !content || !content.length ? (
+          <p>No Equipment.</p>
+        ) : (
+          <ul className={styles.collapseContent}>
+            <CollapseContent type={heading} content={content} />
+          </ul>
+        );
       break;
     case 'summary':
       collapseContent = (
         <p className={styles.collapseContent}>
-          <CollapseContent type={props.heading} content={props.content} />
+          <CollapseContent type={heading} content={content} />
         </p>
       );
       break;
     case 'instructions':
-      collapseContent = (
-        <ol className={styles.collapseContent} type="1">
-          <CollapseContent type={props.heading} content={props.content} />
-        </ol>
-      );
+      collapseContent =
+        !content || !content.length ? (
+          <p>No Instructions.</p>
+        ) : (
+          <ol className={styles.collapseContent} type="1">
+            <CollapseContent type={heading} content={content} />
+          </ol>
+        );
       break;
     default:
       break;
@@ -42,7 +48,7 @@ const Collapse = (props) => {
     <li className={styles.recipeInfoItem}>
       <details>
         <summary>
-          <CollapseHeading heading={props.heading} />
+          <CollapseHeading heading={heading} />
         </summary>
         {collapseContent}
       </details>
