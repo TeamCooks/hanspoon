@@ -5,11 +5,10 @@ import { Heading } from '../Heading/Heading';
 import { IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
-import { saveRecipe, removeRecipe } from '@api/myRecipes';
+import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/myRecipes';
 import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Detail({ id, title, imgSrc }) {
-  const saved = 75; // DB에서 불러오는 것으로 수정해야 함.
   const [isSaved, setIsSaved] = useState(false);
   const authUser = useAuthUser();
   const [recipe, setRecipe] = useState({
@@ -20,13 +19,18 @@ export function Detail({ id, title, imgSrc }) {
 
   useEffect(() => {
     (async () => {
-      setRecipe(await getRecipeById(id));
+      const savedRecipe = await getSavedRecipe(id + '');
+      if (!savedRecipe) {
+        setRecipe(await getRecipeById(id));
+      } else {
+        setRecipe(savedRecipe);
+      }
     })();
-  }, [id]);
+  }, []);
 
-  const { creditsText, diets } = recipe;
+  const { creditsText, diets, readyInMinutes, saved } = recipe;
 
-  const recipeDetails = [
+  const recipeDetails = recipe.recipeDetails || [
     {
       type: 'ingredients',
       data: recipe.extendedIngredients.map((ingredient) => ({
@@ -52,8 +56,7 @@ export function Detail({ id, title, imgSrc }) {
 
   const handleClick = () => {
     if (isSaved === false) {
-      const { creditsText, diets } = recipe;
-      saveRecipe(authUser.uid, { recipeId: id + '', imgSrc, title, creditsText, diets, recipeDetails });
+      saveRecipe(authUser.uid, { recipeId: id + '', imgSrc, title, readyInMinutes, creditsText, diets, recipeDetails });
     } else {
       removeRecipe(authUser.uid, id + '');
     }
@@ -101,8 +104,8 @@ export function Detail({ id, title, imgSrc }) {
             ))}
           </ul>
         )}
-        <Label type={'time'} value={recipe.readyInMinutes || 0} />
-        <Label type={'bookmark'} value={saved} />
+        <Label type={'time'} value={readyInMinutes || 0} />
+        <Label type={'bookmark'} value={saved || 0} />
       </div>
       <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
     </article>
