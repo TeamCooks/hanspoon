@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { excludeTags, camelCase } from '@utils';
 import { getRecipeById } from '@api/requestData';
-import { Heading } from '../Heading/Heading';
-import { IconButton, Label, Badge } from '../';
+import { Heading, IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/myRecipes';
