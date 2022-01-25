@@ -8,8 +8,7 @@ export function CardList({ results }) {
   return (
       <ul className={styles.list}>
         {results.map(({ id, title, image, imgSrc }) => {
-          let imgUrl = `https://spoonacular.com/recipeImages/${id}-312x231`;
-          if (!image) imgUrl = noImgUrl;
+          const imgUrl = image ? `https://spoonacular.com/recipeImages/${id}-312x231`: noImgUrl;
           return (
             <li className={styles.item} key={id}>
               <Card
