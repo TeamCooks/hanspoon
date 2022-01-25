@@ -124,5 +124,6 @@ Pagination.NoResults = ({ headline, description }) => {
 };
 
 Pagination.NoResults.propTypes = {
-  keyword: PropTypes.string.isRequired,
+  headline: PropTypes.string.isRequired,
+  description:PropTypes.string.isRequired
 };
