@@ -3,7 +3,9 @@
 .section {
   @include desktop {
     flex-grow: 2;
-    padding: rem(20px);
+    padding-top: rem(20px);
+    height: 90vh;
+    overflow: auto;
   }
 }
 
@@ -17,6 +19,9 @@
 .cardItems {
   display: flex;
   flex-direction: column;
+  @include mobile {
+    margin: 0;
+  }
   @include desktop {
     flex-direction: row;
     flex-wrap: wrap;
@@ -25,6 +30,9 @@
 }
 
 .item {
+  text-align: center;
+  width: rem(290px);
+
   @media (max-width: 1547px) {
     width: 50%;
     text-align: center;
@@ -37,5 +45,12 @@
 }
 
 .hotRecipes {
-  padding: rem(16px) rem(24px) 0;
+  padding-left: rem(16px);
+  @include mobile {
+    margin-top: rem(40px);
+  }
+
+  @media (min-width: 1546px) {
+    padding-left: rem(28px);
+  }
 }
