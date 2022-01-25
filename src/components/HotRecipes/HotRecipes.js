@@ -15,7 +15,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
@@ -26,7 +25,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
@@ -37,7 +35,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
@@ -48,7 +45,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
@@ -59,7 +55,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />
@@ -70,7 +65,6 @@ export function HotRecipes() {
             background="none"
             hasSummary={false}
             headingPosition="bottomCenter"
-            imgSrc="http://placehold.it/312x230"
             title="Easy Strawberry Cake"
             summary={`Cream Sherry, Moscato d'Asti, and Port are great choices  ...`}
           />

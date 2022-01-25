@@ -75,3 +75,14 @@ export const getHotRecipes = async (num = 6) => {
   });
   return hotRecipes;
 };
+
+export const getSavedRecipe = async (recipeId) => {
+  const savedRecipeRef = doc(db, 'savedRecipes', recipeId);
+  const savedRecipeSnap = await getDoc(savedRecipeRef);
+
+  if (savedRecipeSnap.exists()) {
+    return savedRecipeSnap.data();
+  } else {
+    return null;
+  }
+};
