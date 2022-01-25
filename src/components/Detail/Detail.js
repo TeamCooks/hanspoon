@@ -95,8 +95,8 @@ export function Detail({ id, title, imgSrc }) {
         {diets && (
           <ul className={styles.badgeList}>
             {diets.map((diet, index) => (
-              <li>
-                <Badge key={index} state={camelCase(diet)} size="small" />
+              <li key={index}>
+                <Badge state={camelCase(diet)} size="small" />
               </li>
             ))}
           </ul>
