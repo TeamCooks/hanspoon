@@ -13,7 +13,9 @@ import {
   Timestamp,
   orderBy,
   limit,
-  query
+  query,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 
 initializeApp(firebaseConfig);
@@ -35,9 +37,10 @@ export const saveRecipe = async (userId, recipeData) => {
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
       saved: increment(1),
+      savedBy: arrayUnion(userId),
     });
   } else {
-    await setDoc(savedRecipesRef, { ...recipeData, saved: 1 });
+    await setDoc(savedRecipesRef, { ...recipeData, saved: 1, savedBy: [userId] });
   }
 };
 
@@ -47,6 +50,7 @@ export const removeRecipe = async (userId, recipeId) => {
   await deleteDoc(myRecipesRef);
   await updateDoc(savedRecipesRef, {
     saved: increment(-1),
+    savedBy: arrayRemove(userId),
   });
 };
 
@@ -61,13 +65,13 @@ export const getMyRecipes = async (userId) => {
   return myRecipes;
 };
 
-export const getHotRecipes = async (num=6) => {
+export const getHotRecipes = async (num = 6) => {
   const hotRecipesRef = collection(db, 'savedRecipes');
   const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
   const hotRecipesSnapshot = await getDoc(q);
   const hotRecipes = [];
-  hotRecipesSnapshot.forEach(doc =>{
+  hotRecipesSnapshot.forEach((doc) => {
     hotRecipes.push(doc.data());
-  })
+  });
   return hotRecipes;
-}
+};
