@@ -1,6 +1,6 @@
 import { IconButton, Button, Badge } from '../../components';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
-import { saveRecipe, removeRecipe } from '@api/myRecipes';
+import { saveRecipe, removeRecipe } from '@api/customApi';
 import { useState } from 'react';
 
 export default function Example() {

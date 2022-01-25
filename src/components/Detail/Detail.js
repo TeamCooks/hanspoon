@@ -5,7 +5,7 @@ import { Heading } from '../Heading/Heading';
 import { IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
-import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/myRecipes';
+import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
 import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Detail({ id, title, imgSrc }) {

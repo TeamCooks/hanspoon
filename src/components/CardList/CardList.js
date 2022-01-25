@@ -1,6 +1,6 @@
 import { Card } from '..';
 import styles from './CardList.module.scss';
-import defaultImg from '@assets/default.jpg';
+import noImgUrl from '@assets/images/no-image.jpg';
 import PropTypes from 'prop-types';
 
 
@@ -8,8 +8,7 @@ export function CardList({ results }) {
   return (
       <ul className={styles.list}>
         {results.map(({ id, title, image, imgSrc }) => {
-          let imgUrl = `https://spoonacular.com/recipeImages/${id}-312x231`;
-          if (!image) imgUrl = defaultImg;
+          const imgUrl = image ? `https://spoonacular.com/recipeImages/${id}-312x231`: noImgUrl;
           return (
             <li className={styles.item} key={id}>
               <Card
