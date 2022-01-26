@@ -125,13 +125,3 @@ Dialog.CloseButton.propTypes = {
   onClose: func.isRequired,
   label: string.isRequired,
 };
-
-/* -------------------------------------------------------------------------- */
-
-Dialog.Image = function DialogImage({ img: src }) {
-  return <img className={styles.backgroundImage} src={src} role="none" alt="" />;
-};
-
-Dialog.Image.propTypes = {
-  img: string,
-};
