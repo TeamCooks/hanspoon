@@ -117,14 +117,16 @@ figure {
   height: 1px;
   margin: -1px;
 }
+ 
+$header-height: 70px;
 
 main.main {
   @include desktop {
     max-width: 1500px;
-    // padding: 0 rem(60px);
-    margin: 0 auto;
+    margin: $header-height auto 0;
   }
   @include mobile {
+    margin-top: $header-height;
     padding: rem(10px);
     min-width: 320px;
   }
