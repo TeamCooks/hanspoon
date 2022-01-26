@@ -1,6 +1,6 @@
 @use '@styles' as *;
 
-.detail {
+.Detail {
   @include desktop {
     display: flex;
     gap: 3%;
@@ -14,6 +14,7 @@
 
 .heading {
   width: 100%;
+  margin-bottom: rem(20px);
 }
 
 .buttons {
@@ -24,12 +25,12 @@
 .recipeBrief {
   @include desktop {
     width: 45%;
+    height: 70vh;
+    overflow: scroll;
   }
-}
 
-.recipeAccordion {
-  @include desktop {
-    padding: rem(20px);
+  p {
+    margin: 0;
   }
 }
 
@@ -40,15 +41,14 @@
 }
 
 .foodImageContainer {
-  margin: rem(20px) 0 rem(40px);
+  margin: 0 0 rem(30px);
   position: relative;
 }
 
 .foodImage {
   width: 100%;
-  height: 75vh;
+  height: 40vh;
   object-fit: cover;
-  max-width: 600px;
   border: 7px $white solid;
 }
 

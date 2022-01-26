@@ -7,7 +7,7 @@ const Accordion = ({ recipeDetails }) => {
     <Collapse key={index} heading={recipeInfo.type} content={recipeInfo.data} />
   ));
 
-  return <ul className={styles.accordion}>{recipiInfoItems}</ul>;
+  return <ul className={styles.Accordion}>{recipiInfoItems}</ul>;
 };
 
 export default Accordion;
