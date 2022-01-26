@@ -4,35 +4,14 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(36, 36, 36, 0.8);
-  backdrop-filter: blur(3px);
   overflow: auto;
-}
-
-.backgroundImage {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
 }
 
 .content {
   z-index: 200;
   color: #121212;
-}
-
-.content:focus {
-  outline: 3px solid rgba(249, 0, 0, 0.6);
-}
-
-// .content * {
-//   margin: 0;
-// }
-
-.foot {
+  background: rgba(36, 36, 36, 0.8);
+  backdrop-filter: blur(3px);
 }
 
 .closeButton {
@@ -45,11 +24,6 @@
   padding: 10px;
   background: transparent;
   color: #fefefe;
-}
-
-.closeButton:focus {
-  outline: none;
-  box-shadow: 0 0 0 5px #009cc1;
 }
 
 .closeButton svg {
