@@ -6,10 +6,10 @@ import { Auth } from '../Auth/Auth';
 import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Header() {
+  const authUser = useAuthUser();
   const [isVisible, setIsVisible] = useState(false);
   const [hideHeader, setHideHeader] = useState(true);
   const oldScrollTop = useRef(0);
-  const authUser = useAuthUser();
 
   const handleOpenDialog = () => {
     setIsVisible(true);
@@ -19,11 +19,20 @@ export function Header() {
     setIsVisible(false);
   };
 
+  const handleFocus = () => {
+    setHideHeader(false);
+  };
+
+  const handleBlur = () => {
+    setHideHeader(true);
+  };
+
   const controlHeader = () => {
     const currentScrollTop = window.pageYOffset;
     setHideHeader(currentScrollTop > 70 && currentScrollTop > oldScrollTop.current);
     oldScrollTop.current = currentScrollTop;
   };
+
 
   useEffect(() => {
     document.addEventListener('scroll', controlHeader);
@@ -31,8 +40,13 @@ export function Header() {
       document.removeEventListener('scroll', controlHeader);
     };
   });
+
   return (
-    <header className={classNames(styles.header, { [styles.hide]: hideHeader })}>
+    <header
+      className={classNames(styles.header, { [styles.hide]: hideHeader })}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    >
       <Logo />
       <SearchForm />
       {authUser !== null ? (

@@ -1,17 +1,19 @@
-@use './../../styles/utils/' as *;
+@use '@styles/' as *;
 
 .header {
   @include flexbox($justify-content: space-between, $align-items: center);
-  height: 70px;
+  height: $header-height;
   background-color: $white;
   box-shadow: 0 4px 10px rgba(0 0 0 / 10%);
   padding: 0 10px 0 20px;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   transition: top 0.2s ease-in-out;
   z-index: 10;
 }
 
 .header.hide {
-  top: -70px;
+  top: -1 * $header-height;
 }
