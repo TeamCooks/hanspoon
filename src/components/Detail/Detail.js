@@ -82,7 +82,7 @@ export function Detail({ id, title, imgSrc }) {
   };
 
   return (
-    <article className={styles.detail}>
+    <article className={styles.Detail}>
       <Auth isVisible={isVisible} onClose={handleCloseDialog} />
       <div className={styles.heading}>
         <Heading as="h2">{title}</Heading>
@@ -135,7 +135,7 @@ export function Detail({ id, title, imgSrc }) {
         <Label type={'time'} value={readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved || 0} />
       </div>
-      <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
+      <Accordion recipeDetails={recipeDetails} />
     </article>
   );
 }
