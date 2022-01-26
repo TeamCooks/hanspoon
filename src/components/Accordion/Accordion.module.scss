@@ -29,7 +29,7 @@ summary {
     color: $white;
     width: 2em;
     height: 2em;
-    transition: 0.2s;
+    transition: 0.3s;
     margin: auto 0;
   }
 }
@@ -48,9 +48,20 @@ details[open] {
 .collapseContent {
   font-size: rem(18px);
   color: $gray_200;
+  padding: 0.5rem 1rem 0.5rem 0;
+  line-height: 1.5;
+}
+
+p.collapseContent {
+  margin: 0;
 }
 
 ol.collapseContent {
   list-style: decimal-leading-zero;
   padding-left: 1.8em;
+}
+
+.ingredient {
+  display: flex;
+  justify-content: space-between;
 }
