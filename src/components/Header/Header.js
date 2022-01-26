@@ -24,7 +24,7 @@ export function Header() {
   };
 
   const handleBlur = () => {
-    setHideHeader(true);
+    setHideHeader(window.pageYOffset>70);
   };
 
   const controlHeader = () => {
