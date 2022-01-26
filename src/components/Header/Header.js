@@ -1,12 +1,14 @@
 import styles from './Header.module.scss';
 import { SearchForm, Menu, Button, Logo } from '../../components';
-
-import { useState } from 'react';
+import classNames from 'classnames';
+import { useState, useEffect, useRef } from 'react';
 import { Auth } from '../Auth/Auth';
 import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Header() {
   const [isVisible, setIsVisible] = useState(false);
+  const [hideHeader, setHideHeader] = useState(true);
+  const oldScrollTop = useRef(0);
   const authUser = useAuthUser();
 
   const handleOpenDialog = () => {
@@ -17,8 +19,20 @@ export function Header() {
     setIsVisible(false);
   };
 
+  const controlHeader = () => {
+    const currentScrollTop = window.pageYOffset;
+    setHideHeader(currentScrollTop > 70 && currentScrollTop > oldScrollTop.current);
+    oldScrollTop.current = currentScrollTop;
+  };
+
+  useEffect(() => {
+    document.addEventListener('scroll', controlHeader);
+    return () => {
+      document.removeEventListener('scroll', controlHeader);
+    };
+  });
   return (
-    <header className={styles.header}>
+    <header className={classNames(styles.header, { [styles.hide]: hideHeader })}>
       <Logo />
       <SearchForm />
       {authUser !== null ? (
