@@ -1,6 +1,6 @@
 @use '@styles' as *;
 
-.Detail {
+.detail {
   @include desktop {
     display: flex;
     gap: 3%;
