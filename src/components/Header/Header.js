@@ -1,12 +1,12 @@
 import styles from './Header.module.scss';
-import { SearchForm, Menu, Button, Logo } from '../../components';
+import { SearchForm, Menu, Button, Logo, Auth, Loading } from '..';
 import classNames from 'classnames';
 import { useState, useEffect, useRef } from 'react';
-import { Auth } from '../Auth/Auth';
-import { useAuthUser } from '../../contexts/AuthContext';
+import { useAuthLoading, useAuthUser } from '../../contexts/AuthContext';
 import lodash from 'lodash';
 
 export function Header() {
+  const authLoading = useAuthLoading();
   const authUser = useAuthUser();
   const [showDialog, setShowDialog] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
@@ -41,7 +41,9 @@ export function Header() {
     };
   }, []);
 
-  return (
+  return authLoading ? (
+    <Loading message="Loading" />
+  ) : (
     <header
       className={classNames(styles.header, { [styles.hide]: hideHeader })}
       onFocus={handleFocus}
