@@ -16,15 +16,15 @@
   width: 100%;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .recipeBrief {
   @include desktop {
     width: 45%;
   }
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
 }
 
 .recipeAccordion {
@@ -33,14 +33,20 @@
   }
 }
 
+.saveButton {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+
 .foodImageContainer {
-  margin: 15px 0;
+  margin: rem(20px) 0 rem(40px);
   position: relative;
 }
 
 .foodImage {
   width: 100%;
-  height: 75%;
+  height: 75vh;
   object-fit: cover;
   max-width: 600px;
   border: 7px $white solid;
@@ -52,19 +58,9 @@
   float: right;
 }
 
-.saveButton {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-  &:hover svg {
-    color: $heart_pink;
-    filter: drop-shadow();
-  }
-}
-
 .badgeList {
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  gap: rem(10px);
   flex-wrap: wrap;
 }
