@@ -6,65 +6,51 @@ import { Heading } from '../Heading/Heading';
 import { getRandomRecipe } from '@api/requestData';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import styles from './RandomRecipe.module.scss';
+import lodash from 'lodash';
 
 export function RandomRecipe() {
-  const [id, setId] = useState('');
-  const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState('');
-  const [image, setImage] = useState('');
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const getData = async () => {
-    try {
-      setLoading(true);
-      const { recipes } = await getRandomRecipe();
-      const { id, title, summary, image } = recipes[0];
-      setId(id);
-      setTitle(title);
-      setSummary(summary);
-      setImage(image);
-    } catch (e) {
-      setError(e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  let timer;
-  const handleClick = () => {
-    if (!timer) {
-      timer = setTimeout(() => {
-        timer = null;
-        getData();
-      }, 200);
-    }
-  };
+  const [savedRecipe, setSavedRecipe] = useState([]);
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getData();
+    (async () => {
+      const { recipes } = await getRandomRecipe(2);
+
+      setRecipe(recipes[0]);
+      setSavedRecipe(recipes[1]);
+
+      setLoading(false);
+    })();
   }, []);
 
+  const getRecipe = async () => {
+    setRecipe(savedRecipe);
+    const { recipes } = await getRandomRecipe();
+    setSavedRecipe(recipes[0]);
+  };
+
+  const handleClick = () => {
+    lodash.throttle(getRecipe(), 200);
+  };
+
   const renderCard = () => {
-    if (error) {
-      return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
-    }
     if (loading) {
       return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
+    } else {
+      return (
+        <Card
+          id={recipe.id}
+          type="wide"
+          background="white"
+          hasSummary={true}
+          headingPosition="bottomLeft"
+          imgSrc={recipe.image}
+          title={recipe.title}
+          summary={recipe.summary}
+        />
+      );
     }
-    return (
-      <Card
-        id={id}
-        type="wide"
-        background="white"
-        hasSummary={true}
-        headingPosition="bottomLeft"
-        imgSrc={image}
-        title={title}
-        summary={summary}
-      />
-    );
   };
 
   return (
@@ -73,7 +59,6 @@ export function RandomRecipe() {
       <Button
         className={styles.button}
         style={{
-          padding: '10px 18px',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',

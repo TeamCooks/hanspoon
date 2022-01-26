@@ -17,3 +17,4 @@ export * from './Logo/Logo';
 export * from './ErrorBoundary/ErrorBoundary';
 export * from './Pagination/Pagination';
 export * from './CardList/CardList';
+export * from './Meta/Meta';

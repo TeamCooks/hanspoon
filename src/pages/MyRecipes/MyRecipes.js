@@ -1,4 +1,4 @@
-import { getMyRecipes } from '@api/myRecipes';
+import { getMyRecipes } from '@api/customApi';
 import { useAuthUser } from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { Loading, Heading, CardList, Pagination } from '../../components';
