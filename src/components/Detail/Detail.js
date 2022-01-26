@@ -1,89 +1,13 @@
-import { useState, useEffect } from 'react';
-import { excludeTags, camelCase } from '@utils';
-import { getRecipeById } from '@api/requestData';
+import { camelCase } from '@utils';
 import { Heading, IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
-import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
-import { useAuthUser } from '../../contexts/AuthContext';
-import { Auth } from '../Auth/Auth';
 
-export function Detail({ id, title, imgSrc }) {
-  const [isSaved, setIsSaved] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const authUser = useAuthUser();
-  const [recipe, setRecipe] = useState({
-    extendedIngredients: [],
-    analyzedInstructions: [{ steps: [] }],
-    summary: '',
-  });
-
-  useEffect(() => {
-    (async () => {
-      const savedRecipe = await getSavedRecipe(id + '');
-      if (!savedRecipe) {
-        setRecipe(await getRecipeById(id));
-      } else {
-        setRecipe(savedRecipe);
-        setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
-      }
-    })();
-  }, [isVisible, isSaved]);
-
-  const { creditsText, diets, isHealthy, isPopular, readyInMinutes, saved } = recipe;
-
-  const recipeDetails = recipe.recipeDetails || [
-    {
-      type: 'ingredients',
-      data: recipe.extendedIngredients.map((ingredient) => ({
-        name: ingredient.nameClean,
-        amount: ingredient.amount,
-        unit: ingredient.measures.metric.unitShort,
-      })),
-    },
-    {
-      type: 'equipment',
-      data: [
-        ...new Set(
-          recipe.analyzedInstructions[0]?.steps?.flatMap((step) => step.equipment?.flatMap((equip) => equip.name)),
-        ),
-      ],
-    },
-    { type: 'summary', data: excludeTags(recipe.summary) },
-    {
-      type: 'instructions',
-      data: recipe.analyzedInstructions[0]?.steps?.map((step) => step.step),
-    },
-  ];
-
-  const handleClick = () => {
-    if (authUser) {
-      if (isSaved === false) {
-        saveRecipe(authUser.uid, {
-          recipeId: id + '',
-          imgSrc,
-          title,
-          readyInMinutes,
-          creditsText,
-          diets,
-          recipeDetails,
-        });
-      } else {
-        removeRecipe(authUser.uid, id + '');
-      }
-      setIsSaved(!isSaved);
-    } else {
-      setIsVisible(true);
-    }
-  };
-
-  const handleCloseDialog = () => {
-    setIsVisible(false);
-  };
+export function Detail({ id, title, imgSrc, recipeData, savedCount, isSaved, handleClick }) {
+  const { creditsText, diets, readyInMinutes, recipeDetails, isHealthy, isPopular } = recipeData;
 
   return (
     <article className={styles.detail}>
-      <Auth isVisible={isVisible} onClose={handleCloseDialog} />
       <div className={styles.heading}>
         <Heading as="h2">{title}</Heading>
         <div className={styles.buttons}>
@@ -133,7 +57,7 @@ export function Detail({ id, title, imgSrc }) {
           </ul>
         ) : null}
         <Label type={'time'} value={readyInMinutes || 0} />
-        <Label type={'bookmark'} value={saved || 0} />
+        <Label type={'bookmark'} value={savedCount || 0} />
       </div>
       <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
     </article>
