@@ -1,14 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 import { setDocumentTitle } from '../../utils';
-import { Header, RandomRecipe, HotRecipes, Footer } from '../../components/index';
+import { Header, RandomRecipe, HotRecipes, Footer, Meta } from '../../components/index';
 import styles from './Home.module.scss';
 
 export default function Home() {
+  const metaData = {
+    title: 'Home',
+  };
   return (
     <>
-      <Helmet>
-        <title>{setDocumentTitle('home')}</title>
-      </Helmet>
+      <Meta data={metaData} />
       <div className={styles.section}>
         <RandomRecipe />
         <HotRecipes />
