@@ -21,14 +21,7 @@ export function Auth({ isVisible, onClose }) {
   }, [isVisible]);
 
   return isVisible ? (
-    <Dialog
-      isVisible={isVisible}
-      onClose={onClose}
-      nodeId="dialog"
-      img={imgUrl}
-      label={currentForm}
-      className={styles.memberDialog}
-    >
+    <Dialog onClose={onClose} nodeId="dialog" img={imgUrl} label={currentForm} className={styles.memberDialog}>
       <Heading as="h2" className={styles.heading}>
         {HEADING[currentForm]}
       </Heading>
