@@ -11,7 +11,7 @@
 
   h1 {
     width: 130px;
-    transition: 400ms all ease;
+    transition: 400ms width ease;
 
     @include mobile {
       width: 0;

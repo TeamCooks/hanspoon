@@ -1,24 +1,52 @@
 import styles from './Header.module.scss';
 import { SearchForm, Menu, Button, Logo } from '../../components';
-
-import { useState } from 'react';
+import classNames from 'classnames';
+import { useState, useEffect, useRef } from 'react';
 import { Auth } from '../Auth/Auth';
 import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Header() {
-  const [isVisible, setIsVisible] = useState(false);
   const authUser = useAuthUser();
+  const [showDialog, setShowDialog] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
+  const oldScrollTop = useRef(0);
 
   const handleOpenDialog = () => {
-    setIsVisible(true);
+    setShowDialog(true);
   };
 
   const handleCloseDialog = () => {
-    setIsVisible(false);
+    setShowDialog(false);
   };
 
+  const handleFocus = () => {
+    setHideHeader(false);
+  };
+
+  const handleBlur = () => {
+    setHideHeader(window.pageYOffset>70);
+  };
+
+  const controlHeader = () => {
+    const currentScrollTop = window.pageYOffset;
+    setHideHeader(currentScrollTop > 70 && currentScrollTop > oldScrollTop.current);
+    oldScrollTop.current = currentScrollTop;
+  };
+
+
+  useEffect(() => {
+    document.addEventListener('scroll', controlHeader);
+    return () => {
+      document.removeEventListener('scroll', controlHeader);
+    };
+  });
+
   return (
-    <header className={styles.header}>
+    <header
+      className={classNames(styles.header, { [styles.hide]: hideHeader })}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    >
       <Logo />
       <SearchForm />
       {authUser !== null ? (
@@ -35,7 +63,7 @@ export function Header() {
           >
             Sign In
           </Button>
-          <Auth isVisible={isVisible} onClose={handleCloseDialog} />
+          <Auth isVisible={showDialog} onClose={handleCloseDialog} />
         </>
       )}
     </header>

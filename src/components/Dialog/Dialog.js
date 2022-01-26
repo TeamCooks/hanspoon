@@ -74,11 +74,11 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
         aria-hidden={!isVisible}
         aria-label={`${label} Dialog`}
         {...restProps}
+        style={{ background: `center / cover no-repeat url(${img})`}}
       >
         <div className={classNames(className, styles.content)}>{children}</div>
         <Dialog.CloseButton onClose={handleClose} label={label} />
       </div>
-      {img ? <Dialog.Image img={img} /> : null}
     </>,
     document.getElementById(nodeId),
   );
@@ -124,14 +124,4 @@ Dialog.CloseButton = function DialogCloseButton({ onClose, label }) {
 Dialog.CloseButton.propTypes = {
   onClose: func.isRequired,
   label: string.isRequired,
-};
-
-/* -------------------------------------------------------------------------- */
-
-Dialog.Image = function DialogImage({ img: src }) {
-  return <img className={styles.backgroundImage} src={src} role="none" alt="" />;
-};
-
-Dialog.Image.propTypes = {
-  img: string,
 };

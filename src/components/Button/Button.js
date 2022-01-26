@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import buttonStyle from './Button.module.scss';
 import classNames from 'classnames';
+import { BUTTON_TYPES } from './button.types';
 
 export function Button({ type, variant, shape, size, color, className, children, ...restProps }) {
   return (
@@ -21,11 +21,13 @@ export function Button({ type, variant, shape, size, color, className, children,
   );
 }
 
+const { type, variant, shape, size, color, children } = BUTTON_TYPES;
+
 Button.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit']).isRequired,
-  variant: PropTypes.oneOf(['text', 'outlined', 'filled']).isRequired,
-  shape: PropTypes.oneOf(['wide', 'round']),
-  size: PropTypes.oneOf(['small', 'large']),
-  color: PropTypes.oneOf(['green', 'orange', 'white']),
-  children: PropTypes.any.isRequired,
+  type,
+  variant,
+  shape,
+  size,
+  color,
+  children,
 };

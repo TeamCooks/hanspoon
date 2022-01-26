@@ -6,9 +6,11 @@ import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
 import { useAuthUser } from '../../contexts/AuthContext';
+import { Auth } from '../Auth/Auth';
 
 export function Detail({ id, title, imgSrc }) {
   const [isSaved, setIsSaved] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const authUser = useAuthUser();
   const [recipe, setRecipe] = useState({
     extendedIngredients: [],
@@ -23,9 +25,10 @@ export function Detail({ id, title, imgSrc }) {
         setRecipe(await getRecipeById(id));
       } else {
         setRecipe(savedRecipe);
+        setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
       }
     })();
-  }, []);
+  }, [isVisible, isSaved]);
 
   const { creditsText, diets, isHealthy, isPopular, readyInMinutes, saved } = recipe;
 
@@ -54,16 +57,33 @@ export function Detail({ id, title, imgSrc }) {
   ];
 
   const handleClick = () => {
-    if (isSaved === false) {
-      saveRecipe(authUser.uid, { recipeId: id + '', imgSrc, title, readyInMinutes, creditsText, diets, recipeDetails });
+    if (authUser) {
+      if (isSaved === false) {
+        saveRecipe(authUser.uid, {
+          recipeId: id + '',
+          imgSrc,
+          title,
+          readyInMinutes,
+          creditsText,
+          diets,
+          recipeDetails,
+        });
+      } else {
+        removeRecipe(authUser.uid, id + '');
+      }
+      setIsSaved(!isSaved);
     } else {
-      removeRecipe(authUser.uid, id + '');
+      setIsVisible(true);
     }
-    setIsSaved(!isSaved);
+  };
+
+  const handleCloseDialog = () => {
+    setIsVisible(false);
   };
 
   return (
     <article className={styles.detail}>
+      <Auth isVisible={isVisible} onClose={handleCloseDialog} />
       <div className={styles.heading}>
         <Heading as="h2">{title}</Heading>
         <div className={styles.buttons}>
