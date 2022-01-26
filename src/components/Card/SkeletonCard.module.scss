@@ -64,12 +64,14 @@
   padding: rem(16px);
   position: relative;
   @include desktop {
-    width: 450px;
+    // width: 450px;
   }
 }
 
 .inlineBlock {
   display: inline-block;
+  display: flex;
+  justify-content: center;
 }
 
 .white {
@@ -119,7 +121,7 @@
     left: 0;
   }
   &Center {
-    text-align: center;
+    align-self: center;
   }
 }
 
