@@ -3,13 +3,13 @@
 .Accordion {
   @include desktop {
     width: 45%;
+    height: 70vh;
+    overflow: scroll;
   }
   display: block;
   color: $white;
-  height: 70vh;
   margin: 0;
   padding-right: 1.5rem;
-  overflow: scroll;
 }
 
 .recipeInfoItem {
