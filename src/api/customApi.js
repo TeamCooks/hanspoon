@@ -47,11 +47,16 @@ export const saveRecipe = async (userId, recipeData) => {
 export const removeRecipe = async (userId, recipeId) => {
   const myRecipesRef = doc(db, 'users', userId, 'my-recipes', recipeId);
   const savedRecipesRef = doc(db, 'savedRecipes', recipeId);
+  const savedRecipesSnap = await getDoc(savedRecipesRef);
+
   await deleteDoc(myRecipesRef);
-  await updateDoc(savedRecipesRef, {
-    saved: increment(-1),
-    savedBy: arrayRemove(userId),
-  });
+
+  if (savedRecipesSnap.exists()) {
+    await updateDoc(savedRecipesRef, {
+      saved: increment(-1),
+      savedBy: arrayRemove(userId),
+    });
+  }
 };
 
 export const getMyRecipes = async (userId) => {
