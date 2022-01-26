@@ -6,19 +6,99 @@ import { useState } from 'react';
 import { Dialog, Detail } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import imgUrl from '@assets/images/no-image.jpg';
+import { useAuthUser } from '../../contexts/AuthContext';
+import { getRecipeById } from '@api/requestData';
+import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
+import { Auth } from '../Auth/Auth';
 
 export function Card({ id = 0, type, background, hasSummary, headingPosition, imgSrc = imgUrl, title, summary = '' }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [showDetailDialog, setShowDetailDialog] = useState(false);
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [recipeData, setRecipeData] = useState({});
+  const [savedCount, setSavedCount] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const authUser = useAuthUser();
+
+  const handleClick = (e) => {
+    if (authUser) {
+      isSaved ? setSavedCount(savedCount - 1) : setSavedCount(savedCount + 1);
+      setIsSaved(!isSaved);
+    } else {
+      setShowAuthDialog(true);
+    }
+  };
+
+  const handleCloseAuthDialog = () => {
+    setShowAuthDialog(false);
+  };
+
   const handleOpenDialog = (e) => {
-    setIsVisible(true);
+    (async () => {
+      let savedRecipe = await getSavedRecipe(id + '');
+      if (!savedRecipe) {
+        savedRecipe = await getRecipeById(id);
+        savedRecipe.recipeDetails = [
+          {
+            type: 'ingredients',
+            data: savedRecipe.extendedIngredients.map((ingredient) => ({
+              name: ingredient.nameClean,
+              amount: ingredient.amount,
+              unit: ingredient.measures.metric.unitShort,
+            })),
+          },
+          {
+            type: 'equipment',
+            data: [
+              ...new Set(
+                savedRecipe.analyzedInstructions[0]?.steps?.flatMap((step) =>
+                  step.equipment?.flatMap((equip) => equip.name),
+                ),
+              ),
+            ],
+          },
+          { type: 'summary', data: excludeTags(savedRecipe.summary) },
+          {
+            type: 'instructions',
+            data: savedRecipe.analyzedInstructions[0]?.steps?.map((step) => step.step),
+          },
+        ];
+        savedRecipe.saved = 0;
+      }
+      setRecipeData(savedRecipe);
+      setSavedCount(savedRecipe.saved);
+      if (authUser && savedRecipe.savedBy) setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
+
+      setShowDetailDialog(true);
+    })();
   };
 
   const handleCloseDialog = () => {
+    if (authUser) {
+      if (isSaved) {
+        const { readyInMinutes, creditsText, diets, recipeDetails, saved, veryHealthy, veryPopular } = recipeData;
+
+        saveRecipe(authUser.uid, {
+          recipeId: id + '',
+          imgSrc,
+          title,
+          readyInMinutes,
+          creditsText,
+          diets,
+          recipeDetails,
+          saved,
+          veryHealthy,
+          veryPopular,
+        });
+      } else {
+        removeRecipe(authUser.uid, id + '');
+      }
+    }
+
     navigate(-1);
-    setIsVisible(false);
+    setShowDetailDialog(false);
   };
 
   return (
@@ -36,21 +116,28 @@ export function Card({ id = 0, type, background, hasSummary, headingPosition, im
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
           </figure>
-          {hasSummary && <p className={styles.summary}>{excludeTags(summary)}</p>}
+          {hasSummary && (
+            <>
+              <p className={styles.summary}>{excludeTags(summary)}</p>
+              <button className={styles.more}>more</button>
+            </>
+          )}
         </div>
       </Link>
-      {isVisible ? (
-        <Dialog
-          isVisible={isVisible}
-          onClose={handleCloseDialog}
-          nodeId="dialog"
-          img={imgSrc}
-          label={title}
-          className={styles.detailDialog}
-        >
-          <Detail id={id} imgSrc={imgSrc} title={title} />
+      {showDetailDialog ? (
+        <Dialog onClose={handleCloseDialog} nodeId="dialog" img={imgSrc} label={title} className={styles.detailDialog}>
+          <Detail
+            id={id}
+            imgSrc={imgSrc}
+            title={title}
+            recipeData={recipeData}
+            savedCount={savedCount}
+            isSaved={isSaved}
+            handleClick={handleClick}
+          />
         </Dialog>
       ) : null}
+      <Auth isVisible={showAuthDialog} onClose={handleCloseAuthDialog} />
     </>
   );
 }

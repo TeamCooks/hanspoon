@@ -13,9 +13,21 @@ const CollapseContent = ({ type, content }) => {
     case 'equipment':
       return content.map((equipment, index) => <li key={index}>{equipment}</li>);
     case 'summary':
-      return <span>{content}</span>;
+      return (
+        <span>
+          {content
+            .split('. ')
+            .map((text, index, texts) =>
+              index < texts.length - 1 ? <p className={styles.accordionText}>{text + '.'}</p> : <p>{text}</p>,
+            )}
+        </span>
+      );
     case 'instructions':
-      return content.map((instructions, index) => <li key={index}>{instructions}</li>);
+      return content.map((instructions, index) => (
+        <li key={index}>
+          <p className={styles.accordionText}>{instructions}</p>
+        </li>
+      ));
     default:
       return null;
   }
