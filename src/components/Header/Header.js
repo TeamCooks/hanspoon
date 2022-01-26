@@ -7,8 +7,8 @@ import { useAuthUser } from '../../contexts/AuthContext';
 
 export function Header() {
   const authUser = useAuthUser();
-  const [isVisible, setIsVisible] = useState(false);
-  const [hideHeader, setHideHeader] = useState(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
   const oldScrollTop = useRef(0);
 
   const handleOpenDialog = () => {
@@ -63,7 +63,7 @@ export function Header() {
           >
             Sign In
           </Button>
-          <Auth isVisible={isVisible} onClose={handleCloseDialog} />
+          <Auth isVisible={showDialog} onClose={handleCloseDialog} />
         </>
       )}
     </header>
