@@ -12,11 +12,11 @@ export function Header() {
   const oldScrollTop = useRef(0);
 
   const handleOpenDialog = () => {
-    setIsVisible(true);
+    setShowDialog(true);
   };
 
   const handleCloseDialog = () => {
-    setIsVisible(false);
+    setShowDialog(false);
   };
 
   const handleFocus = () => {
