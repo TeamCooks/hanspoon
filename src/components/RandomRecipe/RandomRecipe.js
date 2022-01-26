@@ -6,7 +6,6 @@ import { Heading } from '../Heading/Heading';
 import { getRandomRecipe } from '@api/requestData';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import styles from './RandomRecipe.module.scss';
-import lodash from 'lodash';
 
 export function RandomRecipe() {
   const [savedRecipe, setSavedRecipe] = useState([]);
@@ -30,8 +29,14 @@ export function RandomRecipe() {
     setSavedRecipe(recipes[0]);
   };
 
+  let timer;
   const handleClick = () => {
-    lodash.throttle(getRecipe(), 200);
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        getRecipe();
+      }, 300);
+    }
   };
 
   const renderCard = () => {
