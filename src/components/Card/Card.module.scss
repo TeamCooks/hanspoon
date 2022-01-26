@@ -94,7 +94,6 @@
   @include desktop {
     display: -webkit-box;
     word-wrap: break-word;
-    // -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -134,4 +133,9 @@
   font-size: rem(24px);
   z-index: 1;
   margin: 0;
+}
+
+.text {
+  margin-top: 0;
+  margin-bottom: rem(8px);
 }
