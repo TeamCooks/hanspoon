@@ -7,7 +7,7 @@ const CollapseContent = ({ type, content }) => {
       return content.map((ingredient, index) => (
         <li key={index} className={styles.collapseContentItem}>
           <span>{ingredient.name}</span>
-          <span>{ingredient.amount}</span>
+          <span>{ingredient.amount.toFixed(2)}</span>
           <span>{ingredient.unit}</span>
         </li>
       ));
