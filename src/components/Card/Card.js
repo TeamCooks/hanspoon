@@ -76,10 +76,9 @@ export function Card({ id = 0, type, background, hasSummary, headingPosition, im
   };
 
   const handleCloseDialog = () => {
-    if (authUser) {
+    const { readyInMinutes, creditsText, diets, recipeDetails, saved, veryHealthy, veryPopular } = recipeData;
+    if (authUser && savedCount !== saved) {
       if (isSaved) {
-        const { readyInMinutes, creditsText, diets, recipeDetails, saved, veryHealthy, veryPopular } = recipeData;
-
         saveRecipe(authUser.uid, {
           recipeId: id + '',
           imgSrc,
