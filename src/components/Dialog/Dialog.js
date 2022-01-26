@@ -73,8 +73,8 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
         aria-modal="true"
         aria-hidden={!isVisible}
         aria-label={`${label} Dialog`}
-        {...restProps}
         style={{ background: `center / cover no-repeat url(${img})`}}
+        {...restProps}
       >
         <div className={classNames(className, styles.content)}>{children}</div>
         <Dialog.CloseButton onClose={handleClose} label={label} />
