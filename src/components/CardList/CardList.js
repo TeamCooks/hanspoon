@@ -18,6 +18,7 @@ export function CardList({ results }) {
                 hasSummary={false}
                 headingPosition="bottomCenter"
                 imgSrc={imgSrc || imgUrl}
+                image={image}
                 title={title}
               />
             </li>

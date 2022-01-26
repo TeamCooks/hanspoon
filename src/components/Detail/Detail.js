@@ -59,7 +59,7 @@ export function Detail({ id, title, imgSrc, recipeData, savedCount, isSaved, han
         <Label type={'time'} value={readyInMinutes || 0} />
         <Label type={'bookmark'} value={savedCount || 0} />
       </div>
-      <Accordion className={styles.recipeAccordion} recipeDetails={recipeDetails} />
+      <Accordion recipeDetails={recipeDetails} />
     </article>
   );
 }

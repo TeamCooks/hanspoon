@@ -71,8 +71,8 @@ export function Dialog({ onClose, children, nodeId = 'dialog', label, img, class
         role="dialog"
         aria-modal="true"
         aria-label={`${label} Dialog`}
+        style={{ background: `center / cover no-repeat url(${img})`}}
         {...restProps}
-        style={{ background: `center / cover no-repeat url(${img})` }}
       >
         <div className={classNames(className, styles.content)}>{children}</div>
         <Dialog.CloseButton onClose={handleClose} label={label} />
