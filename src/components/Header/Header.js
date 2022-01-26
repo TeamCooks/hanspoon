@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useState, useEffect, useRef } from 'react';
 import { Auth } from '../Auth/Auth';
 import { useAuthUser } from '../../contexts/AuthContext';
+import lodash from 'lodash';
 
 export function Header() {
   const authUser = useAuthUser();
@@ -24,22 +25,22 @@ export function Header() {
   };
 
   const handleBlur = () => {
-    setHideHeader(window.pageYOffset>70);
+    setHideHeader(window.pageYOffset > 70);
   };
 
-  const controlHeader = () => {
+  const controlHeader = lodash.throttle(() => {
     const currentScrollTop = window.pageYOffset;
     setHideHeader(currentScrollTop > 70 && currentScrollTop > oldScrollTop.current);
     oldScrollTop.current = currentScrollTop;
-  };
-
+  }, 300);
 
   useEffect(() => {
+    console.log(controlHeader)
     document.addEventListener('scroll', controlHeader);
     return () => {
       document.removeEventListener('scroll', controlHeader);
     };
-  });
+  }, []);
 
   return (
     <header
