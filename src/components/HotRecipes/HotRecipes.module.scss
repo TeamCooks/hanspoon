@@ -4,8 +4,7 @@
   @include desktop {
     flex-grow: 2;
     padding-top: rem(20px);
-    height: 90vh;
-    overflow: auto;
+    height: 80vh;
   }
 }
 
@@ -26,6 +25,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    height: 99%;
+    overflow: auto;
   }
 }
 
