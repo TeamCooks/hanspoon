@@ -5,7 +5,7 @@ import { getTabbableElements } from '../../utils';
 import styles from './Dialog.module.scss';
 import classNames from 'classnames';
 import { IconButton } from '../Button/IconButton';
-export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
+export function Dialog({ onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);
 
@@ -60,7 +60,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
       document.removeEventListener(eventType, eventListener);
       document.body.removeAttribute('aria-hidden');
       document.body.style['overflow-y'] = '';
-      
     };
   }, [handleClose, label]);
 
@@ -71,7 +70,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
         className={styles.container}
         role="dialog"
         aria-modal="true"
-        aria-hidden={!isVisible}
         aria-label={`${label} Dialog`}
         style={{ background: `center / cover no-repeat url(${img})`}}
         {...restProps}
@@ -85,7 +83,6 @@ export function Dialog({ isVisible, onClose, children, nodeId = 'dialog', label,
 }
 
 Dialog.propTypes = {
-  isVisible: bool.isRequired,
   onClose: func.isRequired,
   children: node.isRequired,
   nodeId: string,
