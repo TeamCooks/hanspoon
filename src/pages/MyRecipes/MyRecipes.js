@@ -1,26 +1,27 @@
 import { getMyRecipes } from '@api/customApi';
 import { useAuthUser } from '../../contexts/AuthContext';
-import { useEffect, useState } from 'react';
-import { Loading, Heading, CardList, Pagination } from '../../components';
+import { useEffect, useState, useMemo } from 'react';
+import { Loading, Heading, CardList, Pagination, Meta } from '../../components';
 import styles from './MyRecipes.module.scss';
 import classNames from 'classnames';
-import { setDocumentTitle } from '@utils';
-import { Helmet } from 'react-helmet-async';
 
 export default function MyRecipes() {
+  const authUser = useAuthUser();
   const [myRecipes, setMyRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const authUser = useAuthUser();
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       const data = await getMyRecipes(authUser.uid);
       setMyRecipes(data);
+      setIsLoading(false);
     })();
-    setIsLoading(false);
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const metaData = useMemo(()=> {
+    return { title: 'My Recipes'}
+  }, [])
 
   const handleClick = (num) => {
     setCurrentPage(num);
@@ -28,9 +29,7 @@ export default function MyRecipes() {
 
   return (
     <>
-      <Helmet>
-        <title>{setDocumentTitle('My Recipes')}</title>
-      </Helmet>
+      <Meta data={metaData} />
       <div className={classNames(styles.container)}>
         {isLoading ? (
           <Loading message="Loading my recipes" />
