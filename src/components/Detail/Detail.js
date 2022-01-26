@@ -27,7 +27,7 @@ export function Detail({ id, title, imgSrc }) {
     })();
   }, []);
 
-  const { creditsText, diets, readyInMinutes, saved } = recipe;
+  const { creditsText, diets, isHealthy, isPopular, readyInMinutes, saved } = recipe;
 
   const recipeDetails = recipe.recipeDetails || [
     {
@@ -88,21 +88,30 @@ export function Detail({ id, title, imgSrc }) {
           />
         </div>
       </div>
-
       <div className={styles.recipeBrief}>
         <figure className={styles.foodImageContainer}>
           <img className={styles.foodImage} src={imgSrc} alt={title} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
-        {diets && (
+        {diets && diets.length ? (
           <ul className={styles.badgeList}>
+            {isHealthy ? (
+              <li key={0}>
+                <Badge state={'healthy'} size="small" />
+              </li>
+            ) : null}
+            {isPopular ? (
+              <li key={0}>
+                <Badge state={'popular'} size="small" />
+              </li>
+            ) : null}
             {diets.map((diet, index) => (
-              <li key={index}>
+              <li key={index + 2}>
                 <Badge state={camelCase(diet)} size="small" />
               </li>
             ))}
           </ul>
-        )}
+        ) : null}
         <Label type={'time'} value={readyInMinutes || 0} />
         <Label type={'bookmark'} value={saved || 0} />
       </div>

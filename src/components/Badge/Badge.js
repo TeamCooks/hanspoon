@@ -16,10 +16,11 @@ const STATE = {
   vegan: 'vegan',
   glutenFree: 'gluten-free',
   popular: 'popular',
+  paleolithic: 'paleo',
   paleo: 'paleo',
   primal: 'primal',
   healthy: 'healthy',
-  pescetarian: 'pescetarian',
+  pescatarian: 'pescatarian',
 };
 
 const renderIcon = (state) => {
@@ -31,10 +32,11 @@ const renderIcon = (state) => {
     vegan,
     glutenFree,
     popular,
+    paleolithic,
     paleo,
     primal,
     healthy,
-    pescetarian,
+    pescatarian,
   } = STATE;
 
   switch (state) {
@@ -52,13 +54,15 @@ const renderIcon = (state) => {
       return <GiGrain />;
     case popular:
       return <BsStars />;
+    case paleolithic:
+      return <GiMeat />;
     case paleo:
       return <GiMeat />;
     case primal:
       return <GiMeat />;
     case healthy:
       return <GiMuscleUp />;
-    case pescetarian:
+    case pescatarian:
       return <FaFish />;
     default:
       return null;
