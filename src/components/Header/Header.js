@@ -35,7 +35,6 @@ export function Header() {
   }, 300);
 
   useEffect(() => {
-    console.log(controlHeader)
     document.addEventListener('scroll', controlHeader);
     return () => {
       document.removeEventListener('scroll', controlHeader);

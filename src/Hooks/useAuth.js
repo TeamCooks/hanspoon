@@ -3,11 +3,14 @@ import { getAuthStatus, logOut, signIn as APISignIn, signUp as APISignUp } from 
 
 export const useAuth = () => {
   const [authUser, setAuthUser] = useState(null);
-  
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(()=> {
     (async () => {
+      setIsLoading(true);
       const user = await getAuthStatus();
       setAuthUser(user);
+      setIsLoading(false);
     })();
   }, [])
 
@@ -22,5 +25,5 @@ export const useAuth = () => {
     logOut();
     setAuthUser(null);
   };
-  return { authUser, signIn, signUp, signOut };
+  return { authUser, isLoading, signIn, signUp, signOut };
 };
