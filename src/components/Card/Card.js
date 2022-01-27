@@ -101,7 +101,6 @@ export function Card({
         saveRecipe(authUser.uid, {
           recipeId: id + '',
           image: image || '',
-          imgSrc: image ? imgSrc : '',
           title,
           readyInMinutes,
           creditsText,
