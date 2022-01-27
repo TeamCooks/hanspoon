@@ -4,7 +4,7 @@
   @include desktop {
     width: 45%;
     height: 70vh;
-    overflow: scroll;
+    overflow: auto;
   }
   display: block;
   color: $white;
