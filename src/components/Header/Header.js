@@ -92,8 +92,8 @@ export function Header() {
             shape="circle"
             style={{
               position: 'fixed',
-              right: '10vw',
-              bottom: '10vw',
+              right: '20px',
+              bottom: '20px',
               cursor: 'pointer',
               boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)',
             }}
