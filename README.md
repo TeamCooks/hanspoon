@@ -27,11 +27,11 @@
 4. 모달에서도 키보드 트랩이 가능하도록 구현
 5. 시멘틱한 태그를 사용하여 SEO 점수 향상 및 유지보수시 이해하기 쉬운 설계
 
-<br>
-성능개선을 위해 노력한점
+## 이외에도 성능 개선을 위해 노력한 점
 - 이미지 최적화
 - api요청 최소화
-
+- 
+<br>
 
 ## 📚 사용한 메인 기술 및 라이브러리
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/react(cra)-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=black"> <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> <img src="https://img.shields.io/badge/firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> <img src="https://img.shields.io/badge/webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black">
