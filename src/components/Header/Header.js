@@ -47,11 +47,9 @@ export function Header() {
     };
   }, []);
 
-  return authLoading ? (
-    <Loading message="Loading" />
-  ) : (
+  return (
     <header
-      className={classNames(styles.header, { [styles.hide]: hideHeader })}
+      className={classNames(styles.header, { [styles.hide]: authLoading || hideHeader })}
       onFocus={handleFocus}
       onBlur={handleBlur}
     >
@@ -77,3 +75,5 @@ export function Header() {
     </header>
   );
 }
+
+
