@@ -6,6 +6,10 @@ import styles from './Detail.module.scss';
 
 export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) => {
   const { creditsText, readyInMinutes, recipeDetails, tags } = recipeData;
+  const showAlert = () => {
+    alert('coming Soon..');
+  };
+
   return (
     <article className={styles.detail}>
       <div className={styles.heading}>
@@ -19,6 +23,7 @@ export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleC
             color="white"
             size="large"
             shape="circle"
+            onClick={showAlert}
           />
           <IconButton
             variant="default"
