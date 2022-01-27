@@ -6,6 +6,10 @@ import styles from './Detail.module.scss';
 
 export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) => {
   const { creditsText, readyInMinutes, recipeDetails, tags } = recipeData;
+  const comingSoon = () => {
+    alert('구현 중인 기능입니다.');
+  };
+
   return (
     <article className={styles.detail}>
       <div className={styles.heading}>
@@ -19,6 +23,7 @@ export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleC
             color="white"
             size="large"
             shape="circle"
+            onClick={comingSoon}
           />
           <IconButton
             variant="default"
