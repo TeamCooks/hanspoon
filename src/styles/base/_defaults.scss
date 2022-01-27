@@ -145,3 +145,10 @@ main.main {
 .hidden {
   display: none !important;
 }
+
+.noticeForIE {
+  padding: rem(48px);
+  >* {
+    text-align: center;
+  }
+}
