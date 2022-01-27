@@ -110,9 +110,12 @@
     }
   }
   @include mobile {
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
