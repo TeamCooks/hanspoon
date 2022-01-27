@@ -1,8 +1,12 @@
 @use '@styles/' as *;
 
 .header {
-  @include flexbox($justify-content: space-between, $align-items: center);
-  height: $header-height;
+  > div {
+    @include flexbox($justify-content: space-between, $align-items: center);
+    max-width: 1500px;
+    margin: 0 auto;
+    height: $header-height;
+  }
   background-color: $white;
   box-shadow: 0 4px 10px rgba(0 0 0 / 10%);
   padding: 0 10px 0 20px;

@@ -61,53 +61,55 @@ export function Header() {
       onFocus={handleFocus}
       onBlur={handleBlur}
     >
-      <Logo />
-      <SearchForm />
-      {authUser !== null ? (
-        <Menu />
-      ) : (
-        <>
-          <Button
-            type="button"
-            variant="text"
-            aria-haspopup="dialog"
-            aria-label="Open SignIn Dialog"
-            title="Open SignIn Dialog"
-            onClick={handleOpenDialog}
-          >
-            Sign In
-          </Button>
-          <Auth isVisible={showDialog} onClose={handleCloseDialog} />
-        </>
-      )}
-      {showScrollToTop &&
-        createPortal(
-          <IconButton
-            ariaLabel="Go to Top"
-            state="up"
-            type="button"
-            variant="filled"
-            color="green"
-            size="large"
-            shape="circle"
-            style={{
-              position: 'fixed',
-              right: '10vw',
-              bottom: '10vw',
-              cursor: 'pointer',
-              boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)',
-            }}
-            onClick={() => {
-              window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth',
-              });
-            }}
-          />,
-
-          document.getElementById('root'),
+      <div>
+        <Logo />
+        <SearchForm />
+        {authUser !== null ? (
+          <Menu />
+        ) : (
+          <>
+            <Button
+              type="button"
+              variant="text"
+              aria-haspopup="dialog"
+              aria-label="Open SignIn Dialog"
+              title="Open SignIn Dialog"
+              onClick={handleOpenDialog}
+            >
+              Sign In
+            </Button>
+            <Auth isVisible={showDialog} onClose={handleCloseDialog} />
+          </>
         )}
+        {showScrollToTop &&
+          createPortal(
+            <IconButton
+              ariaLabel="Go to Top"
+              state="up"
+              type="button"
+              variant="filled"
+              color="green"
+              size="large"
+              shape="circle"
+              style={{
+                position: 'fixed',
+                right: '20px',
+                bottom: '20px',
+                cursor: 'pointer',
+                boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)',
+              }}
+              onClick={() => {
+                window.scroll({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth',
+                });
+              }}
+            />,
+
+            document.getElementById('root'),
+          )}
+      </div>
     </header>
   );
 }
