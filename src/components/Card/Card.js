@@ -78,11 +78,9 @@ export function Card({
           },
         ];
         savedRecipe.savedCount = 0;
-        savedRecipe.tags = [
-          ...savedRecipe.diets,
-          savedRecipe.veryHealthy ? 'veryHealthy' : null,
-          savedRecipe.veryPopular ? 'veryPopular' : null,
-        ];
+        savedRecipe.tags = [...savedRecipe.diets.filter((diet) => [diet !== 'fodmap friendly'])];
+        if (savedRecipe.veryPopular) savedRecipe.tags = [...savedRecipe.tags, 'popular'];
+        if (savedRecipe.veryHealthy) savedRecipe.tags = [...savedRecipe.tags, 'healthy'];
       }
       setRecipeData(savedRecipe);
       setSavedCountBeDisplayed(savedRecipe.savedCount);

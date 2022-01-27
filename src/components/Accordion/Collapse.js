@@ -4,40 +4,30 @@ import CollapseContent from './CollapseContent';
 import styles from './Accordion.module.scss';
 
 const Collapse = ({ heading, content }) => {
-  let collapseContent = null;
+  let collapseContentContainer = null;
+  const collapseContentComponent = <CollapseContent type={heading} content={content} />;
+
   switch (heading) {
     case 'ingredients':
-      collapseContent = (
-        <ul className={styles.collapseContent}>
-          <CollapseContent type={heading} content={content} />
-        </ul>
-      );
+      collapseContentContainer = <ul className={styles.collapseContent}>{collapseContentComponent}</ul>;
       break;
     case 'equipment':
-      collapseContent =
+      collapseContentContainer =
         !content || !content.length ? (
           <p>No Equipment.</p>
         ) : (
-          <ul className={styles.collapseContent}>
-            <CollapseContent type={heading} content={content} />
-          </ul>
+          <ul className={styles.collapseContent}>{collapseContentComponent}</ul>
         );
       break;
     case 'summary':
-      collapseContent = (
-        <p className={styles.collapseContent}>
-          <CollapseContent type={heading} content={content} />
-        </p>
-      );
+      collapseContentContainer = <div className={styles.collapseContent}>{collapseContentComponent}</div>;
       break;
     case 'instructions':
-      collapseContent =
+      collapseContentContainer =
         !content || !content.length ? (
           <p>No Instructions.</p>
         ) : (
-          <ol className={styles.collapseContent} type="1">
-            <CollapseContent type={heading} content={content} />
-          </ol>
+          <ol className={styles.collapseContent}>{collapseContentComponent}</ol>
         );
       break;
     default:
@@ -50,7 +40,7 @@ const Collapse = ({ heading, content }) => {
         <summary>
           <CollapseHeading heading={heading} />
         </summary>
-        {collapseContent}
+        {collapseContentContainer}
       </details>
     </li>
   );
