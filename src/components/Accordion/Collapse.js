@@ -25,9 +25,9 @@ const Collapse = ({ heading, content }) => {
       break;
     case 'summary':
       collapseContent = (
-        <p className={styles.collapseContent}>
+        <div className={styles.collapseContent}>
           <CollapseContent type={heading} content={content} />
-        </p>
+        </div>
       );
       break;
     case 'instructions':
