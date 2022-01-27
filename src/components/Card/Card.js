@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './Card.module.scss';
 import classNames from 'classnames';
 import { excludeTags } from '@utils/misc';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, Detail } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import imgUrl from '@assets/images/no-image.jpg';
@@ -88,6 +88,7 @@ export function Card({
       setSavedCountBeDisplayed(savedRecipe.savedCount);
 
       if (authUser && savedRecipe.savedBy) setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
+      else setIsSaved(false);
 
       setShowDetailDialog(true);
     })();
@@ -116,6 +117,10 @@ export function Card({
     navigate(-1);
     setShowDetailDialog(false);
   };
+
+  useEffect(() => {
+    if (authUser && recipeData.savedBy) setIsSaved(recipeData.savedBy.includes(authUser.uid));
+  }, [authUser, recipeData.savedBy]);
 
   return (
     <>
