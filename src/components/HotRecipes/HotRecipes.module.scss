@@ -46,9 +46,11 @@
 }
 
 .hotRecipes {
-  padding-left: rem(16px);
   @include mobile {
     margin-top: rem(40px);
+  }
+  @include desktop {
+    padding-left: rem(16px);
   }
 
   @media (min-width: 1546px) {

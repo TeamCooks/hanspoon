@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './Card.module.scss';
 import classNames from 'classnames';
-import { excludeTags } from '@utils/misc';
+import { excludeTags, sentenceIntoParagraph } from '@utils/misc';
 import { useState, useEffect } from 'react';
 import { Dialog, Detail } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -134,21 +134,12 @@ export function Card({
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
           </figure>
-          <div className={styles.summary}>
-            {hasSummary &&
-              summary.split('. ').map((text, index, texts) =>
-                index < texts.length - 1 ? (
-                  <p key={index} className={styles.text}>
-                    {excludeTags(text) + '. '}
-                  </p>
-                ) : (
-                  <p key={index} className={styles.text}>
-                    {excludeTags(text)}
-                  </p>
-                ),
-              )}
-          </div>
-          {hasSummary && <button className={styles.more}>more</button>}
+          {hasSummary && (
+            <>
+              <div className={styles.summary}>{sentenceIntoParagraph(excludeTags(summary), styles.text)}</div>
+              <button className={styles.more}>more</button>
+            </>
+          )}
         </div>
       </Link>
       {showDetailDialog ? (

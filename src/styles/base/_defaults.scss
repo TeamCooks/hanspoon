@@ -25,7 +25,17 @@ body *::after {
 }
 
 // 본문 기본 폰트, 글자 크기, 굵기, 배경 색상 지정 --------------------------------------------- /
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../assets/fonts/Montserrat-Regular.woff2') format('woff2'),
+    url('../../assets/fonts/Montserrat-Bold.woff2') format('woff2');
+  font-display: block;
+  unicode-range: U+000-5FF;
+}
 
 body {
   font-family: 'Montserrat', 'Roboto', sans-serif;
@@ -117,7 +127,7 @@ figure {
   height: 1px;
   margin: -1px;
 }
- 
+
 $header-height: 70px;
 
 main.main {

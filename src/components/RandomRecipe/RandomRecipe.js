@@ -64,7 +64,7 @@ export function RandomRecipe() {
 
   return (
     <section className={styles.section}>
-      <Heading as="h2">RandomRecipe</Heading>
+      <Heading as="h2">Random Recipe</Heading>
       <Button
         className={styles.button}
         style={{

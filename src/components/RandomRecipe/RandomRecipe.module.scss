@@ -35,16 +35,5 @@
   margin-top: rem(16px);
   @include desktop {
     height: 70vh;
-    &:after {
-      content: '';
-      color: black;
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 18%;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(to top, #fff 50%, transparent);
-    }
   }
 }
