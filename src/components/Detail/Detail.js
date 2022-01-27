@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { camelCase } from '@utils';
-import { Heading, IconButton, Label, Badge } from '../';
-import Accordion from '../Accordion/Accordion';
+import { Heading, IconButton, Label, Badge, Accordion } from '..';
 import styles from './Detail.module.scss';
 
 export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) => {

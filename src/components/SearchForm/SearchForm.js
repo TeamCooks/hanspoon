@@ -1,7 +1,7 @@
 import styles from './SearchForm.module.scss';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { IconButton } from '../../components';
+import { IconButton } from '..';
 
 export function SearchForm() {
   const [keyword, setKeyword] = useState('');

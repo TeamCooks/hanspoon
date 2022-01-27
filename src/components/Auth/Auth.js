@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { Dialog, Heading } from '..';
+import { Dialog, Heading, Button } from '..';
 import { useFormik } from 'formik';
 import styles from './Auth.module.scss';
 import classNames from 'classnames';
 import imgUrl from '@assets/images/default.jpg';
 import { TOGGLE_MESSAGE, HEADING, INITIAL_VALUES, SCHEMA, AUTH_ERROR_MSG, PLACEHOLDER } from '../../services';
 import { useSignIn, useSignUp } from '../../contexts/AuthContext';
-import { Button } from '..';
 export function Auth({ isVisible, onClose }) {
   const [currentForm, setCurrentForm] = useState('signin');
 

@@ -1,3 +1,6 @@
+export * from './Meta/Meta';
+export * from './Accordion/Accordion';
+export * from './Card/SkeletonCard'
 export * from './Header/Header';
 export * from './Auth/Auth';
 export * from './RandomRecipe/RandomRecipe';
@@ -6,7 +9,6 @@ export * from './Footer/Footer';
 export * from './SearchForm/SearchForm';
 export * from './Dialog/Dialog';
 export * from './Card/Card';
-export * from './Detail/Detail';
 export * from './Menu/Menu';
 export * from './Button/Button';
 export * from './Button/IconButton';
@@ -18,4 +20,4 @@ export * from './Logo/Logo';
 export * from './ErrorBoundary/ErrorBoundary';
 export * from './Pagination/Pagination';
 export * from './CardList/CardList';
-export * from './Meta/Meta';
+export * from './Detail/Detail';

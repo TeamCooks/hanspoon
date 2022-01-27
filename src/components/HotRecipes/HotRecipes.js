@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getHotRecipes } from '@api/customApi';
-import { Card } from '../Card/Card';
-import { Heading } from '../Heading/Heading';
+import { Heading, Card } from '..';
 import { SkeletonCard } from '../Card/SkeletonCard';
 import noImgUrl from '@assets/images/no-image.jpg';
 
