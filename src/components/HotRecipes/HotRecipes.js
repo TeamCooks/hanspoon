@@ -23,7 +23,7 @@ export function HotRecipes() {
     if (loading) {
       return <SkeletonCard type="square" background="none" hasSummary={false} headingPosition="bottomCenter" />;
     } else {
-      const imgSrc = image ? `https://spoonacular.com/recipeImages/${recipeId}-312x231` : noImgUrl;
+      // const imgSrc = image ? `https://spoonacular.com/recipeImages/${recipeId}-312x231` : noImgUrl;
       return (
         <Card
           id={recipeId}
@@ -31,7 +31,7 @@ export function HotRecipes() {
           background="none"
           hasSummary={false}
           headingPosition="bottomCenter"
-          imgSrc={imgSrc}
+          imgSrc={image || noImgUrl}
           image={image}
           title={title}
         />
