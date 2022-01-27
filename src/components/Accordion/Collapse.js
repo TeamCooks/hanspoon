@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CollapseHeading from './CollapseHeading';
 import CollapseContent from './CollapseContent';
 import styles from './Accordion.module.scss';
 
-const Collapse = ({ heading, content }) => {
+const Collapse = ({ type, content }) => {
   let collapseContentContainer = null;
-  const collapseContentComponent = <CollapseContent type={heading} content={content} />;
+  const collapseContentComponent = <CollapseContent type={type} content={content} />;
 
-  switch (heading) {
+  switch (type) {
     case 'ingredients':
       collapseContentContainer = <ul className={styles.collapseContent}>{collapseContentComponent}</ul>;
       break;
@@ -38,7 +39,7 @@ const Collapse = ({ heading, content }) => {
     <li className={styles.recipeInfoItem}>
       <details>
         <summary>
-          <CollapseHeading heading={heading} />
+          <CollapseHeading heading={type} />
         </summary>
         {collapseContentContainer}
       </details>
@@ -47,3 +48,7 @@ const Collapse = ({ heading, content }) => {
 };
 
 export default Collapse;
+
+Collapse.propTypes = {
+  type: PropTypes.oneOf(['ingredients', 'equipment', 'summary', 'instructions']).isRequired,
+};

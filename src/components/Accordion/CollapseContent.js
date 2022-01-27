@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Accordion.module.scss';
 import { sentenceIntoParagraph } from '@utils';
 
@@ -27,3 +28,7 @@ const CollapseContent = ({ type, content }) => {
 };
 
 export default CollapseContent;
+
+CollapseContent.propTypes = {
+  type: PropTypes.oneOf(['ingredients', 'equipment', 'summary', 'instructions']).isRequired,
+};
