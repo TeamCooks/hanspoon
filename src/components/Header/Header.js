@@ -15,7 +15,6 @@ export function Header() {
   const location = useLocation();
 
   useEffect(()=> {
-    console.log(location);
     window.scrollTo(0, 0);
   }, [location.pathname])
 
