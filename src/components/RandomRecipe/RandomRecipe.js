@@ -42,7 +42,7 @@ export function RandomRecipe() {
       return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
     } else {
       const { id, title, summary, image } = recipe;
-      const imgSrc = image ? `https://spoonacular.com/recipeImages/${id}-312x231` : noImgUrl;
+      //const imgSrc = image ? `https://spoonacular.com/recipeImages/${id}-312x231` : noImgUrl;
       return (
         <Card
           id={id}
@@ -50,7 +50,7 @@ export function RandomRecipe() {
           background="white"
           hasSummary={true}
           headingPosition="bottomLeft"
-          imgSrc={imgSrc}
+          imgSrc={image || noImgUrl}
           image={image}
           title={title}
           summary={summary}
