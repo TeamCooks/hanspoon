@@ -43,7 +43,7 @@ export function HotRecipes() {
   return (
     <section className={styles.section}>
       <Heading as="h2" className={styles.hotRecipes}>
-        HotRecipes
+        Hot Recipes
       </Heading>
 
       <ul className={styles.cardItems}>
