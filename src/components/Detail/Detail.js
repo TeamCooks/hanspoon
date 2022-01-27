@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { camelCase } from '@utils';
 import { Heading, IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 
-export function Detail({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) {
+export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) => {
   const { creditsText, readyInMinutes, recipeDetails, tags } = recipeData;
-
   return (
     <article className={styles.detail}>
       <div className={styles.heading}>
@@ -52,4 +52,10 @@ export function Detail({ title, imgSrc, recipeData, savedCount, isSaved, handleC
       <Accordion recipeDetails={recipeDetails} />
     </article>
   );
-}
+};
+
+Detail.propTypes = {
+  title: PropTypes.string,
+  imgSrc: PropTypes.string,
+  isSaved: PropTypes.bool,
+};

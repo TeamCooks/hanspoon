@@ -4,7 +4,7 @@ import styles from './Accordion.module.scss';
 
 const Accordion = ({ recipeDetails }) => {
   const recipiInfoItems = recipeDetails.map((recipeInfo) => (
-    <Collapse key={recipeInfo.type} heading={recipeInfo.type} content={recipeInfo.data} />
+    <Collapse key={recipeInfo.type} type={recipeInfo.type} content={recipeInfo.data} />
   ));
 
   return <ul className={styles.Accordion}>{recipiInfoItems}</ul>;
