@@ -3,19 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../src/assets/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../src/assets/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../src/assets/favicon_io/favicon-16x16.png" />
     <meta name="description" content="hanspoon" />
+
+    <!-- ------------------------------ download ------------------------------- -->
+    <link rel="preload" href="../src/assets/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../src/assets/fonts/Montserrat-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
 
     <title>hanspoon</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-        <!--[if IE]>
+    <!--[if IE]>
       <div class="notice notice--fixed-top">
-        <h1>서비스를 정상적으로 이용할 수 없습니다.</h1>
+        <h1>The service cannot be used normally.</h1>
         <p>
-          사용 중인 오래된 웹 브라우저를 사용하면 서비스를 정상적으로 이용할 수 없습니다. 안전하고 빠른 서비스 이용을 위해
+          If you use an outdated web browser in use, you may not be able to use the service normally. Safe and fast
+          service use for
           <a href="https://browsehappy.com/?locale=ko_KR" target="_blank" rel="noopener noreferrer">
-            구형 웹 브라우저를 최신 브라우저로 업그레이드 하세요<span style="font-style: italic">!</span>
+            Upgrade your old web browser to a newer browser<span style="font-style: italic">!</span>
           </a>
         </p>
       </div>
@@ -23,7 +37,7 @@
     <div id="root"></div>
 
     <div id="dialog"></div>
-    <!-- 로딩 접근성 준수 -->
+    <!-- Loading accessibility compliance -->
     <div id="loading-start" aria-live="assertive"></div>
     <div id="loading-end" aria-live="assertive"></div>
   </body>

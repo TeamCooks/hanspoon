@@ -30,18 +30,17 @@ export const saveRecipe = async (userId, recipeData) => {
   await setDoc(myRecipesRef, {
     id: recipeData.recipeId,
     title: recipeData.title,
-    image: recipeData.image || '',
-    imgSrc: recipeData.imgSrc,
+    image: recipeData.image,
     savedAt: Timestamp.fromDate(new Date()),
   });
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
-      saved: increment(1),
+      savedCount: increment(1),
       savedBy: arrayUnion(userId),
     });
   } else {
-    await setDoc(savedRecipesRef, { ...recipeData, saved: 1, savedBy: [userId] });
+    await setDoc(savedRecipesRef, { ...recipeData, savedCount: 1, savedBy: [userId] });
   }
 };
 
@@ -54,7 +53,7 @@ export const removeRecipe = async (userId, recipeId) => {
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
-      saved: increment(-1),
+      savedCount: increment(-1),
       savedBy: arrayRemove(userId),
     });
   }
@@ -73,7 +72,7 @@ export const getMyRecipes = async (userId) => {
 
 export const getHotRecipes = async (num = 6) => {
   const hotRecipesRef = collection(db, 'savedRecipes');
-  const q = query(hotRecipesRef, orderBy('saved', 'desc'), limit(num));
+  const q = query(hotRecipesRef, orderBy('savedCount', 'desc'), limit(num));
   const hotRecipesSnapshot = await getDocs(q);
   const hotRecipes = [];
   hotRecipesSnapshot.forEach((doc) => {

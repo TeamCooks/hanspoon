@@ -3,8 +3,8 @@ import { Heading, IconButton, Label, Badge } from '../';
 import Accordion from '../Accordion/Accordion';
 import styles from './Detail.module.scss';
 
-export function Detail({ id, title, imgSrc, recipeData, savedCount, isSaved, handleClick }) {
-  const { creditsText, diets, readyInMinutes, recipeDetails, isHealthy, isPopular } = recipeData;
+export function Detail({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) {
+  const { creditsText, readyInMinutes, recipeDetails, tags } = recipeData;
 
   return (
     <article className={styles.detail}>
@@ -37,21 +37,11 @@ export function Detail({ id, title, imgSrc, recipeData, savedCount, isSaved, han
           <img className={styles.foodImage} src={imgSrc} alt={title} />
           <figcaption className={styles.creditsText}>{creditsText}</figcaption>
         </figure>
-        {diets && diets.length ? (
+        {tags && tags.length ? (
           <ul className={styles.badgeList}>
-            {isHealthy ? (
-              <li key={0}>
-                <Badge state={'healthy'} size="small" />
-              </li>
-            ) : null}
-            {isPopular ? (
-              <li key={0}>
-                <Badge state={'popular'} size="small" />
-              </li>
-            ) : null}
-            {diets.map((diet, index) => (
-              <li key={index + 2}>
-                <Badge state={camelCase(diet)} size="small" />
+            {tags.map((tag, index) => (
+              <li key={tag + index}>
+                <Badge state={camelCase(tag)} size="small" />
               </li>
             ))}
           </ul>

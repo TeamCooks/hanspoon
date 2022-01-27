@@ -6,6 +6,7 @@ import { Heading } from '../Heading/Heading';
 import { getRandomRecipe } from '@api/requestData';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import styles from './RandomRecipe.module.scss';
+import noImgUrl from '@assets/images/no-image.jpg';
 
 export function RandomRecipe() {
   const [savedRecipe, setSavedRecipe] = useState([]);
@@ -43,16 +44,19 @@ export function RandomRecipe() {
     if (loading) {
       return <SkeletonCard type="wide" background="white" hasSummary={true} headingPosition="bottomLeft" />;
     } else {
+      const { id, title, summary, image } = recipe;
+      const imgSrc = image ? `https://spoonacular.com/recipeImages/${id}-312x231` : noImgUrl;
       return (
         <Card
-          id={recipe.id}
+          id={id}
           type="wide"
           background="white"
           hasSummary={true}
           headingPosition="bottomLeft"
-          imgSrc={recipe.image}
-          title={recipe.title}
-          summary={recipe.summary}
+          imgSrc={imgSrc}
+          image={image}
+          title={title}
+          summary={summary}
         />
       );
     }

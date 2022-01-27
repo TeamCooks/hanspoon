@@ -3,12 +3,13 @@ import iconButtonStyle from './IconButton.module.scss';
 import classNames from 'classnames';
 import { BUTTON_TYPES, ICONBUTTON_TYPES, ICONBUTTON_STATE } from './button.types';
 import { FiSearch } from 'react-icons/fi';
+import { FaArrowUp } from 'react-icons/fa';
 import { BsPersonCircle, BsCartCheckFill, BsLink45Deg, BsBookmark, BsFillBookmarkFill } from 'react-icons/bs';
 import { HiHeart } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
 
 const renderButtonIcon = (state) => {
-  const { search, user, heart, close, cart, link, bookmark, bookmarkFill } = ICONBUTTON_STATE;
+  const { search, user, heart, close, cart, link, bookmark, bookmarkFill, up } = ICONBUTTON_STATE;
 
   switch (state) {
     case search:
@@ -27,6 +28,8 @@ const renderButtonIcon = (state) => {
       return <BsFillBookmarkFill />;
     case bookmark:
       return <BsBookmark />;
+    case up:
+      return <FaArrowUp />;
     default:
   }
 };

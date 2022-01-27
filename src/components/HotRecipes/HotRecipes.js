@@ -3,6 +3,7 @@ import { getHotRecipes } from '@api/customApi';
 import { Card } from '../Card/Card';
 import { Heading } from '../Heading/Heading';
 import { SkeletonCard } from '../Card/SkeletonCard';
+import noImgUrl from '@assets/images/no-image.jpg';
 
 import styles from './HotRecipes.module.scss';
 
@@ -19,10 +20,11 @@ export function HotRecipes() {
     }, 1200);
   }, []);
 
-  const renderCards = ({ recipeId, imgSrc, title }) => {
+  const renderCards = ({ recipeId, image, title }) => {
     if (loading) {
       return <SkeletonCard type="square" background="none" hasSummary={false} headingPosition="bottomCenter" />;
     } else {
+      const imgSrc = image ? `https://spoonacular.com/recipeImages/${recipeId}-312x231` : noImgUrl;
       return (
         <Card
           id={recipeId}
@@ -31,6 +33,7 @@ export function HotRecipes() {
           hasSummary={false}
           headingPosition="bottomCenter"
           imgSrc={imgSrc}
+          image={image}
           title={title}
         />
       );
