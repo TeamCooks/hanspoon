@@ -76,6 +76,11 @@ export function Card({
           },
         ];
         savedRecipe.saved = 0;
+        saveRecipe.tags = [
+          ...savedRecipe.diets,
+          savedRecipe.veryHealthy ? 'veryHealthy' : null,
+          savedRecipe.veryPopular ? 'veryPopular' : null,
+        ];
       }
       setRecipeData(savedRecipe);
       setSavedCount(savedRecipe.saved);
@@ -86,7 +91,7 @@ export function Card({
   };
 
   const handleCloseDialog = () => {
-    const { readyInMinutes, creditsText, diets, recipeDetails, saved, veryHealthy, veryPopular } = recipeData;
+    const { readyInMinutes, creditsText, recipeDetails, saved, tags } = recipeData;
     if (authUser && savedCount !== saved) {
       if (isSaved) {
         saveRecipe(authUser.uid, {
@@ -96,11 +101,9 @@ export function Card({
           title,
           readyInMinutes,
           creditsText,
-          diets,
           recipeDetails,
           saved,
-          veryHealthy,
-          veryPopular,
+          tags,
         });
       } else {
         removeRecipe(authUser.uid, id + '');
