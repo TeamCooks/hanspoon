@@ -40,7 +40,7 @@ export function Detail({ title, imgSrc, recipeData, savedCount, isSaved, handleC
         {tags && tags.length ? (
           <ul className={styles.badgeList}>
             {tags.map((tag, index) => (
-              <li key={'badgeTag' + index}>
+              <li key={tag + index}>
                 <Badge state={camelCase(tag)} size="small" />
               </li>
             ))}
