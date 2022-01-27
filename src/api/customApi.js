@@ -37,11 +37,11 @@ export const saveRecipe = async (userId, recipeData) => {
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
-      saved: increment(1),
+      savedCount: increment(1),
       savedBy: arrayUnion(userId),
     });
   } else {
-    await setDoc(savedRecipesRef, { ...recipeData, saved: 1, savedBy: [userId] });
+    await setDoc(savedRecipesRef, { ...recipeData, savedCount: 1, savedBy: [userId] });
   }
 };
 
@@ -54,7 +54,7 @@ export const removeRecipe = async (userId, recipeId) => {
 
   if (savedRecipesSnap.exists()) {
     await updateDoc(savedRecipesRef, {
-      saved: increment(-1),
+      savedCount: increment(-1),
       savedBy: arrayRemove(userId),
     });
   }
