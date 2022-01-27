@@ -1,22 +1,24 @@
 import styles from './Header.module.scss';
-import { SearchForm, Menu, Button, Logo, Auth, Loading } from '..';
+import { SearchForm, Menu, Button, Logo, Auth, IconButton } from '..';
 import classNames from 'classnames';
 import { useState, useEffect, useRef } from 'react';
 import { useAuthLoading, useAuthUser } from '../../contexts/AuthContext';
 import lodash from 'lodash';
 import { useLocation } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 
 export function Header() {
   const authLoading = useAuthLoading();
   const authUser = useAuthUser();
   const [showDialog, setShowDialog] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const oldScrollTop = useRef(0);
   const location = useLocation();
 
-  useEffect(()=> {
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname])
+  }, [location.pathname]);
 
   const handleOpenDialog = () => {
     setShowDialog(true);
@@ -40,18 +42,22 @@ export function Header() {
     oldScrollTop.current = currentScrollTop;
   }, 300);
 
+  const controlScrollToTop = lodash.debounce(() => {
+    const currentScrollTop = window.pageYOffset;
+    setShowScrollToTop(currentScrollTop > 500);
+  }, 300);
   useEffect(() => {
     document.addEventListener('scroll', controlHeader);
+    document.addEventListener('scroll', controlScrollToTop);
     return () => {
       document.removeEventListener('scroll', controlHeader);
+      document.removeEventListener('scroll', controlScrollToTop);
     };
   }, []);
 
-  return authLoading ? (
-    <Loading message="Loading" />
-  ) : (
+  return (
     <header
-      className={classNames(styles.header, { [styles.hide]: hideHeader })}
+      className={classNames(styles.header, { [styles.hide]: authLoading || hideHeader })}
       onFocus={handleFocus}
       onBlur={handleBlur}
     >
@@ -74,6 +80,34 @@ export function Header() {
           <Auth isVisible={showDialog} onClose={handleCloseDialog} />
         </>
       )}
+      {showScrollToTop &&
+        createPortal(
+          <IconButton
+            ariaLabel="Go to Top"
+            state="up"
+            type="button"
+            variant="filled"
+            color="green"
+            size="large"
+            shape="circle"
+            style={{
+              position: 'fixed',
+              right: '10vw',
+              bottom: '10vw',
+              cursor: 'pointer',
+              boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)',
+            }}
+            onClick={() => {
+              window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+            }}
+          />,
+
+          document.getElementById('root'),
+        )}
     </header>
   );
 }
