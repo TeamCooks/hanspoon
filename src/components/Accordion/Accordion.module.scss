@@ -6,10 +6,14 @@
     height: 70vh;
     overflow: auto;
   }
+
+  @include mobile {
+    margin-top: 20px;
+  }
+
   display: block;
   color: $white;
   margin: 0;
-  padding-right: 1.5rem;
 }
 
 .recipeInfoItem {
@@ -44,7 +48,7 @@ details[open] {
 
 .heading {
   display: inline-block;
-  font-size: rem(36px);
+  font-size: 1.625rem;
 }
 
 .collapseContent {
