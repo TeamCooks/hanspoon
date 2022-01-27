@@ -11,7 +11,17 @@ import { getRecipeById } from '@api/requestData';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
 import { Auth } from '../Auth/Auth';
 
-export function Card({ id = 0, type, background, hasSummary, headingPosition, imgSrc = imgUrl, title, summary = '' }) {
+export function Card({
+  id = 0,
+  type,
+  background,
+  hasSummary,
+  headingPosition,
+  image,
+  imgSrc = imgUrl,
+  title,
+  summary = '',
+}) {
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -82,7 +92,8 @@ export function Card({ id = 0, type, background, hasSummary, headingPosition, im
 
         saveRecipe(authUser.uid, {
           recipeId: id + '',
-          imgSrc,
+          image: image || '',
+          imgSrc: image ? imgSrc : '',
           title,
           readyInMinutes,
           creditsText,

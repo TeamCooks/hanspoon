@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useState, useEffect, useRef } from 'react';
 import { useAuthLoading, useAuthUser } from '../../contexts/AuthContext';
 import lodash from 'lodash';
+import { useLocation } from 'react-router-dom';
 
 export function Header() {
   const authLoading = useAuthLoading();
@@ -11,6 +12,11 @@ export function Header() {
   const [showDialog, setShowDialog] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const oldScrollTop = useRef(0);
+  const location = useLocation();
+
+  useEffect(()=> {
+    window.scrollTo(0, 0);
+  }, [location.pathname])
 
   const handleOpenDialog = () => {
     setShowDialog(true);

@@ -20,6 +20,11 @@ export default function Search() {
     setCurrentPage(1);
   }, [keyword]);
 
+
+  useEffect(()=> {
+    window.scrollTo(0, 0);
+  }, [currentPage])
+
   return (
     <>
       <Helmet>
