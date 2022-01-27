@@ -116,7 +116,21 @@ export function Card({ id = 0, type, background, hasSummary, headingPosition, im
             <img className={styles[type]} src={imgSrc} alt={title} />
             <figcaption className={classNames(styles.title, styles[headingPosition])}>{title}</figcaption>
           </figure>
-          {hasSummary && <p className={styles.summary}>{excludeTags(summary)}</p>}
+          <div className={styles.summary}>
+            {hasSummary &&
+              summary.split('. ').map((text, index, texts) =>
+                index < texts.length - 1 ? (
+                  <p key={index} className={styles.text}>
+                    {excludeTags(text) + '. '}
+                  </p>
+                ) : (
+                  <p key={index} className={styles.text}>
+                    {excludeTags(text)}
+                  </p>
+                ),
+              )}
+          </div>
+          {hasSummary && <button className={styles.more}>more</button>}
         </div>
       </Link>
       {showDetailDialog ? (

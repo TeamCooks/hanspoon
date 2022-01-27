@@ -55,8 +55,8 @@
   }
 }
 
-// background
 .cardWrap {
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: rem(16px);
@@ -94,7 +94,6 @@
   @include desktop {
     display: -webkit-box;
     word-wrap: break-word;
-    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,4 +120,22 @@
   font-size: rem(24px);
   color: orange;
   order: -1;
+}
+
+.more {
+  @include mobile {
+    display: none;
+  }
+  border: 1px solid linear-gradient(to right, gray, $primary_green);
+  background: linear-gradient(to right, #d4fc79, #96e6a1);
+  padding: rem(8px) 0;
+  text-align: center;
+  font-size: rem(24px);
+  z-index: 1;
+  margin: 0;
+}
+
+.text {
+  margin-top: 0;
+  margin-bottom: rem(8px);
 }
