@@ -14,10 +14,12 @@ export default function Search() {
 
   const handleClick = (num) => {
     setCurrentPage(num);
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
     setCurrentPage(1);
+    window.scrollTo(0, 0);
   }, [keyword]);
 
   return (
