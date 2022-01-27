@@ -24,17 +24,19 @@ export function Card({
 }) {
   const [showDetailDialog, setShowDetailDialog] = useState(false);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
   const [recipeData, setRecipeData] = useState({});
-  const [savedCount, setSavedCount] = useState(0);
+  const [savedCountBeDisplayed, setSavedCountBeDisplayed] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
-
   const authUser = useAuthUser();
 
   const handleClick = (e) => {
     if (authUser) {
-      isSaved ? setSavedCount(savedCount - 1) : setSavedCount(savedCount + 1);
+      isSaved
+        ? setSavedCountBeDisplayed(savedCountBeDisplayed - 1)
+        : setSavedCountBeDisplayed(savedCountBeDisplayed + 1);
       setIsSaved(!isSaved);
     } else {
       setShowAuthDialog(true);
@@ -75,15 +77,16 @@ export function Card({
             data: savedRecipe.analyzedInstructions[0]?.steps?.map((step) => step.step),
           },
         ];
-        savedRecipe.saved = 0;
-        saveRecipe.tags = [
+        savedRecipe.savedCount = 0;
+        savedRecipe.tags = [
           ...savedRecipe.diets,
           savedRecipe.veryHealthy ? 'veryHealthy' : null,
           savedRecipe.veryPopular ? 'veryPopular' : null,
         ];
       }
       setRecipeData(savedRecipe);
-      setSavedCount(savedRecipe.saved);
+      setSavedCountBeDisplayed(savedRecipe.savedCount);
+
       if (authUser && savedRecipe.savedBy) setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
 
       setShowDetailDialog(true);
@@ -91,8 +94,8 @@ export function Card({
   };
 
   const handleCloseDialog = () => {
-    const { readyInMinutes, creditsText, recipeDetails, saved, tags } = recipeData;
-    if (authUser && savedCount !== saved) {
+    const { readyInMinutes, creditsText, recipeDetails, savedCount, tags } = recipeData;
+    if (authUser && savedCountBeDisplayed !== savedCount) {
       if (isSaved) {
         saveRecipe(authUser.uid, {
           recipeId: id + '',
@@ -102,7 +105,7 @@ export function Card({
           readyInMinutes,
           creditsText,
           recipeDetails,
-          saved,
+          savedCount,
           tags,
         });
       } else {
@@ -153,7 +156,7 @@ export function Card({
             imgSrc={imgSrc}
             title={title}
             recipeData={recipeData}
-            savedCount={savedCount}
+            savedCount={savedCountBeDisplayed}
             isSaved={isSaved}
             handleClick={handleClick}
           />
