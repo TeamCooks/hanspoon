@@ -6,8 +6,8 @@ import styles from './Detail.module.scss';
 
 export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleClick }) => {
   const { creditsText, readyInMinutes, recipeDetails, tags } = recipeData;
-  const comingSoon = () => {
-    alert('구현 중인 기능입니다.');
+  const showAlert = () => {
+    alert('coming Soon..');
   };
 
   return (
@@ -23,7 +23,7 @@ export const Detail = ({ title, imgSrc, recipeData, savedCount, isSaved, handleC
             color="white"
             size="large"
             shape="circle"
-            onClick={comingSoon}
+            onClick={showAlert}
           />
           <IconButton
             variant="default"
