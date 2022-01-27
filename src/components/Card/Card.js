@@ -3,13 +3,12 @@ import styles from './Card.module.scss';
 import classNames from 'classnames';
 import { excludeTags, sentenceIntoParagraph } from '@utils/misc';
 import { useState, useEffect } from 'react';
-import { Dialog, Detail } from '..';
+import { Dialog, Detail, Auth } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import imgUrl from '@assets/images/no-image.jpg';
 import { useAuthUser } from '../../contexts/AuthContext';
 import { getRecipeById } from '@api/requestData';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
-import { Auth } from '../Auth/Auth';
 
 export function Card({
   id = 0,

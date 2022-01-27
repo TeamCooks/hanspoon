@@ -1,6 +1,4 @@
-import { Helmet } from 'react-helmet-async';
-import { setDocumentTitle } from '../../utils';
-import { Header, RandomRecipe, HotRecipes, Footer, Meta } from '../../components/index';
+import { RandomRecipe, HotRecipes, Meta } from '../../components/index';
 import styles from './Home.module.scss';
 
 export default function Home() {

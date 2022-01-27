@@ -2,7 +2,7 @@ import styles from './Menu.module.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { IconButton, Button } from '../../components';
+import { IconButton, Button } from '..';
 import { useSignOut } from '../../contexts/AuthContext';
 
 export function Menu() {

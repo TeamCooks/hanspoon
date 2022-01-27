@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card } from '../Card/Card';
-import { SkeletonCard } from '../Card/SkeletonCard';
-import { Button } from '../../components';
-import { Heading } from '../Heading/Heading';
+import { Button, Heading, SkeletonCard, Card } from '..';
 import { getRandomRecipe } from '@api/requestData';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import styles from './RandomRecipe.module.scss';

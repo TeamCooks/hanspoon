@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { getTabbableElements } from '@utils';
 import styles from './Dialog.module.scss';
 import classNames from 'classnames';
-import { IconButton } from '../Button/IconButton';
+import { IconButton } from '..';
 export function Dialog({ onClose, children, nodeId = 'dialog', label, img, className, ...restProps }) {
   const dialogRef = useRef(null);
   const openButtonRef = useRef(null);

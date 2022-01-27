@@ -5,9 +5,7 @@ import './styles/index.scss';
 import './styles/global.scss';
 import Layout from './pages/Layout/Layout';
 import Home from './pages/Home/Home';
-import Example from './pages/Example/Example';
-import { Detail } from './components/Detail/Detail';
-import { Loading } from './components';
+import { Loading, Detail } from './components';
 
 const RequireAuth = lazyComponent('RequireAuth');
 const MyRecipes = lazyComponent('MyRecipes');
@@ -59,7 +57,6 @@ function App() {
             </Suspense>
           ),
         },
-        { path: 'example', element: <Example /> },
       ],
     },
   ]);

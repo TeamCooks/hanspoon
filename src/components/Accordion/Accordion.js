@@ -10,4 +10,4 @@ const Accordion = ({ recipeDetails }) => {
   return <ul className={styles.Accordion}>{recipiInfoItems}</ul>;
 };
 
-export default Accordion;
+export { Accordion };
