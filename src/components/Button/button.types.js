@@ -18,6 +18,7 @@ const ICONBUTTON_STATE = {
   link: 'link',
   bookmark: 'bookmark',
   bookmarkFill: 'bookmarkFill',
+  up: 'up',
 };
 
 const ICONBUTTON_TYPES = {

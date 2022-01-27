@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { Heading, Loading, Pagination, CardList } from '../../components';
+import { Heading, Loading, Pagination, CardList, Meta } from '../../components';
 import { useSearch } from '../../Hooks';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
-import { Helmet } from 'react-helmet-async';
-import { setDocumentTitle } from '../../utils';
 
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const { totalResults, results, isLoading } = useSearch(keyword, currentPage);
+
+  const metaData = useMemo(() => {
+    return { title: `Search results for ${keyword}` };
+  }, []);
 
   const handleClick = (num) => {
     setCurrentPage(num);
@@ -20,16 +22,13 @@ export default function Search() {
     setCurrentPage(1);
   }, [keyword]);
 
-
-  useEffect(()=> {
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage])
+  }, [currentPage]);
 
   return (
     <>
-      <Helmet>
-        <title>{setDocumentTitle(`Search results for ${keyword}`)}</title>
-      </Helmet>
+      <Meta data={metaData} />
       <div className={classNames(styles.container)}>
         {isLoading ? (
           <Loading message={`Searching for ${keyword}`} />
