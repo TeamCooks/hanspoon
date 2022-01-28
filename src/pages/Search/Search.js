@@ -4,11 +4,12 @@ import { Heading, Loading, Pagination, CardList, Meta } from '../../components';
 import { useSearch } from '../../Hooks';
 import classNames from 'classnames';
 import styles from './Search.module.scss';
+const RESULTS_PER_PAGE = 12;
 
 export default function Search() {
   const { keyword } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const { totalResults, results, isLoading } = useSearch(keyword, currentPage);
+  const { totalResults, results, isLoading } = useSearch(keyword, currentPage, RESULTS_PER_PAGE);
 
   const metaData = useMemo(() => {
     return { title: `Search results for ${keyword}` };
@@ -40,7 +41,7 @@ export default function Search() {
               Search Results
             </Heading>
             <CardList results={results} />
-            <Pagination onClick={handleClick} currentPage={currentPage} totalResults={totalResults} />
+            <Pagination limit={RESULTS_PER_PAGE} onClick={handleClick} currentPage={currentPage} totalResults={totalResults} />
           </>
         )}
       </div>

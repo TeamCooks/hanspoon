@@ -57,6 +57,7 @@ export const useSearch = (keyword, currentPage, limit = RESULTS_PER_PAGE) => {
       storedResults.current[currentPage] = fetchedResults;
       setResults(fetchedResults);
       setTotalResults(fetchedTotalResults);
+      console.log({results, totalResults})
     } catch (error) {
       console.error(error);
       setError(error);

@@ -5,7 +5,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import { Heading } from '..';
 
-export const Pagination = ({ currentPage, className, onClick: handleClick, totalResults }) => {
+export const Pagination = ({ limit, currentPage, className, onClick: handleClick, totalResults }) => {
   return (
     <div className={classNames(className, styles.control)}>
       <button
@@ -23,7 +23,7 @@ export const Pagination = ({ currentPage, className, onClick: handleClick, total
         className={styles.pageList}
         currentPage={currentPage}
         totalResults={totalResults}
-        limit={5}
+        limit={limit}
         onClick={handleClick}
       />
       <button
@@ -46,6 +46,7 @@ Pagination.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   totalResults: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired
 };
 
 Pagination.List = ({ className, currentPage, limit, totalResults, onClick: handleClick }) => {
