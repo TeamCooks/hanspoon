@@ -44,11 +44,11 @@ export function Dialog({ onClose, children, nodeId = 'dialog', label, img, class
 
     document.addEventListener(eventType, eventListener);
     document.body.style['overflow-y'] = 'hidden';
-    document.body.setAttribute('aria-hidden', 'true');
+    document.getElementById('root').setAttribute('aria-hidden', 'true');
 
     return () => {
       document.removeEventListener(eventType, eventListener);
-      document.body.removeAttribute('aria-hidden');
+      document.getElementById('root').removeAttribute('aria-hidden');
       document.body.style['overflow-y'] = '';
     };
   }, [handleClose, label]);
