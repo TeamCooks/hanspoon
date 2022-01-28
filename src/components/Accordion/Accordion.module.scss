@@ -55,7 +55,7 @@ details[open] {
   font-size: rem(18px);
   color: $gray_200;
   padding: 0.5rem 0;
-  line-height: 1.5;
+  line-height: 1.3;
 }
 
 p.collapseContent {
@@ -70,6 +70,12 @@ ol.collapseContent {
 .ingredient {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+
+  span:first-child {
+    width: 50%;
+  }
 }
 
 .accordionText {
