@@ -3,12 +3,13 @@ import styles from './Card.module.scss';
 import classNames from 'classnames';
 import { excludeTags, sentenceIntoParagraph } from '@utils/misc';
 import { useState, useEffect } from 'react';
-import { Dialog, Detail, Auth } from '..';
+import { Dialog, Detail, Auth, Loading } from '..';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import imgUrl from '@assets/images/no-image.jpg';
 import { useAuthUser } from '../../contexts/AuthContext';
 import { getRecipeById } from '@api/requestData';
 import { saveRecipe, removeRecipe, getSavedRecipe } from '@api/customApi';
+import { HiCursorClick } from 'react-icons/hi';
 
 export function Card({
   id = 0,
@@ -26,6 +27,7 @@ export function Card({
   const [recipeData, setRecipeData] = useState({});
   const [savedCountBeDisplayed, setSavedCountBeDisplayed] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,6 +49,7 @@ export function Card({
   };
 
   const handleOpenDialog = (e) => {
+    setIsLoading(true);
     (async () => {
       let savedRecipe = await getSavedRecipe(id + '');
       if (!savedRecipe) {
@@ -87,6 +90,7 @@ export function Card({
       if (authUser && savedRecipe.savedBy) setIsSaved(savedRecipe.savedBy.includes(authUser.uid));
       else setIsSaved(false);
 
+      setIsLoading(false);
       setShowDetailDialog(true);
     })();
   };
@@ -136,7 +140,10 @@ export function Card({
           {hasSummary && (
             <>
               <div className={styles.summary}>{sentenceIntoParagraph(excludeTags(summary), styles.text)}</div>
-              <button className={styles.more}>more</button>
+              <button className={styles.more}>
+                Click for more
+                <HiCursorClick />
+              </button>
             </>
           )}
         </div>
@@ -155,6 +162,7 @@ export function Card({
         </Dialog>
       ) : null}
       <Auth isVisible={showAuthDialog} onClose={handleCloseAuthDialog} />
+      {isLoading ? <Loading message={'Recipe Loading...'} background={true} /> : null}
     </>
   );
 }
