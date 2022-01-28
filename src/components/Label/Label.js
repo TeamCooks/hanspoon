@@ -17,7 +17,7 @@ export function Label({ type, value }) {
       case 'time':
         return (
           <>
-            <RiTimerFill style={iconStyle} /> Ready in <strong className={styles.bold}>{value} minutes </strong>
+            <RiTimerFill style={iconStyle} />Ready in <strong className={styles.bold}>{value} minutes </strong>
           </>
         );
       case 'bookmark':
