@@ -20,7 +20,6 @@ export const Meta = ({ data }) => {
 
   return (
     <Helmet titleTemplate="%s">
-      <html lang={lang} />
       <title>{`${title} - HanSpoon`}</title>
       <meta name="description" content={description} />
       {canonical ? <link rel="canonical" href={canonical} /> : null}
