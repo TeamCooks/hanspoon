@@ -60,6 +60,7 @@ export function Dialog({ onClose, children, nodeId = 'dialog', label, img, class
         className={styles.container}
         role="dialog"
         aria-modal="true"
+        aria-hidden="false"
         aria-label={`${label} Dialog`}
         style={{ background: `center / cover no-repeat url(${img})`}}
         {...restProps}
