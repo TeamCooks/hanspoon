@@ -73,7 +73,7 @@
   }
 }
 
-.toggle {
+button.toggle {
   display: block;
   min-width: rem(280px);
   border: none;
@@ -84,6 +84,6 @@
     color: $primary_orange;
   }
   @media (max-width: 500px) {
-    padding: rem(12px) rem(72px);
+    padding: rem(12px) rem(60px);
   }
 }
