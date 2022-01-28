@@ -28,6 +28,7 @@ export default function MyRecipes() {
 
   useEffect(() => {
     setRecipesToBeDisplayed(myRecipes.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE));
+    window.scrollTo(0, 0);
   }, [currentPage]);
 
   const handleClick = (num) => {
@@ -48,7 +49,12 @@ export default function MyRecipes() {
               My Recipes
             </Heading>
             <CardList results={recipesToBeDisplayed} />
-            <Pagination limit={RESULTS_PER_PAGE} onClick={handleClick} currentPage={currentPage} totalResults={myRecipes.length} />
+            <Pagination
+              limit={RESULTS_PER_PAGE}
+              onClick={handleClick}
+              currentPage={currentPage}
+              totalResults={myRecipes.length}
+            />
           </>
         )}
       </div>
