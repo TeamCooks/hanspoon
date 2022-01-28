@@ -8,8 +8,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  @include mobile {
+    padding: 50px 30px 25px 30px;
+  }
   color: $white;
-  padding: 50px 50px 50px;
+  padding: 50px 50px 25px 50px;
 }
 
 .heading {

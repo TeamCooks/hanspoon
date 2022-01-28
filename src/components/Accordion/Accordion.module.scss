@@ -6,10 +6,14 @@
     height: 70vh;
     overflow: auto;
   }
+
+  @include mobile {
+    margin-top: 20px;
+  }
+
   display: block;
   color: $white;
   margin: 0;
-  padding-right: 1.5rem;
 }
 
 .recipeInfoItem {
@@ -44,14 +48,14 @@ details[open] {
 
 .heading {
   display: inline-block;
-  font-size: rem(36px);
+  font-size: 1.625rem;
 }
 
 .collapseContent {
   font-size: rem(18px);
   color: $gray_200;
   padding: 0.5rem 0;
-  line-height: 1.5;
+  line-height: 1.3;
 }
 
 p.collapseContent {
@@ -66,6 +70,12 @@ ol.collapseContent {
 .ingredient {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+
+  span:first-child {
+    width: 50%;
+  }
 }
 
 .accordionText {
